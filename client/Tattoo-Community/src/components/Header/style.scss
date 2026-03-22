@@ -1,0 +1,167 @@
+@use '../../styles/vars.scss' as clr;
+@use '../../styles/vars.scss' as fntw;
+.header{
+
+    background-color: rgba(0, 0, 0, 0.901);
+    padding: 74px 169px;
+
+
+
+
+    &_top{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 100px;
+    }
+
+    &_top::after{
+        content: '';
+        position: absolute;
+
+        background-color: clr.$main-color;
+
+        width: 100%;
+        height: 2px;
+
+        left: 0px;
+        top: 120px;
+        
+    }
+
+    // Nav
+
+    &_items{
+        display: flex;
+        gap: 27px;
+    }
+    
+
+    &_link{
+        color: clr.$main-color;
+        font-size: 18px;
+        display: inline-block;
+        transition: transform .5s ease-in-out, color .5s ease-out;
+    }
+
+ 
+    &_link:hover{
+        transform: translateX(10px);
+        color:clr.$btn-color;
+
+    }
+    // Положительные числа двигают элемент вправо и вниз, отрицательные — влево и вверх
+
+    //
+
+    //Btn
+
+    &_btn{
+        display: flex;
+        gap: 25px ;
+    }
+
+    .btn-login{
+        padding: 12px 47px ;
+    }
+    
+    .btn-reg{
+        padding: 12px 13px;
+    }
+
+    //
+
+    // Header content
+
+    &_content{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &_title{
+        margin-bottom: 30px;
+    }
+
+    &_welcome{
+        color: clr.$second-color;
+
+        font-size: 20px;
+        font-family: fntw.$second-font ;
+
+        margin-bottom: 30px;
+    }
+
+    &_have{
+
+        color: clr.$main-color;
+
+        font-weight: 500;
+
+        margin-bottom: 15px ;
+
+    }
+
+    // Services list
+
+
+    &_services{
+        display: inline-block;
+    }
+
+    &_service{
+        color: clr.$second-color;
+        
+        font-size: 14px;
+        font-family: fntw.$second-font;
+        font-weight: fntw.$regular;
+
+        margin-bottom: 10px;
+        
+    }
+
+    &_service:last-child{
+        margin-bottom: 0px;
+    }
+
+    &_service::before{
+        content: '';
+        background-color: clr.$second-color;
+
+
+        border-radius: 50px;
+    
+
+        display: inline-block;
+
+        width: 10px ;
+        height: 10px;
+
+        margin-right: 5px;
+    }
+
+
+    // Header img
+
+    
+
+    &_image{
+
+    position: relative;
+    width: 350px;
+    
+    // border-radius: 50px;
+    }
+
+    &_machine{
+        position: absolute;
+
+        left: -100px;
+        top: -75px;
+
+        width: 200px;
+    }
+
+}
