@@ -1,6 +1,11 @@
+import Community from "./Community/Community";
 const Main = () => {
-    return ( 
-        <h1>Main</h1>
+    return (
+
+        <main className="main">
+            <Community/>
+        </main>
+
      );
 }
  

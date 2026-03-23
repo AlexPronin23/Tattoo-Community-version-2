@@ -1,0 +1,74 @@
+@use '../../../styles/vars.scss' as clr; // цвет
+@use '../../../styles/vars.scss' as fntw; // все что связано со шрифтом
+.community{
+    padding: 130px ;
+
+    background-image: url('../../../assets/img/Main/Community/CommunityBg.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+
+    &_title{
+
+        color: clr.$main-color;
+
+        margin-bottom: 80px;
+    }
+
+    // First question
+
+    &_first_question{
+        margin-bottom: 28px ;
+    }
+
+    &_chat{
+
+        color: clr.$main-color;
+
+        font-size: 30px;
+        font-weight: 600;
+
+        margin-bottom:28px ;
+
+
+        &-descr{
+
+            color: clr.$second-color;
+
+            font-family: fntw.$second-font;
+            font-weight: fntw.$regular;
+
+        }
+
+    }
+
+    // Second question
+
+    &_second_question{
+        margin-bottom: 40px;
+    }
+
+    &_useful{
+
+        color: clr.$main-color;
+
+        font-size: 30px;
+        font-weight: 600;
+
+        margin-bottom:28px;
+
+        &-descr{
+
+            color: clr.$second-color;
+
+            font-family: fntw.$second-font;
+            font-weight: fntw.$regular;
+
+        }
+    }
+
+    &_btn{
+        padding: 22px;
+    }
+}
