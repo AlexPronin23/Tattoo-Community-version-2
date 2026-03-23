@@ -1,0 +1,47 @@
+@use '../../../styles/vars.scss' as clr; // цвета
+@use '../../../styles/vars.scss' as fntw; // все что связано со шрифтами
+.services{
+    background-color: #000000;
+    padding: 30px 70px;
+
+    &_wrapper{
+        text-align: center;
+    }
+
+    &_title{
+        color: clr.$main-color;
+        margin-bottom: 65px;
+
+        display: inline-block;
+    }
+
+    &_card{
+        display: flex;
+        justify-content: center;
+        gap: 184px;
+    }
+}
+
+// Сard
+
+.card{
+    background-color: clr.$main-color;
+    padding: 35px 40px;
+    border-radius: 50px;   
+    
+    &_img{
+        height: 400px; // Фиксированная высота для всех изображений
+        object-fit: cover; // Обрезает изображение, сохраняя пропорции
+        margin-bottom: 35px;
+        border-radius: 30px;
+    }
+
+    &_text{
+        color: #000000;
+
+        font-size: 20px;
+        font-family: fntw.$second-font;
+
+        white-space: nowrap;
+    }
+}
