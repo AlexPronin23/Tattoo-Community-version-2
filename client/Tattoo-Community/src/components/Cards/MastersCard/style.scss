@@ -1,0 +1,52 @@
+@use '../../../styles/vars.scss' as clr;
+
+
+.tattoomasters_card{
+
+    background-color: clr.$main-color;
+    width: 400px;
+
+    border-radius: 50px;
+
+    &-img{
+
+        width: 100%;
+        margin-bottom: 20px;
+
+        border-radius: 50px 50px 0px 0px;
+    }
+
+
+    &-info{
+        text-align: left;
+
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        font-size: 25px;
+
+        padding: 35px;
+    }
+
+//    &-style{
+//         color: clr.$second-color;
+//    }
+
+   &-btn{
+
+    padding: 11px 28px;
+    margin-bottom: 30px ;
+    
+   }
+
+   &-green{
+        color: rgb(88, 255, 11);
+   }
+
+   &-red{
+    color: red;
+   }
+
+    
+}

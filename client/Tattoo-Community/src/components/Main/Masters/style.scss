@@ -1,0 +1,45 @@
+@use '../../../styles/vars.scss' as clr;
+.masters{
+
+    background-color: #000000;
+
+    padding: 120px 69px ;
+
+    //  border: 2px red solid;
+
+
+    &_wrapper{
+        text-align: center;
+        //  border: 2px red solid;
+       
+    }
+
+    &_title{
+        color: clr.$main-color ;
+        
+        margin-bottom: 70px ;
+    }
+
+
+    //  Карточки тату мастеров
+&_card{
+    //  display: grid;
+    // grid-template-columns: repeat(3,1fr);
+
+    // gap: 10px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 30px;
+
+    //  border: 2px red solid;
+}
+
+
+}
+
+
+
+
