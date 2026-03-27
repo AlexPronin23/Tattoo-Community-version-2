@@ -1,0 +1,41 @@
+@use '../../styles/vars.scss' as clr; // для цветов
+@use '../../styles/vars.scss' as fntw; // для работы со шрифтом
+.footer{
+
+    background-color: black;
+
+    padding: 30px 20px;
+
+    &_wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    &_items{
+        display: flex;
+        gap: 20px;
+    }
+
+    &_link{
+
+        color: clr.$main-color;
+
+        font-weight: 600;
+
+    }
+
+    &_social{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &_phone{
+       color: clr.$main-color;
+       font-size: 18px;
+       text-decoration: underline;
+
+    }
+
+}
