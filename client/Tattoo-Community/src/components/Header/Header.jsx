@@ -4,6 +4,11 @@ import './style.scss';
 import HeaderLogo from '@assets/icon/Header/HeaderLogo.svg';
 import HeaderImg from '@assets/img/Header/tattooImg.png';
 import TattooMachine from '@assets/icon/Header/tattoo-machine.svg';
+import BurgerMenuWhite from '@assets/icon/Header/BurgerMenuWhite.svg';
+
+// Components
+import Nav from '../Nav/Nav';
+import Logo from '../Logo/Logo';
 
 const Header = () => {
     return ( 
@@ -14,39 +19,19 @@ const Header = () => {
 
             <div className="header_top">
 
-
                 {/* Logo */}
-                <a href="#" className="header_logo">
+               
+               <div className="header_logo">
 
-                <img src={HeaderLogo} alt="Header Logo" />
+                    <Logo src={HeaderLogo}/>
 
-                </a>
+               </div>
 
                 {/* Navigation */}
                 <nav className="header_nav">
-                    <ul className="header_items">
-                        <li className="header_item">
-                            <a href="#" className="header_link">
-                                О нас
-                            </a>
-                        </li>
-                        <li className="header_item">
-                            <a href="#" className="header_link">
-                                Контакты
-                            </a>
-                        </li>
-                        <li className="header_item">
-                            <a href="#" className="header_link">
-                                Тату мастера
-                            </a>
-                        </li>
-                        <li className="header_item">
-                            <a href="#" className="header_link">
-                                Услуги
-                            </a>
-                        </li>
-                    </ul>
+                    <Nav/>
                 </nav>
+
 
                 {/* Button group */}
                 <div className="header_btn">
@@ -55,6 +40,12 @@ const Header = () => {
                    <button className="button btn-reg">Зарегистрироваться</button>
 
                 </div>
+
+                {/* Mobile(Burger menu) */}
+
+                <button className="header_mobile">
+                    <img src={BurgerMenuWhite} alt="Burger Menu"  className='header_mobile'/>
+                </button>
 
             </div>
 

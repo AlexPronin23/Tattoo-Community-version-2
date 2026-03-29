@@ -14,7 +14,7 @@ body{
     padding: 0px 15px;
 }
 
-button{
+.button{
     background-color: clr.$btn-color;
     color: clr.$main-color;
 
@@ -34,4 +34,12 @@ button{
     
     font-weight: fntw.$bold ;
     font-size: 60px;
+}
+
+@media (max-width:700px) {
+
+    .title{
+        font-size: 30px;
+    }
+    
 }
