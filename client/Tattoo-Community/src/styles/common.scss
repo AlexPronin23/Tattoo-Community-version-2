@@ -33,3 +33,15 @@ body{
 
     border-radius: 50px;
 }
+
+@media (max-width:700px) {
+
+    .title{
+        font-size: 40px;
+    }
+
+    .button{
+        font-size: 16px;
+    }
+    
+}

@@ -71,4 +71,22 @@
     &_btn{
         padding: 22px;
     }
+
+
+    // Mobile version
+    
+    @media (max-width:700px) {
+
+        padding: 50px;
+        height: 80vh;
+
+        
+        &_title{
+        margin-bottom: 50px;
+  
+    }
+
+  
+        
+    }
 }
