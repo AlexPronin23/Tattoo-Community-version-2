@@ -48,5 +48,22 @@
     color: red;
    }
 
+//    Mobile
+
+@media (max-width:700px) {
+
+    width: 300px;
+
+    &-img{
+        margin-bottom: 15px;
+    }
+
+    &-info{
+        font-size: 20px;
+        padding: 20px;
+    }
+    
+}
+
     
 }

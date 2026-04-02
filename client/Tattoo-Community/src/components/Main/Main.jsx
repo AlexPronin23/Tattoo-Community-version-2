@@ -6,8 +6,8 @@ const Main = () => {
 
         <main className="main">
             {/* <Community/> */}
-            <Services/>
-            {/* <Masters/> */}
+            {/* <Services/> */}
+            <Masters/>
         </main>
 
      );
