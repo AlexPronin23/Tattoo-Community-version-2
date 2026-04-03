@@ -22,4 +22,21 @@
     // Положительные числа двигают элемент вправо и вниз, отрицательные — влево и вверх
 
     //
+
+    // Adaptive version(1000px)
+
+    @media (max-width:1000px) {
+
+        &_items{
+            gap: 20px;
+        }
+
+        &_link{
+            font-size: 16px;
+
+            white-space: nowrap;
+        }
+        
+    }
+
  }

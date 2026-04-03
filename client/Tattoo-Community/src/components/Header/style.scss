@@ -4,6 +4,7 @@
 
     background-color: rgba(0, 0, 0, 0.901);
     padding: 74px 169px;
+    overflow: hidden;
 
     &_top{
         position: relative;
@@ -13,6 +14,8 @@
 
         margin-bottom: 100px;
     }
+
+
 
     &_top::after{
         content: '';
@@ -141,8 +144,37 @@
     // }
 
 
+    // Mobile version(1000px)
 
-    // Mobile version
+    @media (max-width:1000px) {
+
+        padding: 70px 20px;
+
+
+        &_btn{
+            gap: 10px;
+        }
+
+        &_top{
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        &_welcome{
+            font-size: 18px;
+        }
+
+        &_image{
+        width: 250px;    
+    }
+
+    &_machine{
+        width: 0px;
+    }
+        
+    }
+
+    // Mobile version(700px)
 
     &_mobile{
         width: 50px;
@@ -158,10 +190,7 @@
 
        padding: 20px 15px;
 
-       
-
            &_top {
-
             width: 500px;
             display: flex;
             justify-content: center;

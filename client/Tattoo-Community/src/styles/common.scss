@@ -36,6 +36,20 @@ body{
     font-size: 60px;
 }
 
+// Adaptive version
+
+@media (max-width:1000px) {
+
+    .button{
+        font-size: 16px;
+    }
+
+    .title{
+        font-size: 40px;
+    }
+    
+}
+
 @media (max-width:700px) {
 
     .title{
