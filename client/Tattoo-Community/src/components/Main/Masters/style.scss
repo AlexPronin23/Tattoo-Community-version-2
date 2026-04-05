@@ -43,9 +43,19 @@
 
     gap: 30px;
 
+    overflow: hidden;
+
 }
 
-// Mobile
+// Adaptive version
+// @media (max-width:1000px){
+
+//     &_card{
+//         flex-wrap: nowrap;
+//     }
+
+// }
+
 
 @media (max-width:700px) {
 

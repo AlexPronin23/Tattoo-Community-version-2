@@ -48,7 +48,20 @@
     color: red;
    }
 
-//    Mobile
+//  Adaptive version
+
+@media (max-width:1000px){
+     width: 350px;
+
+     
+
+
+    //  &-info{
+    //     // padding: 45px;
+    //     padding: 20px 0px;
+    //     white-space: nowrap;
+    //  }
+}
 
 @media (max-width:700px) {
 

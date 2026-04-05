@@ -5,9 +5,9 @@ const Main = () => {
     return (
 
         <main className="main">
-            {/* <Community/> */}
+            <Community/>
             <Services/>
-            {/* <Masters/> */}
+            <Masters/>
         </main>
 
      );
