@@ -5,9 +5,9 @@ const Main = () => {
     return (
 
         <main className="main">
-            <Community/>
-            {/* <Services/>
-            <Masters/> */}
+            {/* <Community/> */}
+            <Services/>
+            {/* <Masters/> */}
         </main>
 
      );

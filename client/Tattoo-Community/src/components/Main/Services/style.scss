@@ -18,7 +18,7 @@
     &_card{
         display: flex;
         justify-content: center;
-        gap: 184px;
+        gap: 50px;
     }
 
 }
@@ -28,13 +28,19 @@
 .card{
     background-color: clr.$main-color;
     padding: 35px 40px;
-    border-radius: 50px;   
+    border-radius: 50px;
+    width: 400px;
+    flex-shrink: 0;
+    // max-height: 552px;   
     
     &_img{
-        height: 400px; // Фиксированная высота для всех изображений
-        object-fit: cover; // Обрезает изображение, сохраняя пропорции
-        margin-bottom: 35px;
-        border-radius: 30px;
+    display: block;
+    width: 100%;
+    max-height: 409px;
+    max-width: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 30px;
     }
 
     &_text{
@@ -52,7 +58,25 @@
 }
 
 
-// Mobile version
+// Adaptive version
+
+@media (max-width:1000px) {
+
+    // .services{
+    //     padding: 20px 40px;
+    // }
+
+    .services{
+        padding: 20px;
+         &_card{
+       flex-direction: column;
+       align-items: center;
+       gap: 40px;
+    }
+    }
+
+   
+}
 
 @media (max-width:700px) {
 
@@ -71,7 +95,13 @@
    }
 
    .card{
+    width: 100%;
+    max-width: 300px;
     padding: 20px;
+
+    &_text{
+        font-size: 16px;
+    }
    }
     
 }
