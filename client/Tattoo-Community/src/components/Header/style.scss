@@ -144,7 +144,7 @@
     // }
 
 
-    // Mobile version(1000px)
+    // Adaptive version(1000px)
 
     @media (max-width:1000px) {
 
@@ -174,7 +174,6 @@
         
     }
 
-    // Mobile version(700px)
 
     &_mobile{
         width: 50px;
@@ -234,8 +233,6 @@
 
         // Content
 
-        
-
         &_text{
             display: inline-block;
             margin: 0 auto;
@@ -255,6 +252,32 @@
         }
 
       
+    }
+
+    @media (max-width:400px) {
+
+          padding: 20px;
+
+          &_top{
+            width: 300px;
+            margin-bottom: 25px;
+
+            &::after{
+                width: 0%;
+            }
+          }
+         &_welcome{
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        &_have{
+            font-size: 12px;
+        }
+
+         &_service{
+            font-size: 10px;
+         }
     }
 
 }
