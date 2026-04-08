@@ -5,8 +5,8 @@ const Main = () => {
     return (
 
         <main className="main">
-            {/* <Community/> */}
-            {/* <Services/> */}
+            <Community/>
+            <Services/>
             <Masters/> 
         </main>
 
