@@ -4,6 +4,9 @@ import './style.scss'
 import FooterLogo from '../../assets/icon/Footer/FooterLogo.svg'
 import VK from '../../assets/icon/Footer/VK.svg'
 
+// Components
+import Nav from '../Nav/Nav';
+
 const Footer = () => {
     return ( 
         
@@ -21,32 +24,7 @@ const Footer = () => {
 
                     {/* Здесь потом будет отдельный компонент Nav */}
                     <nav className="footer_nav">
-
-                        <ul className="footer_items">
-
-                            <li className="footer_item">
-                                <a href="#" className="footer_link">
-                                    О нас
-                                </a>
-                            </li>
-                            <li className="footer_item">
-                                <a href="#" className="footer_link">
-                                    Контакты
-                                </a>
-                            </li>
-                            <li className="footer_item">
-                                <a href="#" className="footer_link">
-                                    Тату мастера
-                                </a>
-                            </li>
-                            <li className="footer_item">
-                                <a href="#" className="footer_link">
-                                    Услуги
-                                </a>
-                            </li>
-
-                        </ul>
-
+                        <Nav/>
                     </nav>
 
                     <div className="footer_social">

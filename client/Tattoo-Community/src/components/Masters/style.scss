@@ -1,7 +1,7 @@
-@use '../../../styles/vars.scss' as clr;
+@use '../../styles/vars.scss' as *;
 .masters{
 
-    background-color: #000000;
+    background-color: $bg-color;
 
     padding: 120px 0px ;
 
@@ -19,7 +19,7 @@
         left: 0px;
         top: 95%;
 
-        background-color: clr.$main-color;
+        background-color: $main-color;
     }
 
     &_wrapper{
@@ -28,7 +28,7 @@
     }
 
     &_title{
-        color: clr.$main-color ;
+        color: $main-color ;
         
         margin-bottom: 70px ;
     }

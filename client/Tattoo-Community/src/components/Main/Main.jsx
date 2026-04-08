@@ -1,6 +1,6 @@
-import Community from "./Community/Community";
-import Masters from "./Masters/Masters";
-import Services from "./Services/Services";
+import Community from "../Community/Community";
+import Masters from "../Masters/Masters";
+import Services from "../Services/Services";
 const Main = () => {
     return (
 

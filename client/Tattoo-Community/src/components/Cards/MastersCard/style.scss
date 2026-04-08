@@ -1,9 +1,8 @@
-@use '../../../styles/vars.scss' as clr;
-
+@use '../../../styles/vars.scss' as *;
 
 .tattoomasters_card{
 
-    background-color: clr.$main-color;
+    background-color: $main-color;
     width: 400px;
 
     border-radius: 50px;
@@ -28,9 +27,6 @@
         padding: 35px;
     }
 
-//    &-style{
-//         color: clr.$second-color;
-//    }
 
    &-btn{
 

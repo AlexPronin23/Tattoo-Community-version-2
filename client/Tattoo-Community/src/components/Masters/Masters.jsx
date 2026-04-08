@@ -1,9 +1,8 @@
 import './style.scss'
 
-
-import MastersCard from '../../Cards/MastersCard/MastersCard';
+import MastersCard from '../Cards/MastersCard/MastersCard';
 import { useEffect, useState } from 'react';
-import Skeleton from '../../Skeleton/CardSkeleton';
+import Skeleton from '../Skeleton/CardSkeleton';
 
 const Masters = () => {
 

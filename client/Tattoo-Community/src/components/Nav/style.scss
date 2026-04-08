@@ -1,4 +1,4 @@
- @use '../../styles/vars.scss' as clr;
+@use '../../styles/vars.scss' as *;
  .nav{
      &_items{
         display: flex;
@@ -7,7 +7,7 @@
     
 
     &_link{
-        color: clr.$main-color;
+        color: $main-color;
         font-size: 18px;
         display: inline-block;
         transition: transform .5s ease-in-out, color .5s ease-out;
@@ -16,7 +16,7 @@
  
     &_link:hover{
         transform: translateX(10px);
-        color:clr.$btn-color;
+        color:$btn-color;
 
     }
     // Положительные числа двигают элемент вправо и вниз, отрицательные — влево и вверх

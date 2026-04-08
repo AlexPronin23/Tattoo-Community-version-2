@@ -1,9 +1,8 @@
-@use '../../../styles/vars.scss' as clr; // цвет
-@use '../../../styles/vars.scss' as fntw; // все что связано со шрифтом
+@use '../../styles/vars.scss' as *;
 .community{
     padding: 130px ;
 
-    background-image: url('../../../assets/img/Main/Community/CommunityBg.png');
+    background-image: url('../../assets/img/Main/Community/CommunityBg.png');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -15,7 +14,7 @@
 
     &_title{
 
-        color: clr.$main-color;
+        color: $main-color;
 
         margin-bottom: 80px;
     }
@@ -28,7 +27,7 @@
 
     &_chat{
 
-        color: clr.$main-color;
+        color: $main-color;
 
         font-size: 30px;
         font-weight: 600;
@@ -38,10 +37,10 @@
 
         &-descr{
 
-            color: clr.$second-color;
+            color: $second-color;
 
-            font-family: fntw.$second-font;
-            font-weight: fntw.$regular;
+            font-family: $second-font;
+            font-weight: $regular;
 
         }
 
@@ -55,7 +54,7 @@
 
     &_useful{
 
-        color: clr.$main-color;
+        color: $main-color;
 
         font-size: 30px;
         font-weight: 600;
@@ -64,10 +63,10 @@
 
         &-descr{
 
-            color: clr.$second-color;
+            color: $second-color;
 
-            font-family: fntw.$second-font;
-            font-weight: fntw.$regular;
+            font-family: $second-font;
+            font-weight: $regular;
 
         }
     }
@@ -126,7 +125,7 @@
     @media (max-width:400px) {
 
         background-image: none;
-        background-color: black;
+        background-color: $bg-color;
         padding: 30px;
 
           &_title{

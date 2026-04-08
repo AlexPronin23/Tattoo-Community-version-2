@@ -1,8 +1,7 @@
-@use '../../styles/vars.scss' as clr; // для цветов
-@use '../../styles/vars.scss' as fntw; // для работы со шрифтом
+@use '../../styles/vars.scss' as *;
 .footer{
 
-    background-color: black;
+    background-color: $bg-color;
 
     padding: 30px 20px;
 
@@ -19,7 +18,7 @@
 
     &_link{
 
-        color: clr.$main-color;
+        color: $main-color;
 
         font-weight: 600;
 
@@ -32,7 +31,7 @@
     }
 
     &_phone{
-       color: clr.$main-color;
+       color: $main-color;
        font-size: 18px;
        text-decoration: underline;
 

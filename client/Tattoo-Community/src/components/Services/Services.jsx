@@ -2,9 +2,9 @@ import './style.scss'
 
 // Images
 
-import FirstPicture from '../../../assets/img/Main/Services/FirstPicture.png'
-import SecondPicture from '../../../assets/img/Main/Services/SecondPicture.png'
-import ThirdPicture from '../../../assets/img/Main/Services/ThirdPicture.png'
+import FirstPicture from '../../assets/img/Main/Services/FirstPicture.png'
+import SecondPicture from '../../assets/img/Main/Services/SecondPicture.png'
+import ThirdPicture from '../../assets/img/Main/Services/ThirdPicture.png'
 
 const Services = () => {
     return ( 

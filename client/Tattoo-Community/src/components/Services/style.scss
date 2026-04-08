@@ -1,8 +1,7 @@
-@use '../../../styles/vars.scss' as clr; // цвета
-@use '../../../styles/vars.scss' as fntw; // все что связано со шрифтами
+@use '../../styles/vars.scss' as *;
 
 .services{
-    background-color: #000000;
+    background-color: $bg-color;
     padding: 30px 70px;
 
     &_wrapper{
@@ -10,7 +9,7 @@
     }
 
     &_title{
-        color: clr.$main-color;
+        color: $main-color;
         margin-bottom: 65px;
 
         display: inline-block;
@@ -27,7 +26,7 @@
 // Сard
 
 .card{
-    background-color: clr.$main-color;
+    background-color: $main-color;
     padding: 35px 40px;
     border-radius: 50px;
     width: 400px;
@@ -47,7 +46,7 @@
         color: #000000;
 
         font-size: 20px;
-        font-family: fntw.$second-font;
+        font-family: $second-font;
 
         white-space: nowrap;
     }
