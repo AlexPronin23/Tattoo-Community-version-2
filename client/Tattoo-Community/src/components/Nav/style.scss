@@ -1,0 +1,42 @@
+ @use '../../styles/vars.scss' as clr;
+ .nav{
+     &_items{
+        display: flex;
+        gap: 27px;
+    }
+    
+
+    &_link{
+        color: clr.$main-color;
+        font-size: 18px;
+        display: inline-block;
+        transition: transform .5s ease-in-out, color .5s ease-out;
+    }
+
+ 
+    &_link:hover{
+        transform: translateX(10px);
+        color:clr.$btn-color;
+
+    }
+    // Положительные числа двигают элемент вправо и вниз, отрицательные — влево и вверх
+
+    //
+
+    // Adaptive version(1000px)
+
+    @media (max-width:1000px) {
+
+        &_items{
+            gap: 20px;
+        }
+
+        &_link{
+            font-size: 16px;
+
+            white-space: nowrap;
+        }
+        
+    }
+
+ }
