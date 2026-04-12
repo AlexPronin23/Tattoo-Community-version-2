@@ -2,16 +2,54 @@
 
 .tattoomasters_card{
 
+    position: relative;
+
     background-color: $main-color;
     width: 400px;
-
     border-radius: 50px;
+
+    cursor: pointer;
+
+    &::after {
+        content: ''; 
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        font-size: 18px;
+        font-weight: $bold;
+        
+        background-color: rgba(0, 0, 0, .5);
+        color: $main-color; 
+        border-radius: 50px;
+        
+        opacity: 0;
+        pointer-events: none; 
+        
+       
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+        content: 'Показать подробнее'; 
+        opacity: 1; 
+        pointer-events: auto; 
+    }
 
     &-img{
 
         width: 100%;
         margin-bottom: 20px;
-
         border-radius: 50px 50px 0px 0px;
     }
 
@@ -30,8 +68,11 @@
 
    &-btn{
 
+    position: relative;
+    z-index: 1;
+
     padding: 11px 28px;
-    margin-bottom: 30px ;
+    margin-bottom: 20px ;
     
    }
 
@@ -61,6 +102,8 @@
     &-info{
         font-size: 20px;
         padding: 20px;
+
+        
     }
     
 }
@@ -68,18 +111,31 @@
 
 @media (max-width:400px) {
 
-    width: 200px;
+    width: 150px;
 
-     &-info{
-        font-size: 16px;
-        padding: 15px;
-        gap: 5px;
+    &:hover::after{
+        font-size: 10px;
     }
 
-    // &-img{
-    //     width: 100%;
-    // }
+     &-info{
+        display: flex;
+        font-size: 12px;
+        padding: 10px;
+        gap: 5px;
+        white-space: nowrap;
+       
+    }
+
+    &-info > p {
+        display: none; //Временно
+    }
     
+    &-btn{
+
+    padding: 5px;
+
+    
+   }
 }
 
     

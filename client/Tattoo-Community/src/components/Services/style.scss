@@ -31,15 +31,15 @@
     border-radius: 50px;
     width: 400px;
     flex-shrink: 0;
-    // max-height: 552px;   
     
     &_img{
     display: block;
     width: 100%;
     max-width: 400px;
     object-fit: cover;
-    margin-bottom: 15px;
     border-radius: 30px;
+    margin-bottom: 15px;
+
     }
 
     &_text{
@@ -50,9 +50,6 @@
 
         white-space: nowrap;
     }
-
-    // Mobile version
-
 
 }
 
@@ -111,7 +108,7 @@
    @media (max-width:400px) {
 
     .services{
-         padding: 30px;
+         padding: 0px;
     }
    
     .card{

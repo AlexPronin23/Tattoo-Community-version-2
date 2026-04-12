@@ -80,6 +80,7 @@
 
     @media (max-width:1000px) {
 
+
         padding:60px;
         height: 80vh;
 
@@ -111,10 +112,11 @@
     
     @media (max-width:700px) {
         
-        padding: 50px;
-        height: 80vh;
+        background-image: none;
+        background-color: $bg-color;
+        padding: 50px 90px;
 
-        
+
         &_title{
         margin-bottom: 50px;
   
@@ -126,15 +128,33 @@
 
         background-image: none;
         background-color: $bg-color;
-        padding: 30px;
+        padding: 20px;
 
           &_title{
         margin-bottom: 30px;
   
     }
 
+    &_chat{
+
+         &-descr{
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+    }
+
         &_second_question{
             margin-bottom: 20px;
+    }
+
+    &_useful{
+
+         &-descr{
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
     }
 
      &_btn{

@@ -20,9 +20,9 @@ const MastersCard = ({user_id, first_name, tattooSalon, experience,isColored,sty
 
                     <p className="tattoomasters_card-experience">Опыт: {experience} лет</p>
 
-                    <p className="tattoomasters_card-colorful">Мастер использует цветные краски: <span className={`tattoomasters_card-${isColored ? 'green' : 'red'}`}>{isColored ? 'Да': 'Нет'}</span></p>
+                    {/* <p className="tattoomasters_card-colorful">Мастер использует цветные краски: <span className={`tattoomasters_card-${isColored ? 'green' : 'red'}`}>{isColored ? 'Да': 'Нет'}</span></p>
 
-                    <p className="tattoomasters_card-style">Стили мастера: {styleTattooName}</p>
+                    <p className="tattoomasters_card-style">Стили мастера: {styleTattooName}</p> */}
 
                 </div>
 
