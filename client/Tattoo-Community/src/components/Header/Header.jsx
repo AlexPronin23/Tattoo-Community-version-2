@@ -1,5 +1,8 @@
 import './style.scss';
 
+// React
+import { useState } from 'react';
+
 // Images
 import HeaderLogo from '@assets/icon/Header/HeaderLogo.svg';
 import HeaderImg from '@assets/img/Header/tattooImg.png';
@@ -9,8 +12,17 @@ import BurgerMenuWhite from '@assets/icon/Header/BurgerMenuWhite.svg';
 // Components
 import Nav from '../Nav/Nav';
 import Logo from '../Logo/Logo';
+import MobileMenu from '../MobileMenu/MobileMenu';
+
 
 const Header = () => {
+
+    const [open,setOpen] = useState(false)
+
+    const handleOpening = () => {
+        setOpen(true)
+    }
+
     return ( 
 
       <header className="header">
@@ -41,12 +53,23 @@ const Header = () => {
 
                 </div>
 
+
+                   {/* Mobile(Menu) */}
+                <div className={`header_mobile ${open ? "open" : ''}`}>
+                    <MobileMenu closeMobile = {() => setOpen(false)}/>
+                </div>
+
+
                 {/* Mobile(Burger menu) */}
 
-                <button className="header_mobile">
-                    <img src={BurgerMenuWhite} alt="Burger Menu"  className='header_mobile'/>
+                <button 
+                onClick={() => handleOpening()}
+                >
+                    <img src={BurgerMenuWhite} alt="Burger Menu"  className="header_burger"/>
+
                 </button>
 
+             
             </div>
 
                 {/* Header content */}
@@ -54,7 +77,7 @@ const Header = () => {
 
                     <div className="header_text">
 
-                         <h1 className="header_title title">Вступай в клуб <br /> единомышленников</h1>
+                    <h1 className="header_title title">Вступай в клуб <br /> единомышленников</h1>
 
                     <p className="header_welcome">
                         Добро пожаловать в дружное пространство для <br /> обмена идеями, поддержкой 
@@ -78,8 +101,9 @@ const Header = () => {
                     </div>
 
                     <div className="header_image">
+
                         <img  className = 'header_img' src={HeaderImg} alt="Header Img" />
-                        
+
                         <img className = 'header_machine' src={TattooMachine} alt="Tattoo machine" />
                             
                     </div>
@@ -87,6 +111,7 @@ const Header = () => {
                 </div>
                 
         </div>
+
       </header>
 
      );

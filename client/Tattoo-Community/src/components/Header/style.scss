@@ -119,15 +119,11 @@
 
 
     // Header img
-
-    
-
     &_image{
 
     position: relative;
     width: 350px;
     
-    // border-radius: 50px;
     }
 
     &_machine{
@@ -139,52 +135,35 @@
         width: 200px;
     }
 
-    // &_mobile{
-    //    width: 50px; 
-    // }
-
-
-    // Adaptive version(1000px)
-
-    @media (max-width:1000px) {
-
-        padding: 70px 20px;
-
-
-        &_btn{
-            gap: 10px;
-        }
-
-        &_top{
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        &_welcome{
-            font-size: 18px;
-        }
-
-        &_image{
-        width: 250px;    
-    }
-
-    &_machine{
-        width: 0px;
-    }
-        
-    }
-
-
-    &_mobile{
-        width: 50px;
-
-        // :hover{
-        //     opacity: .5;
-        // }
-
+    &_burger{
         display: none;
     }
 
+    &_mobile{
+
+        position: fixed;
+
+        background-color: rgba(0,0,0,.9);
+
+        width: 300px;
+        height: 50vh;
+        padding: 30px;
+
+        top: 0;
+        left: 25%;
+        z-index: 1;
+
+       border-top-left-radius: 30px;
+       border-bottom-left-radius: 30px;
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+
+    }
+
+   
     @media (max-width:700px) {
 
        padding: 20px 15px;
@@ -207,8 +186,7 @@
 
 
  }   
-        
-        
+    
         &_nav{
             display: none;
         }
@@ -218,7 +196,7 @@
         }
 
         // 4. Показываем и настраиваем бургер
-        &_mobile {
+        &_burger {
             display: block;
             width: 50px; 
             cursor: pointer;
@@ -278,6 +256,28 @@
          &_service{
             font-size: 10px;
          }
+
+
+        //  MobileMenu
+
+        // Для кнопок которые находятся в MobileMenu
+         .btn-login{
+            padding: 7px 27px ;
+         }
+
+          .btn-reg{
+            padding: 7px 10px ;
+         }
+
+        //  
+
+        &_mobile.open{
+        opacity: 1;
+        visibility: visible;
+    }
+
+    //
+
     }
 
 }

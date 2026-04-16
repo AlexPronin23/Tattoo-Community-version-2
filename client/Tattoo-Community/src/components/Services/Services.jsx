@@ -20,8 +20,8 @@ const Services = () => {
 
                     <div className="card">
 
-                        <img src={FirstPicture} alt="First Picture" className="card_img" />
-                        <p className="card_text">
+                       <img src={FirstPicture} alt="First Picture" className="card_img" /> 
+                        <p className="card_text"> 
                             Профиль мастера
                         </p>
 
@@ -29,7 +29,7 @@ const Services = () => {
 
                     <div className="card">
 
-                         <img src={SecondPicture} alt="Second Picture" className="card_img" />
+                          <img src={SecondPicture} alt="Second Picture" className="card_img" /> 
                           <p className="card_text">
                             Продвижение бренда
                           </p>
@@ -38,7 +38,7 @@ const Services = () => {
 
                     <div className="card">
 
-                         <img src={ThirdPicture} alt="Third Picture" className="card_img" />
+                          <img src={ThirdPicture} alt="Third Picture" className="card_img" /> 
                           <p className="card_text">
                             Консультация у чат бота
                           </p>
