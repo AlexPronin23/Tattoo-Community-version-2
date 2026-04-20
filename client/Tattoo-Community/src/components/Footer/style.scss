@@ -25,43 +25,45 @@
     }
 
     &_social{
+
         display: flex;
         align-items: center;
         gap: 10px;
+
     }
 
     &_phone{
+
        color: $main-color;
+
        font-size: 18px;
        text-decoration: underline;
 
     }
 
-    // Adaptive  version
+// Adaptive  version
 
-    // @media (max-width:1000px) {
 
-        
-    // }
+@media (max-width:700px) {
 
-    @media (max-width:700px) {
+    &_wrapper{
 
-        &_wrapper{
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        
+        flex-direction: column;
+        gap: 20px;
+
     }
+     
+}
 
-    @media (max-width:400px) {
+@media (max-width:400px) {
                
         &_wrapper{
 
             flex-direction: column;
             gap: 20px;
+            
         }
         
-    }
+}
 
 }

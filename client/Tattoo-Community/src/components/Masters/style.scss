@@ -1,4 +1,5 @@
 @use '../../styles/vars.scss' as *;
+
 .masters{
 
     background-color: $bg-color;
@@ -7,8 +8,7 @@
 
     position: relative;
 
-    // Добавил нижнию разделительную линию
-
+// Divide line
     &::after{
         content: '';
         position: absolute;
@@ -21,7 +21,9 @@
 
         background-color: $main-color;
     }
+//
 
+// Masters items
     &_wrapper{
         text-align: center;
        
@@ -32,38 +34,28 @@
         
         margin-bottom: 70px ;
     }
+//
 
+// Masters cards
+    &_card{
 
-    //  Карточки тату мастеров
-&_card{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+        gap: 30px;
 
-    gap: 30px;
-
-    overflow: hidden;
+        overflow: hidden;
 
 }
+//
 
 // Adaptive version
-// @media (max-width:1000px){
-
-//     &_card{
-//         flex-wrap: nowrap;
-//     }
-
-// }
-
-
 @media (max-width:700px) {
 
     padding: 80px;
 
     &::after{
-        // left: px;
-        // width: 50%;
         top: 97%;
     }
 

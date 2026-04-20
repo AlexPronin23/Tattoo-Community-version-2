@@ -1,5 +1,6 @@
 @use '../../styles/vars.scss' as *;
 .community{
+
     padding: 130px ;
 
     background-image: url('../../assets/img/Main/Community/CommunityBg.png');
@@ -12,19 +13,19 @@
     background-repeat: no-repeat;
     height: 100vh;
 
+//Community content
     &_content{
         display: inline-block;
     }
 
     &_title{
 
-        color: $main-color;
+        color:red;
 
         margin-bottom: 80px;
     }
 
-    // First question
-
+// First question
     &_first_question{
         margin-bottom: 28px ;
     }
@@ -39,19 +40,19 @@
         margin-bottom:28px ;
 
 
-        &-descr{
+    &-descr{
 
-            color: $second-color;
+        color: $second-color;
 
-            font-family: $second-font;
-            font-weight: $regular;
+        font-family: $second-font;
+        font-weight: $regular;
 
         }
 
     }
+//
 
-    // Second question
-
+// Second question
     &_second_question{
         margin-bottom: 40px;
     }
@@ -78,92 +79,69 @@
     &_btn{
         padding: 22px;
     }
+//
+
+//
+
+// Adaptive version    
+@media (max-width:700px) {
+
+    background-image: none;
+    background-color: $bg-color;
+    padding: 50px 90px;
+    height: auto;
 
 
-    // Adaptive version
+    &_title{
+        margin-bottom: 50px;
+    }
 
-    @media (max-width:1000px) {
+}
 
+@media (max-width:400px) {
 
-        padding:60px;
-        height: 80vh;
+    background-image: none;
+    background-color: $bg-color;
+
+    padding: 20px;
 
         &_title{
-        margin-bottom: 50px;
-  
-    }
-
-    &_chat{
-        font-size: 20px;
-        margin-bottom: 20px;
-
-        
-    &-descr{
-        font-size: 14px;
-    }
-
-    }
-
-    &_useful{
-        font-size: 20px;
-        margin-bottom: 20px;
-
-        &-descr{
-            font-size: 14px;
+            margin-bottom: 30px;
         }
-     }
-    }
-    
-    @media (max-width:700px) {
-        
-        background-image: none;
-        background-color: $bg-color;
-        padding: 50px 90px;
 
+        &_chat{
 
-        &_title{
-        margin-bottom: 50px;
-  
-    }
+            font-size: 20px;
 
-    }
+            &-descr{
 
-    @media (max-width:400px) {
-
-        background-image: none;
-        background-color: $bg-color;
-        padding: 20px;
-
-          &_title{
-        margin-bottom: 30px;
-  
-    }
-
-    &_chat{
-
-         &-descr{
             font-size: 12px;
             white-space: nowrap;
+
         }
 
     }
 
         &_second_question{
             margin-bottom: 20px;
-    }
-
-    &_useful{
-
-         &-descr{
-            font-size: 12px;
-            white-space: nowrap;
         }
 
-    }
+        &_useful{
 
-     &_btn{
-        padding: 15px;
-    }
+             font-size: 20px;
+
+             &-descr{
+
+                font-size: 12px;
+                white-space: nowrap;
+
+             }
+        }
+
+        &_btn{
+            padding: 15px;
+        }
         
-    }
+}
+//
 }

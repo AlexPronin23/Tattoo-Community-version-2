@@ -1,7 +1,7 @@
 import './style.scss';
 
 // React
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Images
 import HeaderLogo from '@assets/icon/Header/HeaderLogo.svg';
@@ -18,6 +18,7 @@ import MobileMenu from '../MobileMenu/MobileMenu';
 const Header = () => {
 
     const [open,setOpen] = useState(false)
+    const [theme,setTheme] = useState('dark')
 
     const handleOpening = () => {
         setOpen(true)
@@ -50,7 +51,7 @@ const Header = () => {
 
                    <button className="button btn-login">Войти</button>
                    <button className="button btn-reg">Зарегистрироваться</button>
-
+        
                 </div>
 
 
