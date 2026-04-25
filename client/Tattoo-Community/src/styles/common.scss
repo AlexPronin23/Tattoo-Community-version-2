@@ -4,6 +4,8 @@
 
 body{
     font-family: $body-font;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .container{
