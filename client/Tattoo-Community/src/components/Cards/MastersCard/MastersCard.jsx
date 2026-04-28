@@ -4,7 +4,7 @@ import FirstPicture from '../../../assets/img/Main/Masters/FirstPicture.png'
 
 const MastersCard = ({user_id, first_name, tattooSalon, experience,isColored,styleTattooName}) => {
     return ( 
-          <div className="tattoomasters_card">
+          <a href='#' className="tattoomasters_card">
 
                 <img src={FirstPicture} alt="Tattoo Masters picture" className="tattoomasters_card-img" />
 
@@ -28,7 +28,7 @@ const MastersCard = ({user_id, first_name, tattooSalon, experience,isColored,sty
 
                 <button className="button tattoomasters_card-btn">Записаться</button>
 
-            </div>
+            </a>
      );
 }
  

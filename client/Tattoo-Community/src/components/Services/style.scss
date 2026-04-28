@@ -59,7 +59,8 @@
 
      color: #000000;
 
-     font-size: 20px;
+     font-size: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
+    //  font-size: 20px;
      font-family: $second-font;
 
      white-space: nowrap;
@@ -95,10 +96,6 @@
         max-width: 300px;
         padding: 20px;
 
-        &_text{
-            font-size: 14px;
-        }
-
    }
 
 }
@@ -110,12 +107,7 @@
     }
    
     .card{
-
         max-width: 200px;
-
-        &_text{
-            font-size: 12px;
-        }
     }
     
 }
