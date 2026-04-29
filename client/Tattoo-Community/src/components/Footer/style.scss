@@ -37,9 +37,14 @@
        color: $main-color;
 
        font-size: 18px;
-       text-decoration: underline;
 
+       &:hover{
+         opacity: .5;
+         text-decoration: underline;
+       }
     }
+
+    
 
 // Adaptive  version
 

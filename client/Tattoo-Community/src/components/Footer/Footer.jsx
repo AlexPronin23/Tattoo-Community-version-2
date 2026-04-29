@@ -29,7 +29,7 @@ const Footer = () => {
 
                     <div className="footer_social">
 
-                        <p className="footer_phone"> +79521529988 </p>
+                        <a href='#' className="footer_phone"> +79521529988 </a>
 
                         <a href="#" className="footer_vk">
                             <img src={VK} alt="VK" />
