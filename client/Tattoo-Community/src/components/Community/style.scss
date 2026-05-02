@@ -92,6 +92,9 @@
     padding: 50px 90px;
     height: auto;
 
+    &_content{
+        margin-left:40px;
+    }
 
     &_title{
         margin-bottom: 50px;
@@ -105,6 +108,10 @@
     background-color: $bg-color;
 
     padding: 20px;
+
+    &_content{
+        margin-left: 0px;
+    }
 
         &_title{
             margin-bottom: 30px;
