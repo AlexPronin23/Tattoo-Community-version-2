@@ -1,16 +1,36 @@
-import Header from '@components/Header/Header'
-import Main from '@components/Main/Main'
-import Footer from '@components/Footer/Footer'
+import {Routes,Route, useLocation} from "react-router-dom"
+
+import DefaultLayout from "./DefaultLayout"
+import AuthLayout from './AuthLayout'
+import PageNotExists from "./components/PageNotExists/PageNotExists"
 
 function App() {
 
   return (
     <>
-      <Header/>
-      <Main/>
-      <Footer/>
+    <AppContent/> 
     </>
   )
+}
+
+const AppContent = () => {
+  const location = useLocation() // Получаем местоположение url
+  const isAuthPage = ['/login', '/register'].includes(location.pathname) // проверяем наличие url адреса
+
+  return (
+    <>
+  {
+    isAuthPage ? 
+    (
+      <AuthLayout/>
+    ) : 
+    (
+      <DefaultLayout/>
+    )
+  }
+    </>
+  )
+ 
 }
 
 export default App

@@ -2,6 +2,7 @@ import './style.scss';
 
 // React
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Images
 import HeaderLogo from '@assets/icon/Header/HeaderLogo.svg';
@@ -49,8 +50,12 @@ const Header = () => {
                 {/* Button group */}
                 <div className="header_btn">
 
-                   <button className="button btn-login">Войти</button>
-                   <button className="button btn-reg">Зарегистрироваться</button>
+                   {/* <button className="button btn-login">Войти</button>
+                   <button className="button btn-reg">Зарегистрироваться</button> */}
+
+                  
+                   <Link to={'/login'} className='button btn-login'>Войти</Link>
+                   <Link to={'/register'} className='button btn-reg'>Зарегистрироваться</Link>
         
                 </div>
 
