@@ -152,4 +152,44 @@
 
 // Adaptive version
 
+@media (max-width:700px) {
+
+    &_tooltip{
+        width: 150px;
+        padding: 10px;
+    }
+    
+}
+
+@media (max-width:400px) {
+
+    padding: 30px;
+
+    &_column{
+        margin-bottom: 20px;
+    }
+
+    &_label{
+        font-size: 10px;
+    }
+    
+    &_input{
+        width: 200px;
+        padding: 10px;
+
+        &::placeholder{
+            font-size: 10px;
+        }
+    }
+
+    &_link{
+        font-size: 10px;
+    }
+
+    &_help{
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 }
