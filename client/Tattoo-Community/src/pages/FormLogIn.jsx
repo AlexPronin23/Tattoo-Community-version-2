@@ -23,6 +23,26 @@ const FormLogIn = () => {
                             maxLength={254} 
                             className='form_input'/>
 
+                               <div className="form_help">
+                                <span>
+                                    ?
+                                </span>
+
+                                <div className="form_tooltip">
+
+                                <ul className="form_items">
+                                    <li className="form_item">
+                                     Email должен совпадать с адресом, указанным при регистрации
+                                    </li>
+                                    <li className="form_item">
+                                        Убедитесь, что вводите email без опечаток и лишних пробелов
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            </div>
+
                         </div>
                        
                         <div className="form_column">
@@ -36,6 +56,26 @@ const FormLogIn = () => {
                             maxLength={16}
                             className='form_input'
                             />
+
+                            <div className="form_help">
+                                <span>
+                                    ?
+                                </span>
+
+                                <div className="form_tooltip">
+
+                                <ul className="form_items">
+                                    <li className="form_item">
+                                        Убедитесь, что вводите правильный пароль 
+                                    </li>
+                                    <li className="form_item">
+                                        При ошибке входа проверьте Caps Lock и раскладку
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            </div>
 
                         </div>
 
