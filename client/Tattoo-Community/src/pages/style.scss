@@ -59,11 +59,28 @@
         }
 
 
-    }
+        &-checkbox{
+            width: 20px ;
 
+             &:focus{
+
+            transform: none;
+            outline: none;
+            box-shadow: none;
+
+        }
+
+    }
+}
 
     .btn-login{
         padding: 12px 47px ;
+        margin-bottom: 23px;
+    }
+
+
+     .btn-reg{
+        padding: 12px 13px;
         margin-bottom: 23px;
     }
 
@@ -179,6 +196,10 @@
 
         &::placeholder{
             font-size: 10px;
+        }
+
+        &-checkbox{
+            width: 20px;
         }
     }
 
