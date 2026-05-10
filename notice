@@ -1,0 +1,22 @@
+    // &_img{
+    // display: block;
+    // width: 100%;
+    // max-width: 400px;
+    // object-fit: cover;
+    // border-radius: 30px;
+    // margin-bottom: 15px;
+
+    // }
+
+
+    /**
+ * @param {string} mobile - Путь к мобильной версии (1x)
+ * @param {string} mobile2x - Путь к мобильной версии (2x)
+ * @param {string} tablet - Путь к планшетной версии (1x)
+ * @param {string} tablet2x - Путь к планшетной версии (2x)
+ * @param {string} desktop - Путь к десктопной версии (1x)
+ * @param {string} desktop2x - Путь к десктопной версии (2x)
+ * @param {string} alt - Альтернативный текст
+ * @param {string} className - Дополнительные классы
+ * @param {boolean} lazy - Ленивая загрузка (по умолчанию true)
+ */

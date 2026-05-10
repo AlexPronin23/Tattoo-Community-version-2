@@ -1,14 +1,89 @@
 import { Link } from 'react-router-dom';
 
 import './style.scss'
+import { useState } from 'react';
 
 const FormSignIn = () => {
+
+    const[data,setData] = useState({
+        email:'',
+        password:'',
+        confirmPassword:'',
+    })
+
+    const[isTattooMaster,setIsTattooMaster] = useState(false)
+    
+    const{email,password,confirmPassword} = data
+    
+
+    const handleData = (e) => {
+        const {name,value} = e.target
+        setData(prevData => ({
+            ...prevData,
+            [name]:value
+        }))
+    }
+
+
+
+    async function fetchCreat(e){
+        if(e) e.preventDefault()
+
+        if(!email || !password || !confirmPassword){
+            alert('Заполните все поля!')
+            return 
+        }
+
+        if(confirmPassword !== password){
+            alert('Пароли должны совпадать')
+            return
+        }
+        try {
+
+            const res = await fetch('/api/create', {
+                method:'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body:JSON.stringify({
+                    email: email,
+                    password: password,
+                    status: isTattooMaster
+                })
+            })
+
+
+         const responseMessage = await res.json()
+
+            if(res.ok){
+               setData({
+                email: '',
+                password: '',
+                confirmPassword: ''
+            });
+            setIsTattooMaster(false); 
+            alert(responseMessage.successMessage)
+            } else{
+                alert(responseMessage.message)
+            }
+
+        console.log(data);
+        
+
+        } catch (error) {
+            console.log(error);
+            
+            
+        }
+    }
+    
+
     return ( 
-         <div className="form">
+         <div className="form" >
             <div className="container">
                 <h2 className="title form_title">Регистрация</h2>
 
-                <form>
+                <form onSubmit={fetchCreat}>
 
                     <div className="form_inner">
 
@@ -17,11 +92,14 @@ const FormSignIn = () => {
                             <label className="form_label">Email: </label>
 
                             <input 
+                            value={email}
                             type="email" 
                             required 
                             placeholder='Введите email' 
                             maxLength={254} 
-                            className='form_input'/>
+                            className='form_input'
+                            name='email'
+                            onChange={handleData}/>
 
                                <div className="form_help">
                                 <span>
@@ -49,12 +127,15 @@ const FormSignIn = () => {
                             
                             <label className="form_label" >Пароль: </label>
 
-                            <input 
+                            <input
+                            value={password} 
                             type="password" 
                             required  
                             placeholder='Введите пароль' 
                             maxLength={16}
                             className='form_input'
+                            name='password'
+                            onChange={handleData}
                             />
 
                             <div className="form_help">
@@ -84,11 +165,14 @@ const FormSignIn = () => {
                             <label className="form_label" > Подтвердите Пароль: </label>
 
                             <input 
+                            value={confirmPassword}
                             type="password" 
                             required  
                             placeholder='Введите пароль повторно' 
                             maxLength={16}
                             className='form_input'
+                             name='confirmPassword'
+                            onChange={handleData}
                             />
 
                         </div>
@@ -97,9 +181,11 @@ const FormSignIn = () => {
                             
                             <label className="form_label" > Тату мастер? </label>
 
-                            <input 
+                            <input
+                            checked={isTattooMaster} 
                             type="checkbox" 
                             className='form_input form_input-checkbox'
+                             onChange={(e) => setIsTattooMaster(e.target.checked)}
                             />
 
                             <div className="form_help">
@@ -122,7 +208,7 @@ const FormSignIn = () => {
                         </div>
 
 
-                         <button className="button btn-reg">Зарегистрироваться</button>
+                         <button type='submit' className="button btn-reg">Зарегистрироваться</button>
                          <Link to={'/login'} className='form_link'>Уже есть аккаунт?</Link>
                          <br />
                          <Link to={'/'} className='form_link'>Назад</Link>

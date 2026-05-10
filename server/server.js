@@ -13,7 +13,8 @@ app.use(cors({
 }))
 //
 
-app.use('/api/tattooMasters', TattooMasterRouter)
+app.use('/api', TattooMasterRouter)
+// app.use('/api/create', TattooMasterRouter)
 
 
 app.listen(PORT, () => {
