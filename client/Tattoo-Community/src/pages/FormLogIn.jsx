@@ -82,6 +82,8 @@ const FormLogIn = () => {
 
                          <button className="button btn-login">Войти</button>
                          <Link to={'/register'} className='form_link'>Еще нет аккаунта?</Link>
+                         <br />
+                         <Link to={'/'} className='form_link'>Назад</Link>
 
                     </div>
 

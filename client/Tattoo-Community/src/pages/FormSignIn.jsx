@@ -124,6 +124,8 @@ const FormSignIn = () => {
 
                          <button className="button btn-reg">Зарегистрироваться</button>
                          <Link to={'/login'} className='form_link'>Уже есть аккаунт?</Link>
+                         <br />
+                         <Link to={'/'} className='form_link'>Назад</Link>
 
                     </div>
 
