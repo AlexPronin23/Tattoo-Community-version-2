@@ -13,6 +13,8 @@ const FormSignIn = () => {
 
     const[isTattooMaster,setIsTattooMaster] = useState(false)
     
+    const[isOpen,setIsOpen] = useState(false)
+    
     const{email,password,confirmPassword} = data
     
 
@@ -24,6 +26,9 @@ const FormSignIn = () => {
         }))
     }
 
+    const handleType = () => {
+        setIsOpen(prev => !prev)
+    }
 
 
     async function fetchCreat(e){
@@ -101,6 +106,8 @@ const FormSignIn = () => {
                             name='email'
                             onChange={handleData}/>
 
+                            
+
                                <div className="form_help">
                                 <span>
                                     ?
@@ -127,16 +134,28 @@ const FormSignIn = () => {
                             
                             <label className="form_label" >Пароль: </label>
 
-                            <input
-                            value={password} 
-                            type="password" 
-                            required  
-                            placeholder='Введите пароль' 
-                            maxLength={16}
-                            className='form_input'
-                            name='password'
-                            onChange={handleData}
-                            />
+                            <div className="form_password">
+
+                                <input
+                                value={password} 
+                                type={isOpen ? 'text' : 'password'}
+                                required  
+                                placeholder='Введите пароль' 
+                                maxLength={16}
+                                className='form_input'
+                                name='password'
+                                onChange={handleData}
+                                 />
+
+                                <button 
+                                 type='button'
+                                 onClick={() => handleType()}
+                                 className="form_toggle"
+                                 >
+
+                                </button>
+
+                            </div>
 
                             <div className="form_help">
                                 <span>
@@ -164,16 +183,13 @@ const FormSignIn = () => {
                             
                             <label className="form_label" > Подтвердите Пароль: </label>
 
-                            <input 
-                            value={confirmPassword}
-                            type="password" 
-                            required  
-                            placeholder='Введите пароль повторно' 
-                            maxLength={16}
-                            className='form_input'
-                             name='confirmPassword'
-                            onChange={handleData}
-                            />
+                                <input
+                                type={isOpen ? 'text' : 'password'}
+                                required  
+                                placeholder='Введите пароль повторно' 
+                                maxLength={16}
+                                className='form_input'
+                                 />
 
                         </div>
 

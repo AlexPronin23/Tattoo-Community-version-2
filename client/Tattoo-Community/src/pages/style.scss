@@ -36,6 +36,17 @@
         
     }
 
+    &_password{
+        position: relative;
+    }
+
+    // &_password > input:focus{
+
+          
+    // }
+
+
+// Input
     &_input{
 
         width: 270px;
@@ -47,6 +58,8 @@
 
         transition: transform .5s ease-in-out, box-shadow .5s ease-in-out;
 
+        position: relative;
+
         &:focus{
 
             transform: translateY(-5px);
@@ -56,6 +69,7 @@
             &::placeholder{
                opacity: 0;
             }
+            
         }
 
 
@@ -72,6 +86,44 @@
 
     }
 }
+
+    &_input:focus + &_toggle{
+       opacity: 0;
+       visibility: hidden;
+    }
+
+    &_input[type='text'] + &_toggle{
+         background-image: url('../assets/icon/Forms/HideEye.svg');
+    }
+
+    &_toggle{
+        position: absolute;
+
+        left: 85%;
+        right: 0;
+        top: 30%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        opacity: 1;
+        transition: opacity 0.3s ease;
+
+        padding: 10px;
+
+        width: 20px;
+        height: 20px;
+
+        background-image: url('../assets/icon/Forms/OpenEye.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        z-index: 9999999;
+
+
+    }
+//
 
     .btn-login{
         padding: 12px 47px ;
@@ -166,7 +218,6 @@
         font-family: $second-font;
         font-size: 10px;
     }
-
 
 // Adaptive version
 
