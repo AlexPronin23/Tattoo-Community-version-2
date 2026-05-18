@@ -19,11 +19,41 @@ import MobileMenu from '../MobileMenu/MobileMenu';
 const Header = () => {
 
     const [open,setOpen] = useState(false)
-    const [theme,setTheme] = useState('dark')
+    const [status,setStatus] = useState(false)
+
+
+    // Test
+    async function fetchStatus() {
+
+        try {
+
+        const res = await fetch('/api/status')
+
+        const status = await res.json()
+
+        if(res.ok){
+           
+            alert('Статус получен')
+        }
+
+         setStatus(status)
+
+        } catch (error) {
+
+            alert(error)
+            
+        }
+            
+    }
 
     const handleOpening = () => {
         setOpen(true)
     }
+
+    // Test
+    useEffect(() => {
+        fetchStatus()
+    }, [])
 
     return ( 
 
@@ -47,20 +77,37 @@ const Header = () => {
                 </nav>
 
 
-                {/* Button group */}
-                <div className="header_btn">
 
-                   {/* <button className="button btn-login">Войти</button>
-                   <button className="button btn-reg">Зарегистрироваться</button> */}
+                {/* Button group or Account page */}
 
-                  
-                   <Link to={'/login'} className='button btn-login'>Войти</Link>
-                   <Link to={'/register'} className='button btn-reg'>Зарегистрироваться</Link>
-        
+
+                {status ? (
+
+                    <>
+                <div className="header_account">
+                    <a href="#" className='header_account-logo'>ПС</a>
                 </div>
 
+                    </>
+                    
+                )
+                : (
+                <>
+                
+                
+                <div className="header_btn">
 
-                   {/* Mobile(Menu) */}
+                         <Link to={'/login'} className='button btn-login'>Войти</Link>
+                         <Link to={'/register'} className='button btn-reg'>Зарегистрироваться</Link>
+            
+                </div>
+                
+                </>
+            )
+            }
+
+                
+                {/* Mobile(Menu) */}
                 <div className={`header_mobile ${open ? "open" : ''}`}>
                     <MobileMenu closeMobile = {() => setOpen(false)}/>
                 </div>

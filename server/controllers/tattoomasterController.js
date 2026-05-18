@@ -53,6 +53,24 @@ class TattooMastersController {
         }
     }
 
+    // Test
+    static async getStatus(req,res) {
+        try {
+
+            const status = await TattooMasters.getStatus()
+
+            return res.json(
+                {
+                    status:status
+
+                })
+            
+        } catch (error) {
+            res.status(500).json({message:'Ошибка сервера'})
+            
+        }
+    }
+
 }
 
 

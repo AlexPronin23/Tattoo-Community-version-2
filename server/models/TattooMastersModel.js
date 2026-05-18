@@ -17,6 +17,12 @@ class TattooMasters{
       return {id:rows.insertId, email,status}
    }
 
+//   Test
+   static async getStatus(){
+      const [rows] = await pool.query('SELECT status FROM tb_users WHERE status = true')
+      return rows[0] // вернет [{status: true}]
+   }
+
 }
 
 
