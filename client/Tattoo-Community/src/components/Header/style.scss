@@ -46,6 +46,10 @@
     .btn-reg{
         padding: 12px 13px;
     }
+
+    .btn-logout{
+        padding: 3px 15px;
+    }
 //
 
 //
@@ -175,6 +179,8 @@
 
     &_account{
 
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -194,11 +200,79 @@
 
     }
 
-    &:hover{
-        opacity: .5;
+    &-dropdown{
+
+        width: 150px;
+     
+        position: absolute;
+        left: -10%;
+        top: -50%;
+     
+        // z-index: -1;
+        
+        background-color: $main-color;
+
+        padding: 30px;
+        border-radius: 30px;
+        box-shadow: 0px 0px 20px 0px rgba(255,255,255,.7);
+
+        text-align: center;
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition-delay: 0.2s;
+        transition: all .5s ease-in-out;
+       
+
+    }
+
+    &-profile{
+
+        position: relative;
+
+        display: inline-block;
+
+        color: $black;
+
+        font-family: $second-font;
+
+        margin-bottom: 20px ;
+
+        transition: opacity .5s ease-in-out;
+
+        &::before{
+            content: '';
+            position: absolute;
+
+            background-image: url('../../assets/icon/Header/UserIcon.svg');
+
+            left: -30%;
+            top: 15%;
+
+            width: 15px ;
+            height: 15px;
+
+        }
+
+        &:hover{
+            opacity: .3;
+        }
+
     }
 
  }
+
+   &_account:hover{
+
+        .header_account-dropdown{
+            opacity: 1;
+            visibility: visible;
+            left: 150%;
+        }
+   }
+
+
    
 @media (max-width:700px) {
 

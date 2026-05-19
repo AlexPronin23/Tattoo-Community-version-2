@@ -85,7 +85,16 @@ const Header = () => {
 
                     <>
                 <div className="header_account">
-                    <a href="#" className='header_account-logo'>ПС</a>
+                    <p className='header_account-logo'>ПС</p>
+
+                    <div className="header_account-dropdown">
+
+                        <Link to={'/profile'} className='header_account-profile'>Профиль</Link>
+
+                        <button className="button btn-logout">Выйти</button>
+
+                    </div>
+
                 </div>
 
                     </>
