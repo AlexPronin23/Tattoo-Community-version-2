@@ -195,9 +195,11 @@
     transition: opacity .5s ease-in-out;
 
     &-logo{
-        color: $main-color;
-        font-size: 20px;
 
+        color: $main-color;
+
+        font-size: 20px;
+        cursor: pointer;
     }
 
     &-dropdown{

@@ -31,16 +31,17 @@ const Header = () => {
 
         const status = await res.json()
 
-        if(res.ok){
+        if(!res.ok){
            
-            alert('Статус получен')
+           return
         }
 
          setStatus(status)
 
         } catch (error) {
 
-            alert(error)
+         console.log(error);
+         
             
         }
             

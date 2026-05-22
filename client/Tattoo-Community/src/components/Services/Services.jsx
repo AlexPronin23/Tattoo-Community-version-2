@@ -40,7 +40,7 @@ const Services = () => {
 
                           <img src={ThirdPicture} alt="Third Picture" className="card_img" /> 
                           <p className="card_text">
-                            Консультация у чат бота
+                            Онлайн чат
                           </p>
                           
                     </div>
