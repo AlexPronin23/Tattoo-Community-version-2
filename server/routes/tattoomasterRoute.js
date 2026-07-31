@@ -1,12 +1,13 @@
 const TattooMastersController = require('../controllers/tattoomasterController')
 const express = require('express')
-const router = express.Router()
+const tattooMasterRouter = express.Router()
 
-router.get('/tattooMasters', TattooMastersController.getTattooMasters)
+
+tattooMasterRouter.get('/', TattooMastersController.getTattooMasters)
 
 // Test
-router.get('/status', TattooMastersController.getStatus)
+tattooMasterRouter.get('/status', TattooMastersController.getStatus)
 
-router.post('/create', TattooMastersController.create)
+tattooMasterRouter.post('/create', TattooMastersController.create)
 
-module.exports = router
+module.exports = tattooMasterRouter

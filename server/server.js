@@ -4,17 +4,18 @@ const cors = require('cors')
 const app = express()
 const PORT = 5000
 
-const TattooMasterRouter = require('./routes/tattoomasterRoute')
+const Router = require('./routes/index')
 
 // Middlewares
 app.use(express.json())
+
 app.use(cors({
     origin:'http://localhost:5173'
 }))
 //
 
-app.use('/api', TattooMasterRouter)
-// app.use('/api/create', TattooMasterRouter)
+app.use('/api', Router)
+
 
 
 app.listen(PORT, () => {

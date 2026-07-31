@@ -6,7 +6,7 @@
     overflow: hidden;
 
 // Header top
-    &_top{
+    &__top{
         
         position: relative;
         display: flex;
@@ -16,7 +16,7 @@
         margin-bottom: 100px;
     }
 
-    &_top::after{
+    &__top::after{
         content: '';
         position: absolute;
 
@@ -32,7 +32,7 @@
     }
 
 //Btn
-    &_btn{
+    &__btn{
 
         display: flex;
         gap: 25px ;
@@ -55,17 +55,17 @@
 //
 
 // Header content
-    &_content{
+    &__content{
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 
-    &_title{
+    &__title{
         margin-bottom: 30px;
     }
 
-    &_welcome{
+    &__welcome{
 
         color: $second-color;
 
@@ -75,7 +75,7 @@
         margin-bottom: 30px;
     }
 
-    &_have{
+    &__have{
 
         color: $second-color;
 
@@ -88,11 +88,11 @@
 
 
 // Services list
-    &_services{
+    &__services{
         display: inline-block;
     }
 
-    &_service{
+    &__service{
         color: $second-color;
     
         
@@ -104,11 +104,11 @@
         
     }
 
-    &_service:last-child{
+    &__service:last-child{
         margin-bottom: 0px;
     }
 
-    &_service::before{
+    &__service::before{
         content: '';
         background-color: $second-color;
 
@@ -126,14 +126,14 @@
 //
 
 // Header img
-    &_image{
+    &__image{
 
     position: relative;
     width: 350px;
     
     }
 
-    &_machine{
+    &__machine{
         position: absolute;
 
         left: -100px;
@@ -142,11 +142,11 @@
         width: 200px;
     }
 
-    &_burger{
+    &__burger{
         display: none;
     }
 
-    &_mobile{
+    &__mobile{
 
         position: fixed;
 
@@ -177,7 +177,7 @@
 
 // Account
 
-    &_account{
+   &__account{
 
     position: relative;
 
@@ -194,7 +194,7 @@
 
     transition: opacity .5s ease-in-out;
 
-    &-logo{
+    &__logo{
 
         color: $main-color;
 
@@ -202,7 +202,7 @@
         cursor: pointer;
     }
 
-    &-dropdown{
+    &__dropdown{
 
         width: 150px;
      
@@ -229,7 +229,7 @@
 
     }
 
-    &-profile{
+    &__profile{
 
         position: relative;
 
@@ -265,9 +265,9 @@
 
  }
 
-   &_account:hover{
+   &__account:hover{
 
-        .header_account-dropdown{
+        .header__account__dropdown{
             opacity: 1;
             visibility: visible;
             left: 150%;
@@ -280,7 +280,7 @@
 
     padding: 20px 15px;
 
-    &_top {
+    &__top {
 
         width: 500px;
 
@@ -300,21 +300,21 @@
         }       
     }   
     
-    &_nav {
+    &__nav {
         display: none;
     }
      
-    &_btn {
+    &__btn {
         display: none; 
     }
 
-    &_burger {
+    &__burger {
         display: block;
         width: 50px; 
         cursor: pointer;
     }
 
-    &_logo {
+    &__logo {
 
         img {
              max-height: 80px; 
@@ -322,7 +322,7 @@
     }
 
 // Content
-    &_text{
+    &__text{
 
         display: inline-block;
         margin: 0 auto;
@@ -330,19 +330,19 @@
      }
     
 
-    &_title{
+    &__title{
         margin-bottom: 20px;
     }
 
-    // &_welcome{
+    // &__welcome{
     //     font-size: 16px;
     // }
 
-    &_image{
+    &__image{
         display: none;
     }
 
-    &_mobile.open{
+    &__mobile.open{
 
         opacity: 1;
         visibility: visible;
@@ -357,7 +357,7 @@
 
     padding: 20px;
 
-    &_top{
+    &__top{
 
             width: 300px;
             margin-bottom: 25px;
@@ -368,22 +368,22 @@
 
     }
 
-    &_text{
+    &__text{
         margin: 0;
     }
 
-    // &_welcome{
+    // &__welcome{
 
     //     font-size: 10px;
     //     white-space: nowrap;
 
     // }
         
-    // &_have{
+    // &__have{
     //     font-size: 12px;
     // }
 
-    // &_service{
+    // &__service{
     //     font-size: 10px;
     // }
 
@@ -401,13 +401,17 @@
 
 //  
 
-    &_mobile.open{
+    &__mobile.open{
 
         opacity: 1;
         visibility: visible;
 
         width:300px;
         left: 25%;
+    }
+
+    &__account{
+        display: none;
     }
 
 //

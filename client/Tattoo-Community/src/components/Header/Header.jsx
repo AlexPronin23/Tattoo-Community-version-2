@@ -1,183 +1,145 @@
-import './style.scss';
+import "./style.scss";
 
 // React
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Images
-import HeaderLogo from '@assets/icon/Header/HeaderLogo.svg';
-import HeaderImg from '@assets/img/Header/tattooImg.png';
-import TattooMachine from '@assets/icon/Header/tattoo-machine.svg';
-import BurgerMenuWhite from '@assets/icon/Header/BurgerMenuWhite.svg';
+import HeaderLogo from "@assets/icon/Header/HeaderLogo.svg";
+import HeaderImg from "@assets/img/Header/tattooImg.png";
+import TattooMachine from "@assets/icon/Header/tattoo-machine.svg";
+import BurgerMenuWhite from "@assets/icon/Header/BurgerMenuWhite.svg";
 
 // Components
-import Nav from '../Nav/Nav';
-import Logo from '../Logo/Logo';
-import MobileMenu from '../MobileMenu/MobileMenu';
-
+import Nav from "../Nav/Nav";
+import Logo from "../Logo/Logo";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState(false);
 
-    const [open,setOpen] = useState(false)
-    const [status,setStatus] = useState(false)
+  // Test
+  async function fetchStatus() {
+    try {
+      const res = await fetch("/api/tattooMasters/status");
 
+      const status = await res.json();
 
-    // Test
-    async function fetchStatus() {
+      if (!res.ok) {
+        return;
+      }
 
-        try {
-
-        const res = await fetch('/api/status')
-
-        const status = await res.json()
-
-        if(!res.ok){
-           
-           return
-        }
-
-         setStatus(status)
-
-        } catch (error) {
-
-         console.log(error);
-         
-            
-        }
-            
+      setStatus(status);
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    const handleOpening = () => {
-        setOpen(true)
-    }
+  const handleOpening = () => {
+    setOpen(true);
+  };
 
-    // Test
-    useEffect(() => {
-        fetchStatus()
-    }, [])
+  // Test
+  useEffect(() => {
+    fetchStatus();
+  }, []);
 
-    return ( 
+  return (
+    <header className="header">
+      <div className="container">
+        <div className="header__top">
+          {/* Logo */}
 
-      <header className="header">
+          <div className="header__logo">
+            <Logo src={HeaderLogo} />
+          </div>
 
-        <div className="container">
+          {/* Navigation */}
+          <nav className="header__nav">
+            <Nav />
+          </nav>
 
-            <div className="header_top">
+          {/* Button group or Account page */}
 
-                {/* Logo */}
-               
-               <div className="header_logo">
+          {status ? (
+            <>
+              <div className="header__account">
+                <p className="header__account__logo">ПС</p>
 
-                    <Logo src={HeaderLogo}/>
+                <div className="header__account__dropdown">
+                  <Link to={"/profile"} className="header__account__profile">
+                    Профиль
+                  </Link>
 
-               </div>
-
-                {/* Navigation */}
-                <nav className="header_nav">
-                    <Nav/>
-                </nav>
-
-
-
-                {/* Button group or Account page */}
-
-
-                {status ? (
-
-                    <>
-                <div className="header_account">
-                    <p className='header_account-logo'>ПС</p>
-
-                    <div className="header_account-dropdown">
-
-                        <Link to={'/profile'} className='header_account-profile'>Профиль</Link>
-
-                        <button className="button btn-logout">Выйти</button>
-
-                    </div>
-
+                  <button className="button btn-logout">Выйти</button>
                 </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="header__btn">
+                <Link to={"/login"} className="button btn-login">
+                  Войти
+                </Link>
+                <Link to={"/register"} className="button btn-reg">
+                  Зарегистрироваться
+                </Link>
+              </div>
+            </>
+          )}
 
-                    </>
-                    
-                )
-                : (
-                <>
-                
-                
-                <div className="header_btn">
+          {/* Mobile(Menu) */}
+          <div className={`header__mobile ${open ? "open" : ""}`}>
+            <MobileMenu closeMobile={() => setOpen(false)} />
+          </div>
 
-                         <Link to={'/login'} className='button btn-login'>Войти</Link>
-                         <Link to={'/register'} className='button btn-reg'>Зарегистрироваться</Link>
-            
-                </div>
-                
-                </>
-            )
-            }
+          {/* Mobile(Burger menu) */}
 
-                
-                {/* Mobile(Menu) */}
-                <div className={`header_mobile ${open ? "open" : ''}`}>
-                    <MobileMenu closeMobile = {() => setOpen(false)}/>
-                </div>
-
-
-                {/* Mobile(Burger menu) */}
-
-                <button 
-                onClick={() => handleOpening()}
-                >
-                    <img src={BurgerMenuWhite} alt="Burger Menu"  className="header_burger"/>
-
-                </button>
-
-             
-            </div>
-
-                {/* Header content */}
-                <div className="header_content">
-
-                    <div className="header_text">
-
-                    <h1 className="header_title title">Вступай в клуб <br /> единомышленников</h1>
-
-                    <p className="header_welcome">
-                        Добро пожаловать в дружное пространство для <br /> обмена идеями, поддержкой 
-                        и совместных проектов <br /> — участвуй, вдохновляй и находи своих людей.
-                    </p>
-
-                    <p className="header_have">Что мы предоставляем: </p>
-
-                    <ul className="header_services">
-                        <li className="header_service">
-                            Общение и обмен опытом 
-                        </li>
-                        <li className="header_service">
-                            Оказания услуг
-                        </li>
-                        <li className="header_service">
-                            Продвижение своего бренда
-                        </li>
-                    </ul>
-
-                    </div>
-
-                    <div className="header_image">
-
-                        <img  className = 'header_img' src={HeaderImg} alt="Header Img" />
-
-                        <img className = 'header_machine' src={TattooMachine} alt="Tattoo machine" />
-                            
-                    </div>
-
-                </div>
-                
+          <button onClick={() => handleOpening()}>
+            <img
+              src={BurgerMenuWhite}
+              alt="Burger Menu"
+              className="header__burger"
+            />
+          </button>
         </div>
 
-      </header>
+        {/* Header content */}
+        <div className="header__content">
+          <div className="header__text">
+            <h1 className="header__title title">
+              Вступай в клуб <br /> единомышленников
+            </h1>
 
-     );
-}
- 
+            <p className="header__welcome">
+              Добро пожаловать в дружное пространство для <br /> обмена идеями,
+              поддержкой и совместных проектов <br /> — участвуй, вдохновляй и
+              находи своих людей.
+            </p>
+
+            <p className="header__have">Что мы предоставляем: </p>
+
+            <ul className="header__services">
+              <li className="header__service">Общение и обмен опытом</li>
+              <li className="header__service">Оказания услуг</li>
+              <li className="header__service">Продвижение своего бренда</li>
+            </ul>
+          </div>
+
+          <div className="header__image">
+            <img className="header__img" src={HeaderImg} alt="Header Img" />
+
+            <img
+              className="header__machine"
+              src={TattooMachine}
+              alt="Tattoo machine"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
 export default Header;

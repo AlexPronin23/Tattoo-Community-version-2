@@ -1,78 +1,47 @@
-import './style.scss'
+import "./style.scss";
 
-import MastersCard from '../Cards/MastersCard/MastersCard';
-import { useEffect, useState } from 'react';
-import Skeleton from '../Skeleton/CardSkeleton';
+import MastersCard from "../Cards/MastersCard/MastersCard";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllTattooMasters } from "../../slices/tattooMastersSlice";
+import Skeleton from "../Skeleton/CardSkeleton";
 
 const Masters = () => {
+  const dispatch = useDispatch();
+  const masters = useSelector((state) => state.tattooMasters.tattooMasters);
+  const { status, error } = useSelector((state) => state.tattooMasters);
 
-    const [masters,setMasters] = useState([]) // Данные тату мастера
-    const [isLoading, setIsLoading] = useState(true) // Имитация загрузки
+  useEffect(() => {
+    dispatch(getAllTattooMasters());
+  }, [dispatch]);
 
-    async function fetchMasters() {
+  return (
+    <section className="masters">
+      <div className="container">
+        <div className="masters_wrapper">
+          <h1 className="title masters_title">Тату мастера</h1>
 
-        try {
+          <div className="masters_card">
+            {error ? (
+              <>
+                <h1>{error}</h1>
+              </>
+            ) : status === "Загрузка" ? (
+              <>
+                {[...Array(2)].map(() => (
+                  <Skeleton />
+                ))}
+              </>
+            ) : (
+              masters.map((master) => (
+                <MastersCard key={master.user_id} {...master} />
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-        const response = await fetch('/api/tattooMasters')
-
-    
-        const data = await response.json()
-        
-         if(!response.ok){
-            alert(data.errorMessage)
-            return
-        }
-
-        setMasters(data.data)
-        setIsLoading(false)
-
-        } catch (error) {
-
-            console.log(error);
-            
-        } 
-    } 
-
-    useEffect(() => {
-        fetchMasters()
-    }, [])
-
-
-    
-
-    return ( 
-        <section className="masters">
-
-            <div className="container">
-
-                <div className="masters_wrapper">
-
-                    <h1 className="title masters_title">Тату мастера</h1>
-
-                    <div className="masters_card">
-
-                    {isLoading ? (
-                        <>
-                        {[...Array(2)].map(() => (
-                             <Skeleton/>
-                        ))}
-                        </>
-                    ): 
-                        masters.map((masters) => (
-                         <MastersCard key={masters.user_id} {...masters} />
-                         
-                    ))
-                    
-                    }
-  
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-     );
-}
- 
 export default Masters;
