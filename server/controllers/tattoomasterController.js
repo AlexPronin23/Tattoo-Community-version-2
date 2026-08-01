@@ -21,38 +21,6 @@ class TattooMastersController {
         }
     }
 
-    static async create(req,res) {
-    
-        try {
-         
-         if(!req.body.email || !req.body.password){
-            return res.status(400).json({message: 'Данные обязательны'})
-         }
-
-         const{email,password,status} = req.body
-
-         const result = await TattooMasters.create(email,password,status)
-
-         res.status(201).json({
-            successMessage:'Пользователь создан',
-            email: result.email
-         })
-
-            
-        } catch (error) {
-             console.error('Ошибка БД:', error)  // ← Лог для отладки
-
-            res.status(500).json({
-
-            error: error.message,
-
-            message: "Ошибка сервера"
-
- }) 
-            
-        }
-    }
-
     // Test
     static async getStatus(req,res) {
         try {

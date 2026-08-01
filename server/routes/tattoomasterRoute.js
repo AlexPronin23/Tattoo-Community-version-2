@@ -8,6 +8,6 @@ tattooMasterRouter.get('/', TattooMastersController.getTattooMasters)
 // Test
 tattooMasterRouter.get('/status', TattooMastersController.getStatus)
 
-tattooMasterRouter.post('/create', TattooMastersController.create)
+// tattooMasterRouter.post('/create', TattooMastersController.create)
 
 module.exports = tattooMasterRouter

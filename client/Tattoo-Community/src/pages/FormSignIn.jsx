@@ -1,20 +1,57 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./style.scss";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { userRegistration } from "../slices/userSlice";
 
 const FormSignIn = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [data, setData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const [isTattooMaster, setIsTattooMaster] = useState(false);
-
   const [isOpen, setIsOpen] = useState(false);
 
   const { email, password, confirmPassword } = data;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password || !confirmPassword) {
+      alert("Данные должны быть заполнены");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Пароли должны совпадать");
+      return;
+    }
+
+    try {
+      const resultAction = await dispatch(
+        userRegistration({
+          email,
+          password,
+          status: isTattooMaster,
+        }),
+      );
+
+      if (userRegistration.fulfilled.match(resultAction)) {
+        setData({ email: "", password: "", confirmPassword: "" });
+        setIsTattooMaster(false);
+        navigate("/");
+      } else {
+        alert(resultAction.payload || "Ошибка регистрации");
+      }
+    } catch (error) {
+      alert("Произошла ошибка");
+    }
+  };
 
   const handleData = (e) => {
     const { name, value } = e.target;
@@ -28,57 +65,12 @@ const FormSignIn = () => {
     setIsOpen((prev) => !prev);
   };
 
-  async function fetchCreat(e) {
-    if (e) e.preventDefault();
-
-    if (!email || !password || !confirmPassword) {
-      alert("Заполните все поля!");
-      return;
-    }
-
-    if (confirmPassword !== password) {
-      alert("Пароли должны совпадать");
-      return;
-    }
-    try {
-      const res = await fetch("/api/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          status: isTattooMaster,
-        }),
-      });
-
-      const responseMessage = await res.json();
-
-      if (res.ok) {
-        setData({
-          email: "",
-          password: "",
-          confirmPassword: "",
-        });
-        setIsTattooMaster(false);
-        alert(responseMessage.successMessage);
-      } else {
-        alert(responseMessage.message);
-      }
-
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <div className="form">
       <div className="container">
         <h2 className="title form_title">Регистрация</h2>
 
-        <form onSubmit={fetchCreat}>
+        <form onSubmit={handleSubmit}>
           <div className="form_inner">
             <div className="form_column">
               <label className="form_label">Email: </label>
@@ -120,6 +112,7 @@ const FormSignIn = () => {
                   type={isOpen ? "text" : "password"}
                   required
                   placeholder="Введите пароль"
+                  minLength={8}
                   maxLength={16}
                   className="form_input"
                   name="password"
@@ -153,11 +146,15 @@ const FormSignIn = () => {
               <label className="form_label"> Подтвердите Пароль: </label>
 
               <input
+                value={confirmPassword}
                 type={isOpen ? "text" : "password"}
                 required
                 placeholder="Введите пароль повторно"
+                minLength={8}
                 maxLength={16}
                 className="form_input"
+                name="confirmPassword"
+                onChange={handleData}
               />
             </div>
 
