@@ -42,6 +42,7 @@ export const userSlice = createSlice({
     initialState:{
         user:[],
         status:null,
+        isAuthenticated: false,
         error:null
     },
     extraReducers:(builder) => {
@@ -54,7 +55,7 @@ export const userSlice = createSlice({
             state.status = 'Отклонен'
             state.error = action.payload
         })
-
+      
     }
 })
 

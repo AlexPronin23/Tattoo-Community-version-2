@@ -44,7 +44,7 @@ const FormSignIn = () => {
       if (userRegistration.fulfilled.match(resultAction)) {
         setData({ email: "", password: "", confirmPassword: "" });
         setIsTattooMaster(false);
-        navigate("/");
+        navigate("/login");
       } else {
         alert(resultAction.payload || "Ошибка регистрации");
       }

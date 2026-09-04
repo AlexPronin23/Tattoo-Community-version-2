@@ -1,14 +1,13 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 // Получение всех тату мастеров
-
 export const getAllTattooMasters = createAsyncThunk(
     'tattooMasters/getAllTattooMasters',
     async function (_,{rejectWithValue}) {
 
         try {
 
-            const response = await fetch('/api/tattooMasters')
+            const response = await fetch('/api/tattoomasters')
 
             if(!response.ok) {
                 let message = `Произошла ошибка: ${response.status} ${response.statusText}`
@@ -17,7 +16,7 @@ export const getAllTattooMasters = createAsyncThunk(
 
             const data = await response.json()
 
-            return data.data
+            return data.masters
             
         } catch (error) {
             return rejectWithValue(error.message)

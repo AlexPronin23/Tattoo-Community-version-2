@@ -20,3 +20,8 @@
  * @param {string} className - Дополнительные классы
  * @param {boolean} lazy - Ленивая загрузка (по умолчанию true)
  */
+
+   console.error('Полная ошибка:', error);
+   console.error('Сообщение:', error.message);
+   console.error('Stack:', error.stack);
+        

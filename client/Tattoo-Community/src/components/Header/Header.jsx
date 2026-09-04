@@ -17,33 +17,10 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState(false);
-
-  // Test
-  async function fetchStatus() {
-    try {
-      const res = await fetch("/api/tattooMasters/status");
-
-      const status = await res.json();
-
-      if (!res.ok) {
-        return;
-      }
-
-      setStatus(status);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const handleOpening = () => {
     setOpen(true);
   };
-
-  // Test
-  useEffect(() => {
-    fetchStatus();
-  }, []);
 
   return (
     <header className="header">
@@ -62,7 +39,7 @@ const Header = () => {
 
           {/* Button group or Account page */}
 
-          {status ? (
+          {/* {status ? (
             <>
               <div className="header__account">
                 <p className="header__account__logo">ПС</p>
@@ -87,7 +64,16 @@ const Header = () => {
                 </Link>
               </div>
             </>
-          )}
+          )} */}
+
+          <div className="header__btn">
+            <Link to={"/login"} className="button btn-login">
+              Войти
+            </Link>
+            <Link to={"/register"} className="button btn-reg">
+              Зарегистрироваться
+            </Link>
+          </div>
 
           {/* Mobile(Menu) */}
           <div className={`header__mobile ${open ? "open" : ""}`}>
