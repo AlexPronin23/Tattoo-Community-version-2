@@ -5,6 +5,6 @@ import userReducer from '../slices/userSlice'
 export default configureStore({
     reducer:{
         tattooMasters:tattooMasterReducer,
-        user: userReducer,
+        users: userReducer,
     }
 })

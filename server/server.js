@@ -2,10 +2,13 @@ const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser'); 
 const sequelize = require('./db/db')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 // Models
 const TattooMasters = require('./models/TattooMasters')
+const Users = require('./models/Users')
 
 const app = express()
 const PORT = process.env.PORT
@@ -42,6 +45,92 @@ app.get('/api/tattoomasters', async (req,res) => {
         
     }
     
+})
+
+// 2. Users
+
+// 2.1 Регистрация пользователей
+
+app.post('/api/user/registration', async (req,res) => {
+    const {email,phone,password,status} = req.body
+
+    try {
+        const user = await Users.findOne({where:{email:email,phone:phone, password:password}}, {raw:true})
+        if(user) {
+           return res.status(409).json({message:'Пользователь с таким данными уже существует'})
+        }
+
+        const salt = bcrypt.genSaltSync(7)
+        const hashedPassword = bcrypt.hashSync(password,salt)
+
+        const data = await Users.create({
+            email:email,
+            phone:phone,
+            password:hashedPassword,
+            status:status
+        })
+
+        res.json({
+            user:data,
+            message:'Успешная регистрация!'
+        })
+
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+
+})
+
+// 2.1 Авторизация пользователей
+
+app.post('/api/user/login', async (req,res) => {
+
+    const{email,password} = req.body
+
+    try {
+        
+        if(!email || !password){
+            return res.status(400).json({message:'Логин и пароль должны быть заполнены'})
+        }
+
+        const user = await Users.findOne({where: {email:email}}, {raw:true})
+
+        if(!user){
+            return res.status(401).json({message:`Пользователь с такими данными не существует`})
+        }
+
+        const isPasswordValid = bcrypt.compareSync(password, user.password)
+
+        if(!isPasswordValid){
+            return res.status(409).json({message:'Неверный пароль'})
+        }
+
+        const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET
+
+        const token = jwt.sign({
+            id:user.user_id,
+            email:user.email
+        }, JWT_ACCESS_SECRET,{expiresIn:'7d'})
+
+        res.cookie('token',token, {
+            httpOnly:true,
+            sameSite:'lax',
+            maxAge:7 * 24 * 60 * 60 * 1000
+        })
+
+        res.json({
+            user:{
+                id:user.user_id,
+                email:user.email,
+                password:user.password
+            },
+            message:'Успешная авторизация'
+        })
+
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+
 })
 
 //

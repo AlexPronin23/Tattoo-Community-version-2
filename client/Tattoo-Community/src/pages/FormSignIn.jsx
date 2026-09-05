@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "./style.scss";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userRegistration } from "../slices/userSlice";
 
 const FormSignIn = () => {
@@ -11,18 +11,19 @@ const FormSignIn = () => {
 
   const [data, setData] = useState({
     email: "",
+    phone: "",
     password: "",
     confirmPassword: "",
   });
   const [isTattooMaster, setIsTattooMaster] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { email, password, confirmPassword } = data;
+  const { email, phone, password, confirmPassword } = data;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password || !confirmPassword) {
+    if (!email || !phone || !password || !confirmPassword) {
       alert("Данные должны быть заполнены");
       return;
     }
@@ -36,15 +37,17 @@ const FormSignIn = () => {
       const resultAction = await dispatch(
         userRegistration({
           email,
+          phone,
           password,
           status: isTattooMaster,
         }),
       );
 
       if (userRegistration.fulfilled.match(resultAction)) {
-        setData({ email: "", password: "", confirmPassword: "" });
+        alert(resultAction.payload.message);
+        setData({ email: "", phone: "", password: "", confirmPassword: "" });
         setIsTattooMaster(false);
-        navigate("/login");
+        navigate("/login", { replace: true });
       } else {
         alert(resultAction.payload || "Ошибка регистрации");
       }
@@ -97,6 +100,33 @@ const FormSignIn = () => {
                     <li className="form_item">
                       Он понадобится для подтверждения регистрации и входа в
                       аккаунт.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="form_column">
+              <label className="form_label">Телефон: </label>
+
+              <input
+                value={phone}
+                type="tel"
+                required
+                placeholder="+7 (___) ___-__-__"
+                maxLength={15}
+                className="form_input"
+                name="phone"
+                onChange={handleData}
+              />
+
+              <div className="form_help">
+                <span>?</span>
+
+                <div className="form_tooltip">
+                  <ul className="form_items">
+                    <li className="form_item">
+                      Введите действующий номер телефона.
                     </li>
                   </ul>
                 </div>
