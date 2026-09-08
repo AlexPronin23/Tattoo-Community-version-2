@@ -37,6 +37,36 @@ body{
     }
 }
 
+
+
+.button-yes {
+    width: 100px;
+    background-color: $green;
+    padding: 5px;
+    color: $main-color;
+    border-radius: 30px;
+    transition: transform .5s ease-in-out;
+  
+
+    &:hover{
+        transform: scale(1.2);
+    }
+}
+
+.button-no {
+    width: 100px;
+    background-color: $red;
+    padding: 5px;
+    color: $main-color;
+    border-radius: 30px;
+    transition: transform .5s ease-in-out;
+  
+
+    &:hover{
+        transform: scale(1.2);
+    }
+}
+
 .title{
 
     color: $main-color;

@@ -2,7 +2,12 @@ import "./style.scss";
 
 // React
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+// Redux
+import { userLogout } from "../../slices/userSlice";
 
 // Images
 import HeaderLogo from "@assets/icon/Header/HeaderLogo.svg";
@@ -16,10 +21,26 @@ import Logo from "../Logo/Logo";
 import MobileMenu from "../MobileMenu/MobileMenu";
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.users);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [openModalWindow, setOpenModalWindow] = useState(false);
 
   const handleOpening = () => {
-    setOpen(true);
+    setOpenMobileMenu(true);
+  };
+
+  const handleLogout = async () => {
+    try {
+      const resultAction = await dispatch(userLogout());
+      if (userLogout.fulfilled.match(resultAction)) {
+        alert(resultAction.payload.message);
+        window.location.reload();
+        setOpenModalWindow(false);
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
@@ -39,7 +60,7 @@ const Header = () => {
 
           {/* Button group or Account page */}
 
-          {/* {status ? (
+          {isAuth ? (
             <>
               <div className="header__account">
                 <p className="header__account__logo">ПС</p>
@@ -49,7 +70,12 @@ const Header = () => {
                     Профиль
                   </Link>
 
-                  <button className="button btn-logout">Выйти</button>
+                  <button
+                    className="button btn-logout"
+                    onClick={() => setOpenModalWindow(true)}
+                  >
+                    Выйти
+                  </button>
                 </div>
               </div>
             </>
@@ -64,20 +90,11 @@ const Header = () => {
                 </Link>
               </div>
             </>
-          )} */}
-
-          <div className="header__btn">
-            <Link to={"/login"} className="button btn-login">
-              Войти
-            </Link>
-            <Link to={"/register"} className="button btn-reg">
-              Зарегистрироваться
-            </Link>
-          </div>
+          )}
 
           {/* Mobile(Menu) */}
-          <div className={`header__mobile ${open ? "open" : ""}`}>
-            <MobileMenu closeMobile={() => setOpen(false)} />
+          <div className={`header__mobile ${openMobileMenu ? "open" : ""}`}>
+            <MobileMenu closeMobile={() => setOpenMobileMenu(false)} />
           </div>
 
           {/* Mobile(Burger menu) */}
@@ -89,6 +106,26 @@ const Header = () => {
               className="header__burger"
             />
           </button>
+        </div>
+
+        {/* Modal window (Logout) */}
+        <div className={`header__logout ${openModalWindow ? "open" : ""} `}>
+          <div className="header__logout__content">
+            <p className="header__logout__title">
+              Вы действительно хотите выйти?
+            </p>
+            <div className="header__logout__btn">
+              <button className="button-yes" onClick={handleLogout}>
+                Да
+              </button>
+              <button
+                className="button-no"
+                onClick={() => setOpenModalWindow(false)}
+              >
+                Нет
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Header content */}

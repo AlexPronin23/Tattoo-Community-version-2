@@ -34,7 +34,7 @@ const FormLogIn = () => {
           email: "",
           password: "",
         });
-        // navigate("/", { replace: true });
+        navigate("/", { replace: true });
       } else if (userLogin.rejected.match(resultAction)) {
         alert(resultAction.payload);
       }

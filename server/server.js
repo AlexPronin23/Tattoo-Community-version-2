@@ -14,10 +14,9 @@ const app = express()
 const PORT = process.env.PORT
 
 // Middlewares
+const auth = require('./middleware/auth')
 app.use(express.json())
-
 app.use(cookieParser());
-
 app.use(cors({
     origin:'http://localhost:5173',
     credentials:true
@@ -131,6 +130,39 @@ app.post('/api/user/login', async (req,res) => {
         return res.status(500).json({message:error.message})
     }
 
+})
+
+// 2.2 Аутентификация пользователей
+app.get('/api/user/auth', auth,  async (req,res) => {
+    const {id} = req.user
+    
+    try {
+
+        const user = await Users.findOne({where:{user_id:id}}, {raw:true})
+
+        if(!user){
+            return res.status(401).json({message:'Пользователь не найден'})
+        }
+
+        res.json({
+            message:'Доступ разрешен',
+            user:user
+        })
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
+//2.3 Выход из профиля
+app.post('/api/user/logout', (req,res) => {
+
+    res.clearCookie('token',{
+    httpOnly:true,
+    sameSite:'lax',
+
+ })
+ res.json({message:'Выход выполнен успешно'})
 })
 
 //

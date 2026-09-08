@@ -23,7 +23,7 @@ export const userRegistration = createAsyncThunk(
             const data = await response.json()
 
             if(!response.ok) {
-                rejectWithValue(data.message)
+                return rejectWithValue(data.message)
             }
 
             return {
@@ -57,13 +57,65 @@ export const userLogin = createAsyncThunk(
             const data = await response.json()
 
             if(!response.ok) {
-                rejectWithValue(data.message)
+              return  rejectWithValue(data.message)
             }
 
             return {
                 user:data.user,
                 message:data.message
             }
+            
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+        
+    }
+)
+
+export const userAuth = createAsyncThunk(
+    'users/userAuth',
+    async function (_,{rejectWithValue}) {
+        try {
+            
+            const response = await fetch('/api/user/auth', {
+                credentials:'include'
+            })
+
+            const data = await response.json()
+
+            if(!response.ok) {
+                return rejectWithValue(data.message)
+            }
+
+            return {
+                user:data.user,
+                message:data.message
+            }
+
+        } catch (error) {
+           return rejectWithValue(error.message)
+        }
+        
+    }
+)
+
+export const userLogout = createAsyncThunk(
+    'users/userLogout', 
+    async function (_,{rejectWithValue}) {
+        try {
+
+            const response = await fetch('/api/user/logout', {
+                method:'POST',
+                credentials:'include'
+            })
+
+           const data = await response.json()
+
+            if (!response.ok) {
+                return rejectWithValue(data.message || 'Ошибка выхода')
+            }
+            
+            return { message: data.message }
             
         } catch (error) {
             return rejectWithValue(error.message)
@@ -102,7 +154,7 @@ const userSlice = createSlice({
         .addCase(userLogin.fulfilled, (state,action) => {
             state.status = 'Успешно'
             state.isAuth = true
-            state.currentUser = action.payload
+            state.currentUser = action.payload.user
         })
         .addCase(userLogin.rejected, (state,action) => {
             state.status = 'Отклонен'
@@ -110,6 +162,31 @@ const userSlice = createSlice({
             state.currentUser = null
             state.error = action.payload
         })
+         .addCase(userAuth.pending, (state,action) => {
+            state.status = 'Загрузка'
+            state.error = null
+        })
+        .addCase(userAuth.fulfilled, (state,action) => {
+            state.status = 'Успешно'
+            state.isAuth = true
+            state.currentUser = action.payload.user
+        })
+        .addCase(userAuth.rejected, (state,action) => {
+            state.status = 'Отклонен'
+            state.isAuth = false
+            state.currentUser = null
+            state.error = action.payload
+        })
+        .addCase(userLogout.fulfilled, (state,action) => {
+            state.status = 'Успешно'
+            state.isAuth = false
+            state.currentUser = null
+        })
+        .addCase(userLogout.rejected, (state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload
+        })
+
     }
 })
 
