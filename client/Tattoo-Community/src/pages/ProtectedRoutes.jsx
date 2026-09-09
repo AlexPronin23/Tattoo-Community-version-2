@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
 const ProtectedRoutes = ({ children }) => {
   const { isAuth, status } = useSelector((state) => state.users);
 
@@ -12,7 +11,11 @@ const ProtectedRoutes = ({ children }) => {
   }
 
   if (!isAuth) {
-    return <Navigate to="/login" replace />;
+    return (
+      <>
+        <h1>Вы не авторизованы!</h1>
+      </>
+    );
   }
 
   return children;

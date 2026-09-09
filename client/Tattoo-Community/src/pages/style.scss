@@ -225,7 +225,11 @@
         font-size: 10px;
     }
 
+
+
+
 // Adaptive version
+
 
 @media (max-width:700px) {
 
@@ -270,5 +274,61 @@
         visibility: hidden;
     }
 }
+
+}
+
+// Profile
+
+.profile{
+    background-color: $bg-color;
+    padding: 100px;
+    height: 100vh;
+
+&__content{
+    // width: 500px;
+    outline: 1px $main-color solid ;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+&__title{
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+&__tabs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    position: relative;
+}
+
+&__tabs:after{
+    content: '';
+    position: absolute;
+
+    width: 50px;
+    height: 1px;
+    
+    left: 50%;
+    
+    background-color: $main-color;
+
+    transform: rotateZ(90deg);
+  
+}
+
+.btn__tabs{
+    padding: 27px;
+    
+}
+
+.btn__tabs.active{
+    background-color: $black;
+    outline: 1px $main-color solid ;
+}
+
+
 
 }
