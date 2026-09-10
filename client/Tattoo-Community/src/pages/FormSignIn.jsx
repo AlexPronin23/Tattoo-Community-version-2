@@ -71,12 +71,12 @@ const FormSignIn = () => {
   return (
     <div className="form">
       <div className="container">
-        <h2 className="title form_title">Регистрация</h2>
+        <h2 className="title form__title">Регистрация</h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="form_inner">
-            <div className="form_column">
-              <label className="form_label">Email: </label>
+          <div className="form__inner">
+            <div className="form__column">
+              <label className="form__label">Email: </label>
 
               <input
                 value={email}
@@ -84,20 +84,20 @@ const FormSignIn = () => {
                 required
                 placeholder="Введите email"
                 maxLength={254}
-                className="form_input"
+                className="form__input"
                 name="email"
                 onChange={handleData}
               />
 
-              <div className="form_help">
+              <div className="form__help">
                 <span>?</span>
 
-                <div className="form_tooltip">
-                  <ul className="form_items">
-                    <li className="form_item">
+                <div className="form__tooltip">
+                  <ul className="form__items">
+                    <li className="form__item">
                       Введите корректный email — он станет вашим логином.
                     </li>
-                    <li className="form_item">
+                    <li className="form__item">
                       Он понадобится для подтверждения регистрации и входа в
                       аккаунт.
                     </li>
@@ -106,8 +106,8 @@ const FormSignIn = () => {
               </div>
             </div>
 
-            <div className="form_column">
-              <label className="form_label">Телефон: </label>
+            <div className="form__column">
+              <label className="form__label">Телефон: </label>
 
               <input
                 value={phone}
@@ -115,17 +115,17 @@ const FormSignIn = () => {
                 required
                 placeholder="+7 (___) ___-__-__"
                 maxLength={15}
-                className="form_input"
+                className="form__input"
                 name="phone"
                 onChange={handleData}
               />
 
-              <div className="form_help">
+              <div className="form__help">
                 <span>?</span>
 
-                <div className="form_tooltip">
-                  <ul className="form_items">
-                    <li className="form_item">
+                <div className="form__tooltip">
+                  <ul className="form__items">
+                    <li className="form__item">
                       Введите действующий номер телефона.
                     </li>
                   </ul>
@@ -133,10 +133,10 @@ const FormSignIn = () => {
               </div>
             </div>
 
-            <div className="form_column">
-              <label className="form_label">Пароль: </label>
+            <div className="form__column">
+              <label className="form__label">Пароль: </label>
 
-              <div className="form_password">
+              <div className="form__password">
                 <input
                   value={password}
                   type={isOpen ? "text" : "password"}
@@ -144,7 +144,7 @@ const FormSignIn = () => {
                   placeholder="Введите пароль"
                   minLength={8}
                   maxLength={16}
-                  className="form_input"
+                  className="form__input"
                   name="password"
                   onChange={handleData}
                 />
@@ -152,19 +152,19 @@ const FormSignIn = () => {
                 <button
                   type="button"
                   onClick={() => handleType()}
-                  className="form_toggle"
+                  className="form__toggle"
                 ></button>
               </div>
 
-              <div className="form_help">
+              <div className="form__help">
                 <span>?</span>
 
-                <div className="form_tooltip">
-                  <ul className="form_items">
-                    <li className="form_item">
+                <div className="form__tooltip">
+                  <ul className="form__items">
+                    <li className="form__item">
                       Минимум 8 символов: буквы, цифры или знаки
                     </li>
-                    <li className="form_item">
+                    <li className="form__item">
                       Чем сложнее пароль — тем безопаснее ваш аккаунт
                     </li>
                   </ul>
@@ -172,8 +172,8 @@ const FormSignIn = () => {
               </div>
             </div>
 
-            <div className="form_column">
-              <label className="form_label"> Подтвердите Пароль: </label>
+            <div className="form__column">
+              <label className="form__label"> Подтвердите Пароль: </label>
 
               <input
                 value={confirmPassword}
@@ -182,28 +182,28 @@ const FormSignIn = () => {
                 placeholder="Введите пароль повторно"
                 minLength={8}
                 maxLength={16}
-                className="form_input"
+                className="form__input"
                 name="confirmPassword"
                 onChange={handleData}
               />
             </div>
 
-            <div className="form_column">
-              <label className="form_label"> Тату мастер? </label>
+            <div className="form__column">
+              <label className="form__label"> Тату мастер? </label>
 
               <input
                 checked={isTattooMaster}
                 type="checkbox"
-                className="form_input form_input-checkbox"
+                className="form__input form__input-checkbox"
                 onChange={(e) => setIsTattooMaster(e.target.checked)}
               />
 
-              <div className="form_help">
+              <div className="form__help">
                 <span>?</span>
 
-                <div className="form_tooltip">
-                  <ul className="form_items">
-                    <li className="form_item">
+                <div className="form__tooltip">
+                  <ul className="form__items">
+                    <li className="form__item">
                       Если поставили галочку,то получаете доступ к личному
                       профилю
                     </li>
@@ -215,11 +215,11 @@ const FormSignIn = () => {
             <button type="submit" className="button btn-reg">
               Зарегистрироваться
             </button>
-            <Link to={"/login"} className="form_link">
+            <Link to={"/login"} className="form__link">
               Уже есть аккаунт?
             </Link>
 
-            <Link to={"/"} className="form_link">
+            <Link to={"/"} className="form__link">
               Назад
             </Link>
           </div>

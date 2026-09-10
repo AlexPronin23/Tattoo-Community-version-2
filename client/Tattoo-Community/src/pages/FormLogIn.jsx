@@ -34,7 +34,7 @@ const FormLogIn = () => {
           email: "",
           password: "",
         });
-        navigate("/", { replace: true });
+        navigate("/profile", { replace: true });
       } else if (userLogin.rejected.match(resultAction)) {
         alert(resultAction.payload);
       }
@@ -54,12 +54,12 @@ const FormLogIn = () => {
   return (
     <div className="form">
       <div className="container">
-        <h2 className="title form_title">Войти</h2>
+        <h2 className="title form__title">Войти</h2>
 
         <form onSubmit={fetchUserLogin}>
-          <div className="form_inner">
-            <div className="form_column">
-              <label className="form_label">Email: </label>
+          <div className="form__inner">
+            <div className="form__column">
+              <label className="form__label">Email: </label>
 
               <input
                 type="email"
@@ -68,20 +68,20 @@ const FormLogIn = () => {
                 placeholder="Введите email"
                 maxLength={254}
                 name="email"
-                className="form_input"
+                className="form__input"
                 onChange={handleData}
               />
 
-              <div className="form_help">
+              <div className="form__help">
                 <span>?</span>
 
-                <div className="form_tooltip">
-                  <ul className="form_items">
-                    <li className="form_item">
+                <div className="form__tooltip">
+                  <ul className="form__items">
+                    <li className="form__item">
                       Email должен совпадать с адресом, указанным при
                       регистрации
                     </li>
-                    <li className="form_item">
+                    <li className="form__item">
                       Убедитесь, что вводите email без опечаток и лишних
                       пробелов
                     </li>
@@ -90,8 +90,8 @@ const FormLogIn = () => {
               </div>
             </div>
 
-            <div className="form_column">
-              <label className="form_label">Пароль: </label>
+            <div className="form__column">
+              <label className="form__label">Пароль: </label>
 
               <input
                 type="password"
@@ -101,19 +101,19 @@ const FormLogIn = () => {
                 minLength={8}
                 maxLength={16}
                 name="password"
-                className="form_input"
+                className="form__input"
                 onChange={handleData}
               />
 
-              <div className="form_help">
+              <div className="form__help">
                 <span>?</span>
 
-                <div className="form_tooltip">
-                  <ul className="form_items">
-                    <li className="form_item">
+                <div className="form__tooltip">
+                  <ul className="form__items">
+                    <li className="form__item">
                       Убедитесь, что вводите правильный пароль
                     </li>
-                    <li className="form_item">
+                    <li className="form__item">
                       При ошибке входа проверьте Caps Lock и раскладку
                     </li>
                   </ul>
@@ -125,10 +125,10 @@ const FormLogIn = () => {
               Войти
             </button>
 
-            <Link to={"/register"} className="form_link">
+            <Link to={"/register"} className="form__link">
               Еще нет аккаунта?
             </Link>
-            <Link to={"/"} className="form_link">
+            <Link to={"/"} className="form__link">
               Назад
             </Link>
           </div>

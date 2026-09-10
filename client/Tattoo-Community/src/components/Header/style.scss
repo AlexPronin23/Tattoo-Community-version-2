@@ -185,7 +185,7 @@
     align-items: center;
     justify-content: center;
 
-    background-color: blue;
+    background-color: $main-color;
     border-radius: 50px;
     padding: 15px;
 
@@ -204,7 +204,7 @@
 
     &__dropdown{
 
-        width: 150px;
+        width: 200px;
      
         position: absolute;
         left: -10%;
@@ -231,9 +231,11 @@
 
     &__profile{
 
-        position: relative;
+        // position: relative;
 
         display: inline-block;
+
+        text-wrap: nowrap;
 
         color: $black;
 
@@ -243,19 +245,19 @@
 
         transition: opacity .5s ease-in-out;
 
-        &::before{
-            content: '';
-            position: absolute;
+        // &::before{
+        //     content: '';
+        //     position: absolute;
 
-            background-image: url('../../assets/icon/Header/UserIcon.svg');
+        //     background-image: url('../../assets/icon/Header/UserIcon.svg');
 
-            left: -30%;
-            top: 15%;
+        //     left: -30%;
+        //     top: 15%;
 
-            width: 15px ;
-            height: 15px;
+        //     width: 15px ;
+        //     height: 15px;
 
-        }
+        // }
 
         &:hover{
             opacity: .3;
@@ -266,6 +268,7 @@
  }
 
    &__account:hover{
+    
 
         .header__account__dropdown{
             opacity: 1;

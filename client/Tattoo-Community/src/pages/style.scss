@@ -6,14 +6,14 @@
 
     padding: 67px 100px;
 
-    &_title{
+    &__title{
 
         text-align: center;
         margin-bottom: 50px;
 
     }
 
-    &_inner{
+    &__inner{
 
         display: flex;
         align-items: center;
@@ -21,14 +21,14 @@
 
     }
 
-    &_column{
+    &__column{
         display: flex;
         align-items: center;
         margin-bottom: 47px;
         gap: 10px;
     }
 
-    &_label{
+    &__label{
 
         color: $main-color;
         
@@ -36,18 +36,18 @@
         
     }
 
-    &_password{
+    &__password{
         position: relative;
     }
 
-    // &_password > input:focus{
+    // &__password > input:focus{
 
           
     // }
 
 
 // Input
-    &_input{
+    &__input{
 
         width: 270px;
 
@@ -87,16 +87,16 @@
     }
 }
 
-    &_input:focus + &_toggle{
+    &__input:focus + &__toggle{
        opacity: 0;
        visibility: hidden;
     }
 
-    &_input[type='text'] + &_toggle{
+    &__input[type='text'] + &__toggle{
          background-image: url('../assets/icon/Forms/HideEye.svg');
     }
 
-    &_toggle{
+    &__toggle{
         position: absolute;
 
         left: 85%;
@@ -136,7 +136,7 @@
         margin-bottom: 23px;
     }
 
-    &_link{
+    &__link{
 
         color: $second-color;
 
@@ -158,7 +158,7 @@
 
     }
 
-    &_help{
+    &__help{
 
         position: relative;
 
@@ -190,7 +190,7 @@
         
     }
 
-    &_tooltip{
+    &__tooltip{
 
         position: absolute;
         left: 40%;
@@ -214,13 +214,13 @@
 
     }
 
-    &_items{
+    &__items{
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
 
-    &_item{
+    &__item{
         font-family: $second-font;
         font-size: 10px;
     }
@@ -233,7 +233,7 @@
 
 @media (max-width:700px) {
 
-    &_tooltip{
+    &__tooltip{
         width: 150px;
         padding: 10px;
     }
@@ -244,15 +244,15 @@
 
     padding: 30px;
 
-    &_column{
+    &__column{
         margin-bottom: 20px;
     }
 
-    &_label{
+    &__label{
         font-size: 10px;
     }
     
-    &_input{
+    &__input{
         width: 200px;
         padding: 10px;
 
@@ -265,11 +265,11 @@
         }
     }
 
-    &_link{
+    &__link{
         font-size: 10px;
     }
 
-    &_help{
+    &__help{
         opacity: 0;
         visibility: hidden;
     }
@@ -284,12 +284,7 @@
     padding: 100px;
     height: 100vh;
 
-&__content{
-    // width: 500px;
-    outline: 1px $main-color solid ;
-    border-radius: 30px;
-    padding: 30px;
-}
+
 
 &__title{
     margin-bottom: 50px;
@@ -302,33 +297,90 @@
     justify-content: center;
     gap: 50px;
     position: relative;
+    margin-bottom: 50px;
 }
 
-&__tabs:after{
-    content: '';
-    position: absolute;
+// &__tabs:after{
+//     content: '';
+//     position: absolute;
 
-    width: 50px;
-    height: 1px;
+//     width: 50px;
+//     height: 1px;
     
-    left: 50%;
+//     left: 52%;
     
-    background-color: $main-color;
+//     background-color: $main-color;
 
-    transform: rotateZ(90deg);
+//     transform: rotateZ(90deg);
   
-}
+// }
 
 .btn__tabs{
     padding: 27px;
+    transition: background-color .2s ease-in-out, outline .5s ease-in-out;
+
+    &:hover{
+        opacity: 1;
+        transform: translateY(0);
+    }
     
 }
 
 .btn__tabs.active{
     background-color: $black;
-    outline: 1px $main-color solid ;
+    outline: 1px $main-color solid;
 }
 
+&__info{
+    border: 1px $main-color solid;
+    padding: 30px;
+    border-radius: 30px;
+}
+
+.btn-logout{
+    padding: 3px 15px;
+}
+
+}
+
+// ProfilePersonal
+
+.personal{
+    text-align: center;
+    margin-bottom: 30px;
+
+    &__content{
+        color: $main-color;
+    }
+
+    &__title{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    &__items{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    &__back{
+        color: $second-color;
+
+        font-size: 12px;
+
+        transition: color .2s ease-in-out, transform .4s ease-in;
+
+        margin-bottom: 10px;
+
+        display: inline-block;
 
 
+        &:hover{
+           color: $main-color;
+           transform: scale(1.5);
+        }
+    }
 }

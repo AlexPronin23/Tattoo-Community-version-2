@@ -1,7 +1,7 @@
 import "./style.scss";
 
 // React
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -14,6 +14,7 @@ import HeaderLogo from "@assets/icon/Header/HeaderLogo.svg";
 import HeaderImg from "@assets/img/Header/tattooImg.png";
 import TattooMachine from "@assets/icon/Header/tattoo-machine.svg";
 import BurgerMenuWhite from "@assets/icon/Header/BurgerMenuWhite.svg";
+import UserIcon from "@assets/icon/Header/UserIcon.svg";
 
 // Components
 import Nav from "../Nav/Nav";
@@ -63,11 +64,15 @@ const Header = () => {
           {isAuth ? (
             <>
               <div className="header__account">
-                <p className="header__account__logo">ПС</p>
+                <img
+                  className="header__account__logo"
+                  src={UserIcon}
+                  alt="User icon"
+                />
 
                 <div className="header__account__dropdown">
                   <Link to={"/profile"} className="header__account__profile">
-                    Профиль
+                    Личный кабинет
                   </Link>
 
                   <button

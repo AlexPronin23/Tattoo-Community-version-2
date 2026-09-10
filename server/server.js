@@ -121,7 +121,9 @@ app.post('/api/user/login', async (req,res) => {
             user:{
                 id:user.user_id,
                 email:user.email,
-                password:user.password
+                phone:user.phone,
+                status:user.status
+
             },
             message:'Успешная авторизация'
         })
@@ -138,7 +140,7 @@ app.get('/api/user/auth', auth,  async (req,res) => {
     
     try {
 
-        const user = await Users.findOne({where:{user_id:id}}, {raw:true})
+        const user = await Users.findOne({where:{user_id:id}, attributes: { exclude: ['password'] }}, {raw:true})
 
         if(!user){
             return res.status(401).json({message:'Пользователь не найден'})
