@@ -30,7 +30,9 @@ export const getAllTattooMasters = createAsyncThunk(
     initialState: {
         tattooMasters: [],
         status: null,
-        error:null
+        error:null,
+        created:false,
+        currentMaster:null
     },
     extraReducers:(builder) => {
         builder

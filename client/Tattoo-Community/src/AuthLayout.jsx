@@ -4,6 +4,7 @@ import FormLogIn from "./pages/FormLogIn";
 import FormSignIn from "./pages/FormSignIn";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import Profile from "./pages/Profile";
+import FormCreate from "./pages/FormCreate";
 
 const AuthLayout = () => {
   return (
@@ -19,6 +20,7 @@ const AuthLayout = () => {
             </ProtectedRoutes>
           }
         />
+        <Route path="/create" element={<FormCreate />} />
       </Routes>
     </>
   );

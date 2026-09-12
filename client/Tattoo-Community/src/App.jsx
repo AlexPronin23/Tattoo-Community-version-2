@@ -21,7 +21,7 @@ function App() {
 
 const AppContent = () => {
   const location = useLocation(); // Получаем местоположение url
-  const isAuthPage = ["/login", "/register", "/profile"].includes(
+  const isAuthPage = ["/login", "/register", "/profile", "/create"].includes(
     location.pathname,
   ); // проверяем наличие url адреса
 
