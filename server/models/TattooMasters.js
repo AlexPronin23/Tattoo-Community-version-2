@@ -1,13 +1,12 @@
 const {DataTypes}  = require('sequelize')
 const sequelize = require('../db/db')
 
-const Styles = require('./Styles')
-const SpStyles = require('./SpStyles')
+// const Styles = require('./Styles')
+// const SpStyles = require('./SpStyles')
 
 const TattooMasters = sequelize.define('tb_info', {
     user_id:{
         type:DataTypes.INTEGER,
-        autoIncrement:true,
         primaryKey:true,
     },
     first_name:{
@@ -24,29 +23,33 @@ const TattooMasters = sequelize.define('tb_info', {
     },
     tattooSalon: {
         type:DataTypes.STRING,
-        allowNull:false
+        allowNull:true
     },
     isColored: {
         type:DataTypes.BOOLEAN
     },
     isAtHome: {
         type:DataTypes.BOOLEAN
+    },
+    description: {
+        type:DataTypes.STRING,
+        allowNull:false
     }
 }, {
     tableName:'tb_info',
     timestamps:false
 })
 
-TattooMasters.belongsToMany(SpStyles, {
-    through: Styles,
-    foreignKey:'user_id',
-    otherKey:'style_id'
-})
+// TattooMasters.belongsToMany(SpStyles, {
+//     through: Styles,
+//     foreignKey:'user_id',
+//     otherKey:'style_id'
+// })
 
-SpStyles.belongsToMany(TattooMasters, {
-    through: Styles,
-    foreignKey: 'style_id',
-    otherKey: 'user_id'
-})
+// SpStyles.belongsToMany(TattooMasters, {
+//     through: Styles,
+//     foreignKey: 'style_id',
+//     otherKey: 'user_id'
+// })
 
 module.exports = TattooMasters

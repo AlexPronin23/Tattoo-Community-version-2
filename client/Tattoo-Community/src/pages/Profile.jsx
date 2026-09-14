@@ -8,7 +8,7 @@ import { userLogout } from "../slices/userSlice";
 
 // Pages
 import ProfilePersonal from "./ProfilePersonal";
-import ProfilePortfolio from "./ProfilePortfolio";
+import ProfileWorkSheet from "./ProfileWorkSheet";
 
 import "./style.scss";
 
@@ -52,10 +52,10 @@ const Profile = () => {
                 Персональные данные
               </button>
               <button
-                onClick={() => handleActive("portfolio")}
-                className={`button btn__tabs ${active === "portfolio" ? "active" : ""}`}
+                onClick={() => handleActive("worksheet")}
+                className={`button btn__tabs ${active === "worksheet" ? "active" : ""}`}
               >
-                Портфолио
+                Анкета мастера
               </button>
             </>
           ) : (
@@ -75,7 +75,7 @@ const Profile = () => {
               <ProfilePersonal />
             </>
           ) : (
-            <ProfilePortfolio />
+            <ProfileWorkSheet />
           )}
           <button className="button btn-logout" onClick={handleLogout}>
             Выйти

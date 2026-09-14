@@ -2,8 +2,8 @@
 
 .form{
     background-color: $bg-color;
-    // height: 100vh;
-    // overflow: hidden;
+    height: 100vh;
+    overflow-X: hidden;
     padding: 67px 100px;
 
     &__title{
@@ -26,6 +26,15 @@
         align-items: center;
         margin-bottom: 47px;
         gap: 10px;
+    }
+
+    &__column-salon{
+       display: none;
+
+    }
+
+    &__column-salon.open {
+        display: block;
     }
 
     &__label{
@@ -179,7 +188,7 @@
 
             background-color: $second-color;
 
-            .form_tooltip{
+            .form__tooltip{
 
                 opacity: 1;
                 visibility: visible;
@@ -225,6 +234,23 @@
         font-size: 10px;
     }
 
+
+// TextArea
+
+&__textarea{
+    width: 400px;
+    height: 200px;
+    resize: none;
+    outline: 3px $main-color solid;
+    color: $main-color;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+&__count{
+    color: $main-color;
+}
+
 // Secect & option
 
     &__select{
@@ -232,6 +258,25 @@
         padding: 12px 40px 12px 20px;
         border-radius: 30px;
         color: $main-color;
+        font-size: 16px;
+        
+    }
+
+    &__option{
+        // color: $black;
+        padding: 10px;
+      
+
+        &:checked{
+            background-color: $blue;
+            color: $main-color;
+            border-radius: 20px;
+        }
+
+        &:hover{
+           background-color: $blue;
+           border-radius: 20px;
+        }
     }
 
     // Upload button
@@ -312,8 +357,6 @@
   line-height: 1;
   padding-bottom: 2px;
 }
-
- 
 
 // Adaptive version
 

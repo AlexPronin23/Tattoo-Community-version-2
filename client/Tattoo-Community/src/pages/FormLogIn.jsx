@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { userLogin } from "../slices/userSlice";
 
@@ -10,6 +10,7 @@ import "./style.scss";
 const FormLogIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const { status } = useSelector((state) => state.users);
 
   const [data, setData] = useState({
     email: "",
@@ -28,6 +29,9 @@ const FormLogIn = () => {
 
     try {
       const resultAction = await dispatch(userLogin({ email, password }));
+      // if(status === 'Загрузка') {
+
+      // }
       if (userLogin.fulfilled.match(resultAction)) {
         alert(resultAction.payload.message);
         setData({

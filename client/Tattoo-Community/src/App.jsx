@@ -1,16 +1,18 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userAuth } from "./slices/userSlice";
+import { getStyles } from "./slices/styleSlice";
 
 import DefaultLayout from "./DefaultLayout";
 import AuthLayout from "./AuthLayout";
-import PageNotExists from "./components/PageNotExists/PageNotExists";
+// import PageNotExists from "./components/PageNotExists/PageNotExists";
 import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userAuth());
+    dispatch(getStyles());
   }, [dispatch]);
   return (
     <>

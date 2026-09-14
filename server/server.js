@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 // Models
-const TattooMasters = require('./models/TattooMasters')
-const Users = require('./models/Users')
+const { TattooMasters,Users, SpStyles } = require('./models/index');
+
 
 const app = express()
 const PORT = process.env.PORT
@@ -44,6 +44,75 @@ app.get('/api/tattoomasters', async (req,res) => {
         
     }
     
+})
+
+// 1.2 Получение стилей 
+app.get('/api/styles', async (req,res) => {
+    try {
+
+        const styles = await SpStyles.findAll({raw:true})
+
+        res.json({
+            styles:styles
+        })
+        
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+
+})
+
+//1.3 Создание анкеты
+app.post('/api/tattoomasters/profile', auth, async (req,res) => {
+    const {firstName,lastName,experience,isColored,isAtHome,tattooSalon,description,styleIds} = req.body
+    const userId = req.user.id
+
+    const normalizedStyleIds = Array.from(
+    Array.isArray(styleIds) ? styleIds : [styleIds],
+        (id) => Number(id)
+    ).filter((id) => !Number.isNaN(id) && id > 0);
+
+    if (normalizedStyleIds.length === 0) {
+        return res.status(400).json({ message: 'Выберите хотя бы один стиль' });
+    }
+
+    try {
+        const [master] = await TattooMasters.upsert({
+            user_id:userId,
+            first_name:firstName,
+            last_name:lastName,
+            experience:experience,
+            isColored:isColored,
+            isAtHome:isAtHome,
+            tattooSalon:tattooSalon || 'Фриланс',
+            description:description
+        }) // Экземпляр модели 
+
+        const styles = await SpStyles.findAll({
+            where:{style_id:normalizedStyleIds}
+        })
+
+        if(styles.length === 0) {
+             return res.status(400).json({ message: 'Стили не найдены' });
+        }
+
+        await master.setStyles(styles)
+
+        const result  = await TattooMasters.findOne({
+            where:{user_id:userId},
+            include:[{
+                model:SpStyles,
+                as:'styles',
+                through:{attributes:[]}
+            }]
+        })
+
+        res.json({message:'Анкета была создана', master:result} )
+
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+
 })
 
 // 2. Users

@@ -25,6 +25,39 @@ export const getAllTattooMasters = createAsyncThunk(
     }
 )
 
+// Создание анкеты
+
+export const createWorkSheet = createAsyncThunk(
+    'tattooMasters/createWorkSheet',
+    async function ({masterInfo}, {_,rejectWithValue}) {
+        try {
+            const response = await fetch('/api/tattoomasters/profile', {
+                method:'POST',
+                credentials:'include',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(masterInfo)
+            })
+
+            const data = await response.json()
+
+            if(!response.ok) {
+               return rejectWithValue(data.message)
+            }
+
+            return {
+                message:data.message,
+                master:data.master
+            }
+
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+        
+    }
+)
+
  export const tattooMastersSlice = createSlice({
     name:'tattooMasters',
     initialState: {
@@ -47,6 +80,19 @@ export const getAllTattooMasters = createAsyncThunk(
         .addCase(getAllTattooMasters.rejected, (state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
+        })
+        .addCase(createWorkSheet.pending,(state,action) => {
+            state.status = 'Загрузка'
+            state.error = null
+        })
+        .addCase(createWorkSheet.fulfilled, (state,action) => {
+            state.status = 'Успешно'
+            state.currentMaster = action.payload.master
+            state.created = true
+        })
+        .addCase(createWorkSheet.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload.message
         })
 
     }

@@ -8,8 +8,12 @@ const Portfolio = sequelize.define('tb_portfolio', {
         primaryKey:true,
         allowNull:false
     },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     img:{
-        type:DataTypes.BLOB,
+        type:DataTypes.STRING,
         allowNull:false
     }
 }, {
