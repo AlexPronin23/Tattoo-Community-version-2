@@ -413,6 +413,7 @@
     background-color: $bg-color;
     padding: 100px;
     height: 100vh;
+    overflow-x: hidden;
 
 
 
@@ -517,7 +518,7 @@
 
 // ProfilePortfolio
 
-.portfolio{
+.worksheet{
     padding: 30px;
 
     &__content{
@@ -533,4 +534,28 @@
   .btn-create{
     padding: 10px;
   }
+
+  &__items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__item{
+    color: $main-color;
+  }
+
+  &__style{
+    color: $main-color;
+    margin-bottom: 10px;
+  }
+
+  &__styles{
+    display: flex;
+    flex-direction:column ;
+    gap: 10px;
+    color: #1a1aff;
+  }
+  
 }

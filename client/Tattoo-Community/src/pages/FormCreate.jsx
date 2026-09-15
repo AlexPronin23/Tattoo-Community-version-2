@@ -7,8 +7,6 @@ const FormCreate = () => {
   const navigate = useNavigate();
 
   const { styles } = useSelector((state) => state.styles);
-  // const [atHome, setAtHome] = useState(false); // При true открывается доп поле ввода для название тату салона
-  // const [colored, setColored] = useState(false);
 
   const [masterInfo, setMasterInfo] = useState({
     firstName: "",
@@ -31,13 +29,6 @@ const FormCreate = () => {
     styleIds,
     description,
   } = masterInfo;
-
-  // const handleChange = (e) => {
-  //   const { name, value, type, checked } = e.target;
-  //   setMasterInfo((prev) => ({
-  //     ...prev,
-  //     [name]: type === "checkbox" ? checked : value,
-  //   }));
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

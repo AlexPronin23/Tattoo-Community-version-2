@@ -25,8 +25,8 @@ export const getAllTattooMasters = createAsyncThunk(
     }
 )
 
-// Создание анкеты
 
+// Создание анкеты
 export const createWorkSheet = createAsyncThunk(
     'tattooMasters/createWorkSheet',
     async function ({masterInfo}, {_,rejectWithValue}) {
@@ -58,7 +58,32 @@ export const createWorkSheet = createAsyncThunk(
     }
 )
 
- export const tattooMastersSlice = createSlice({
+// Проверка создания анкеты
+export const checkWorkSheet = createAsyncThunk(
+    'tattooMasters/checkWorkSheet',
+    async function (_,{rejectWithValue}) {
+        try {
+
+            const response = await fetch('/api/tattoomasters/check', {
+                credentials:'include'
+            })
+
+            const data = await response.json()
+
+            if(!response.ok) {
+                return rejectWithValue(data.message)
+            }
+
+            return data.master
+            
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+        
+    }
+)
+
+export const tattooMastersSlice = createSlice({
     name:'tattooMasters',
     initialState: {
         tattooMasters: [],
@@ -66,6 +91,14 @@ export const createWorkSheet = createAsyncThunk(
         error:null,
         created:false,
         currentMaster:null
+    },
+    reducers: {
+        resetMasterState: (state) => {
+            state.currentMaster = null;
+            state.created = false;
+            state.error = null;
+            state.status = null;
+        }
     },
     extraReducers:(builder) => {
         builder
@@ -92,11 +125,29 @@ export const createWorkSheet = createAsyncThunk(
         })
         .addCase(createWorkSheet.rejected,(state,action) => {
             state.status = 'Отклонен'
+            state.currentMaster = null
             state.error = action.payload.message
+            state.created = false
+        })
+        .addCase(checkWorkSheet.pending,(state,action) => {
+            state.status = 'Загрузка'
+            state.error = null
+        })
+        .addCase(checkWorkSheet.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.currentMaster = action.payload
+            state.created = true
+        })
+        .addCase(checkWorkSheet.rejected, (state,action) => {
+           state.status = 'Отклонен'
+           state.currentMaster = null
+           state.error = action.payload.message
+           state.created = false
         })
 
     }
 })
 
 export default  tattooMastersSlice.reducer
+export const  {resetMasterState} = tattooMastersSlice.actions
 

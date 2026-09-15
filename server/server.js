@@ -115,6 +115,32 @@ app.post('/api/tattoomasters/profile', auth, async (req,res) => {
 
 })
 
+app.get('/api/tattoomasters/check', auth, async (req,res) => {
+    const id = req.user.id
+    
+    try {
+
+        const master = await TattooMasters.findOne({where:{user_id:id},  include: [{
+        model: SpStyles,
+        as: 'styles',
+        through: { attributes: [] }
+    }]})
+
+         if(!master){
+            return res.status(404).json({message:'Пользователь не найден'})
+        }
+
+        res.json({
+            master:master
+        })
+
+
+        
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+})
+
 // 2. Users
 
 // 2.1 Регистрация пользователей

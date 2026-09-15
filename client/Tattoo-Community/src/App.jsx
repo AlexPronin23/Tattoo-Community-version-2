@@ -1,7 +1,8 @@
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userAuth } from "./slices/userSlice";
 import { getStyles } from "./slices/styleSlice";
+import { checkWorkSheet, resetMasterState } from "./slices/tattooMastersSlice";
 
 import DefaultLayout from "./DefaultLayout";
 import AuthLayout from "./AuthLayout";
@@ -10,10 +11,21 @@ import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.users.currentUser);
+
   useEffect(() => {
     dispatch(userAuth());
     dispatch(getStyles());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(checkWorkSheet());
+    } else {
+      dispatch(resetMasterState);
+    }
+  }, [dispatch, currentUser]);
+
   return (
     <>
       <AppContent />
