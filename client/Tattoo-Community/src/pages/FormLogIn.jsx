@@ -10,7 +10,7 @@ import "./style.scss";
 const FormLogIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { status } = useSelector((state) => state.users);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState({
     email: "",
@@ -27,18 +27,18 @@ const FormLogIn = () => {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       const resultAction = await dispatch(userLogin({ email, password }));
-      // if(status === 'Загрузка') {
-
-      // }
       if (userLogin.fulfilled.match(resultAction)) {
-        alert(resultAction.payload.message);
         setData({
           email: "",
           password: "",
         });
-        navigate("/profile", { replace: true });
+        setTimeout(() => {
+          navigate("/profile", { replace: true });
+        }, 1000);
       } else if (userLogin.rejected.match(resultAction)) {
         alert(resultAction.payload);
       }
@@ -137,6 +137,10 @@ const FormLogIn = () => {
             </Link>
           </div>
         </form>
+        {/* Loading screen */}
+        <div className={`form__loading ${isLoading ? "open" : ""}`}>
+          <div className="spinner"></div>
+        </div>
       </div>
     </div>
   );

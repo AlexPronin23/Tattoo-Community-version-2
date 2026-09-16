@@ -358,6 +358,57 @@
   padding-bottom: 2px;
 }
 
+// Loading screen
+
+&__loading{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba($black, .5);
+
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity .5s ease-in-out, visibility .5s ease-in-out, backdrop-filter .5s ease-in-out;
+}
+
+.spinner{
+  width: 50px;
+  height: 50px;
+  border: 5px $main-color solid; /* Цвет фона рамки */
+  border-top: 5px $blue solid; /* Цвет вращающейся части */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* Настройка анимации */
+}
+
+&__loading.open{
+    opacity: 1;
+    visibility: visible;
+     backdrop-filter: blur(10px);
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 // Adaptive version
 
 

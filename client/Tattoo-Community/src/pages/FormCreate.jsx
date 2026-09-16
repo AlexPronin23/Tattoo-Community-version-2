@@ -2,11 +2,13 @@ import { Link, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { createWorkSheet } from "../slices/tattooMastersSlice";
+
 const FormCreate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { styles } = useSelector((state) => state.styles);
+  const { status } = useSelector((state) => state.tattooMasters);
 
   const [masterInfo, setMasterInfo] = useState({
     firstName: "",
@@ -49,8 +51,8 @@ const FormCreate = () => {
     e.preventDefault();
     try {
       const resultAction = await dispatch(createWorkSheet({ masterInfo }));
+
       if (createWorkSheet.fulfilled.match(resultAction)) {
-        alert(resultAction.payload.message);
         setMasterInfo({
           firstName: "",
           lastName: "",
@@ -128,7 +130,6 @@ const FormCreate = () => {
               <input
                 type="checkbox"
                 checked={isColored}
-                required
                 name="isColored"
                 className="form__input form__input-checkbox"
                 onChange={handleChange}
@@ -222,6 +223,11 @@ const FormCreate = () => {
             </Link>
           </div>
         </form>
+      </div>
+      {/* Loading screen */}
+
+      <div className={`form__loading ${status === "Загрузка" ? "open" : ""}`}>
+        <div className="spinner"></div>
       </div>
     </div>
   );

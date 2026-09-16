@@ -8,6 +8,7 @@ import { userRegistration } from "../slices/userSlice";
 const FormSignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState({
     email: "",
@@ -33,6 +34,8 @@ const FormSignIn = () => {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       const resultAction = await dispatch(
         userRegistration({
@@ -44,10 +47,11 @@ const FormSignIn = () => {
       );
 
       if (userRegistration.fulfilled.match(resultAction)) {
-        alert(resultAction.payload.message);
         setData({ email: "", phone: "", password: "", confirmPassword: "" });
         setIsTattooMaster(false);
-        navigate("/login", { replace: true });
+        setTimeout(() => {
+          navigate("/login", { replace: true });
+        }, 1000);
       } else {
         alert(resultAction.payload || "Ошибка регистрации");
       }
@@ -224,6 +228,9 @@ const FormSignIn = () => {
             </Link>
           </div>
         </form>
+        <div className={`form__loading ${isLoading ? "open" : ""}`}>
+          <div className="spinner"></div>
+        </div>
       </div>
     </div>
   );
