@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userAuth } from "./slices/userSlice";
 import { getStyles } from "./slices/styleSlice";
 import { checkWorkSheet, resetMasterState } from "./slices/tattooMastersSlice";
+import { resetPortfolio } from "./slices/portfolioSlice";
 
 import DefaultLayout from "./DefaultLayout";
 import AuthLayout from "./AuthLayout";
@@ -22,7 +23,8 @@ function App() {
     if (currentUser) {
       dispatch(checkWorkSheet());
     } else {
-      dispatch(resetMasterState);
+      dispatch(resetMasterState());
+      // dispatch(resetPortfolio());
     }
   }, [dispatch, currentUser]);
 

@@ -34,6 +34,10 @@ const TattooMasters = sequelize.define('tb_info', {
     description: {
         type:DataTypes.STRING,
         allowNull:false
+    },
+    cardImg: {
+        type:DataTypes.TEXT('long'),
+         allowNull: false
     }
 }, {
     tableName:'tb_info',

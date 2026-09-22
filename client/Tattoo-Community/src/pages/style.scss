@@ -279,84 +279,8 @@
         }
     }
 
-    // Upload button
- &__upload-section {
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 40px;
-}
-
-&__upload-title {
-  color: $main-color;
-  font-family: $second-font;
-  font-size: 24px;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-&__upload-grid {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  gap: 15px;
-}
-
-&__upload-item {
-  position: relative;
-  width: 70px;
-  height: 70px;
-}
 
 
-&__file-input {
-  position: absolute;
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  z-index: -1;
-
-  &:focus + .form__file-label {
-    outline: 2px solid $second-color;
-  }
-}
-
-
-&__file-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: #1a1aff;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform .3s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-
-  &:hover {
-    transform: translateY(-3px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-}
-
-&__plus {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  background-color: #fff;
-  border-radius: 50%;
-  color: #1a1aff;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 1;
-  padding-bottom: 2px;
-}
 
 // Loading screen
 
@@ -406,6 +330,39 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+//  Card Img
+&__file-input {
+    display: none;
+}
+
+&__file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border: 3px solid $main-color;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.3s ;
+
+    &:hover {
+        background: rgba($main-color, 0.1);
+    }
+}
+
+&__plus {
+    font-size: 40px;
+    color: $main-color;
+}
+
+&__preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
@@ -569,44 +526,143 @@
 
 // ProfilePortfolio
 
-.worksheet{
+.worksheet {
     padding: 30px;
 
-    &__content{
+    &__content {
         text-align: center;
     }
 
-  &__title{
-    color: $main-color;
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
+    &__title {
+        color: $main-color;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
 
-  .btn-create{
-    padding: 10px;
-  }
+    .btn-create {
+        padding: 10px;
+    }
 
-  &__items{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
+    &__items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
 
-  &__item{
-    color: $main-color;
-  }
+    &__item {
+        color: $main-color;
+    }
 
-  &__style{
-    color: $main-color;
-    margin-bottom: 10px;
-  }
+    &__style {
+        color: $main-color;
+        margin-bottom: 10px;
+    }
 
-  &__styles{
-    display: flex;
-    flex-direction:column ;
-    gap: 10px;
-    color: #1a1aff;
-  }
+    &__styles {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        color: #1a1aff;
+        margin-bottom: 20px;
+    }
+
   
+    &__portfolio {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    &__upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    &__upload-title {
+        color: $main-color;
+        font-family: $second-font;
+        font-size: 24px;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    &__upload-file-input {
+        position: absolute;
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    &__upload-file-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        border: 3px solid $main-color;
+        border-radius: 50%;
+        cursor: pointer;
+        overflow: hidden;
+        transition: 0.3s;
+        margin-bottom: 15px;
+        transition: background-color .5s ease-in-out, transform .5s ease-in-out;
+
+        &:hover {
+           background-color: $blue;
+            transform: translateY(-3px);
+        }
+
+        
+    }
+
+    &__upload-plus {
+        font-size: 40px;
+        color: $main-color;
+    }
+
+    &__upload-hint {
+        color: $second-color;
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    &__gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   // 3 колонки, одинаковая ширина
+    gap: 15px;
+ 
+    margin-top: 20px;
+}
+
+&__gallery__item{
+    aspect-ratio: 1 / 1;         
+    overflow: hidden;           
+    border-radius: 30px;
+    border: 2px solid $main-color;
+}
+
+&__gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;          
+   
+}
+
+    &__back {
+        color: $second-color;
+        font-size: 12px;
+        transition: color 0.2s ease-in-out, transform 0.4s ease-in;
+        margin-bottom: 10px;
+        display: inline-block;
+
+        &:hover {
+            color: $main-color;
+            transform: scale(1.5);
+        }
+    }
 }

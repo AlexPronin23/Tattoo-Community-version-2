@@ -19,6 +19,7 @@ const FormCreate = () => {
     tattooSalon: "",
     styleIds: [],
     description: "",
+    cardImg: "",
   });
 
   const {
@@ -30,6 +31,7 @@ const FormCreate = () => {
     tattooSalon,
     styleIds,
     description,
+    cardImg,
   } = masterInfo;
 
   const handleChange = (e) => {
@@ -47,6 +49,28 @@ const FormCreate = () => {
     setMasterInfo((prev) => ({ ...prev, styleIds: selected }));
   };
 
+  const handleCardImg = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Файл слишком большой. Максимум 5 МБ");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file); // Конвертация в base64
+    reader.onloadend = () => {
+      setMasterInfo((prev) => ({
+        ...prev,
+        cardImg: reader.result,
+      }));
+    };
+  };
+
   const fetchCreateWorkSheet = async (e) => {
     e.preventDefault();
     try {
@@ -62,6 +86,7 @@ const FormCreate = () => {
           tattooSalon: "",
           styleIds: [],
           description: "",
+          cardImg: "",
         });
         navigate("/profile", { replace: true });
       } else if (createWorkSheet.rejected.match(resultAction)) {
@@ -215,6 +240,25 @@ const FormCreate = () => {
               {/* <p className="form__count">Кол-во символов : {text.length}</p> */}
             </div>
 
+            <div className="form__column">
+              <label className="form__label">Фото мастера:</label>
+
+              <input
+                type="file"
+                id="avatar-upload"
+                accept="image/*"
+                className="form__file-input"
+                onChange={handleCardImg}
+              />
+              <label htmlFor="avatar-upload" className="form__file-label">
+                {cardImg ? (
+                  <img src={cardImg} alt="preview" className="form__preview" />
+                ) : (
+                  <span className="form__plus">+</span>
+                )}
+              </label>
+            </div>
+
             <button type="submit" className="button btn-login">
               Создать
             </button>
@@ -225,7 +269,6 @@ const FormCreate = () => {
         </form>
       </div>
       {/* Loading screen */}
-
       <div className={`form__loading ${status === "Загрузка" ? "open" : ""}`}>
         <div className="spinner"></div>
       </div>

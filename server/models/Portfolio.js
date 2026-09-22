@@ -13,7 +13,7 @@ const Portfolio = sequelize.define('tb_portfolio', {
         allowNull: false
     },
     img:{
-        type:DataTypes.STRING,
+        type:DataTypes.TEXT('long'),
         allowNull:false
     }
 }, {

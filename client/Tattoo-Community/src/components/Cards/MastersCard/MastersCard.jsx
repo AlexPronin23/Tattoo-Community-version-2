@@ -1,19 +1,19 @@
+import { Link } from "react-router";
+import UserImg from "../../../assets/img/Main/Masters/UserImg.jpg";
 import "./style.scss";
-
-import FirstPicture from "../../../assets/img/Main/Masters/FirstPicture.png";
 
 const MastersCard = ({
   user_id,
   first_name,
+  last_name,
   tattooSalon,
   experience,
-  isColored,
-  styleTattooName,
+  cardImg,
 }) => {
   return (
-    <a href="#" className="tattoomasters_card">
+    <Link key={user_id} className="tattoomasters_card">
       <img
-        src={FirstPicture}
+        src={cardImg || UserImg}
         alt="Tattoo Masters picture"
         className="tattoomasters_card-img"
       />
@@ -22,22 +22,17 @@ const MastersCard = ({
         <h2 className="tattoomasters_card-name">
           Имя тату мастера: {first_name}
         </h2>
-
-        {/* Когда будет добавлена форма, то будет проверятеся работает ли тату мастер в салоне или нет */}
+        <h2 className="tattoomasters_card-name">
+          Фамилия тату мастера: {last_name}
+        </h2>
 
         <p className="tattoomasters_card-salon">Тату салон: {tattooSalon}</p>
 
-        {/* ------------------------------------------------------------- */}
-
         <p className="tattoomasters_card-experience">Опыт: {experience} лет</p>
-
-        {/* <p className="tattoomasters_card-colorful">Мастер использует цветные краски: <span className={`tattoomasters_card-${isColored ? 'green' : 'red'}`}>{isColored ? 'Да': 'Нет'}</span></p>
-
-                    <p className="tattoomasters_card-style">Стили мастера: {styleTattooName}</p> */}
       </div>
 
       <button className="button tattoomasters_card-btn">Записаться</button>
-    </a>
+    </Link>
   );
 };
 

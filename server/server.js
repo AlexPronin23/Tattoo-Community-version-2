@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 // Models
-const { TattooMasters,Users, SpStyles } = require('./models/index');
+const { TattooMasters,Users, SpStyles, Portfolio } = require('./models/index');
 
 
 const app = express()
@@ -15,7 +15,7 @@ const PORT = process.env.PORT
 
 // Middlewares
 const auth = require('./middleware/auth')
-app.use(express.json())
+app.use(express.json({limit:'50mb'}))
 app.use(cookieParser());
 app.use(cors({
     origin:'http://localhost:5173',
@@ -64,7 +64,7 @@ app.get('/api/styles', async (req,res) => {
 
 //1.3 Создание анкеты
 app.post('/api/tattoomasters/profile', auth, async (req,res) => {
-    const {firstName,lastName,experience,isColored,isAtHome,tattooSalon,description,styleIds} = req.body
+    const {firstName,lastName,experience,isColored,isAtHome,tattooSalon,description,cardImg,styleIds} = req.body
     const userId = req.user.id
 
     const normalizedStyleIds = Array.from(
@@ -85,7 +85,8 @@ app.post('/api/tattoomasters/profile', auth, async (req,res) => {
             isColored:isColored,
             isAtHome:isAtHome,
             tattooSalon:tattooSalon || 'Фриланс',
-            description:description
+            description:description,
+            cardImg:cardImg || null
         }) // Экземпляр модели 
 
         const styles = await SpStyles.findAll({
@@ -140,6 +141,7 @@ app.get('/api/tattoomasters/check', auth, async (req,res) => {
         res.status(500).json({message:error.message})
     }
 })
+
 
 // 2. Users
 
@@ -260,6 +262,52 @@ app.post('/api/user/logout', (req,res) => {
 
  })
  res.json({message:'Выход выполнен успешно'})
+})
+
+// 3. Portfolio
+
+// 3.1 Создание портфолио(добавление фото)
+app.post('/api/portfolio', auth, async(req,res) => {
+    const {images} = req.body
+
+    if(!images || !Array.isArray(images) || images.length === 0) {
+        res.status(400).json({message:'Нет фото'})
+    }
+
+    if(images.length > 6) {
+        res.status(400).json({message:'Максимум 6 фото'})
+    }
+    
+     if (images.length > 7 * 1024 * 1024) {
+            return res.status(400).json({ message: 'Фото слишком большое' });
+     }
+
+     try {
+
+        const rows = images.map((img) => ({
+            user_id:req.user.id,
+            img
+        })) // Получем из строки Base64 объект с данными 
+
+        await Portfolio.bulkCreate(rows) // Добавляет одним разом все фото
+
+        const photos = await Portfolio.findAll({where:{user_id:req.user.id}},{raw:true})
+        
+        res.json({photos})
+        
+     } catch (error) {
+         res.status(500).json({ message: error.message });
+     }
+
+})
+
+app.get('/api/portfolio', auth, async(req,res) => {
+    try {
+        const photos = await Portfolio.findAll({where:{user_id:req.user.id}},{raw:true})
+        res.json({photos})
+    } catch (error) {
+       res.status(500).json({message:error.message}) 
+    }
 })
 
 //
