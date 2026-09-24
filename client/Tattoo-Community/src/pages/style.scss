@@ -5,6 +5,7 @@
     height: 100vh;
     overflow-X: hidden;
     padding: 67px 100px;
+    position: relative;
 
     &__title{
 
@@ -300,6 +301,7 @@
 
     background-color: rgba($black, .5);
 
+    z-index: 9999;
 
     opacity: 0;
     visibility: hidden;
@@ -365,6 +367,49 @@
     object-fit: cover;
 }
 
+// Popup
+
+&__popup{
+    position: fixed;
+
+    left: 45%;
+    top: 0;
+   transform: translateY(-110%);
+   
+   
+    background-color: $main-color;
+
+    padding: 20px;
+    border-radius: 30px;
+
+    
+    opacity: 0;
+    visibility: hidden;
+
+
+    transition: opacity .5s ease-in-out, visibility .5s ease-in-out, transform .5s ease-in-out;
+   
+    z-index: 9998;
+
+    text-align: center;
+
+    
+}
+
+&__popup.open{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    top: 0;
+}
+
+&__popup__text{
+    margin-bottom: 10px;
+}
+
+.btn-cancel{
+    padding: 10px;
+}
 
 // Adaptive version
 

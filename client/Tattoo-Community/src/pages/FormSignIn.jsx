@@ -2,14 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "./style.scss";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userRegistration } from "../slices/userSlice";
 
 const FormSignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { message } = useSelector((state) => state.users);
   const [isLoading, setIsLoading] = useState(false);
-
   const [data, setData] = useState({
     email: "",
     phone: "",
@@ -17,7 +17,9 @@ const FormSignIn = () => {
     confirmPassword: "",
   });
   const [isTattooMaster, setIsTattooMaster] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Для запуска спиннера
+  const [open, setOpen] = useState(false); // Для открытия popup окна
+  const [isSucces, setIsSucces] = useState(false);
 
   const { email, phone, password, confirmPassword } = data;
 
@@ -34,7 +36,7 @@ const FormSignIn = () => {
       return;
     }
 
-    setIsLoading(true);
+    // setIsLoading(true);
 
     try {
       const resultAction = await dispatch(
@@ -49,11 +51,11 @@ const FormSignIn = () => {
       if (userRegistration.fulfilled.match(resultAction)) {
         setData({ email: "", phone: "", password: "", confirmPassword: "" });
         setIsTattooMaster(false);
-        setTimeout(() => {
-          navigate("/login", { replace: true });
-        }, 1000);
-      } else {
-        alert(resultAction.payload || "Ошибка регистрации");
+        setOpen(true);
+        setIsSucces(true);
+      } else if (userRegistration.rejected.match(resultAction)) {
+        setIsSucces(false);
+        setOpen(true);
       }
     } catch (error) {
       alert("Произошла ошибка");
@@ -70,6 +72,16 @@ const FormSignIn = () => {
 
   const handleType = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleOk = () => {
+    setOpen(false);
+    if (isSucces) {
+      setIsLoading(true);
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 1500);
+    }
   };
 
   return (
@@ -228,8 +240,16 @@ const FormSignIn = () => {
             </Link>
           </div>
         </form>
+        {/* Loading screen */}
         <div className={`form__loading ${isLoading ? "open" : ""}`}>
           <div className="spinner"></div>
+        </div>
+        {/* Popup */}
+        <div className={`form__popup ${open ? "open" : ""}`}>
+          <p className="form__popup__text">{message}</p>
+          <button className="button btn-cancel" onClick={handleOk}>
+            Хорошо
+          </button>
         </div>
       </div>
     </div>

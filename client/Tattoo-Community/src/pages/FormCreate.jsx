@@ -8,7 +8,10 @@ const FormCreate = () => {
   const navigate = useNavigate();
 
   const { styles } = useSelector((state) => state.styles);
-  const { status } = useSelector((state) => state.tattooMasters);
+  const { message } = useSelector((state) => state.tattooMasters);
+  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [isSucces, setIsSucces] = useState(false);
 
   const [masterInfo, setMasterInfo] = useState({
     firstName: "",
@@ -88,12 +91,24 @@ const FormCreate = () => {
           description: "",
           cardImg: "",
         });
-        navigate("/profile", { replace: true });
+        setIsSucces(true);
+        setOpen(true);
       } else if (createWorkSheet.rejected.match(resultAction)) {
-        alert(resultAction.payload.message);
+        setIsSucces(false);
+        setOpen(true);
       }
     } catch (error) {
       alert(error.message);
+    }
+  };
+
+  const handleOk = () => {
+    setOpen(false);
+    if (isSucces) {
+      setIsLoading(true);
+      setTimeout(() => {
+        navigate("/profile", { replace: true });
+      }, 1500);
     }
   };
 
@@ -269,8 +284,15 @@ const FormCreate = () => {
         </form>
       </div>
       {/* Loading screen */}
-      <div className={`form__loading ${status === "Загрузка" ? "open" : ""}`}>
+      <div className={`form__loading ${isLoading ? "open" : ""}`}>
         <div className="spinner"></div>
+      </div>
+      {/* Popup */}
+      <div className={`form__popup ${open ? "open" : ""}`}>
+        <p className="form__popup__text">{message}</p>
+        <button className="button btn-cancel" onClick={handleOk}>
+          Хорошо
+        </button>
       </div>
     </div>
   );

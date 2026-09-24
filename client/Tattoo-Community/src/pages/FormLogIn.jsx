@@ -10,7 +10,10 @@ import "./style.scss";
 const FormLogIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { message } = useSelector((state) => state.users);
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [isSucces, setIsSucces] = useState(false);
 
   const [data, setData] = useState({
     email: "",
@@ -27,8 +30,6 @@ const FormLogIn = () => {
       return;
     }
 
-    setIsLoading(true);
-
     try {
       const resultAction = await dispatch(userLogin({ email, password }));
       if (userLogin.fulfilled.match(resultAction)) {
@@ -36,11 +37,11 @@ const FormLogIn = () => {
           email: "",
           password: "",
         });
-        setTimeout(() => {
-          navigate("/profile", { replace: true });
-        }, 1000);
+        setIsSucces(true);
+        setOpen(true);
       } else if (userLogin.rejected.match(resultAction)) {
-        alert(resultAction.payload);
+        setOpen(true);
+        setIsSucces(false);
       }
     } catch (error) {
       alert(error.message);
@@ -53,6 +54,16 @@ const FormLogIn = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleOk = () => {
+    setOpen(false);
+    if (isSucces) {
+      setIsLoading(true);
+      setTimeout(() => {
+        navigate("/profile", { replace: true });
+      }, 1500);
+    }
   };
 
   return (
@@ -140,6 +151,13 @@ const FormLogIn = () => {
         {/* Loading screen */}
         <div className={`form__loading ${isLoading ? "open" : ""}`}>
           <div className="spinner"></div>
+        </div>
+        {/* Popup */}
+        <div className={`form__popup ${open ? "open" : ""}`}>
+          <p className="form__popup__text">{message}</p>
+          <button className="button btn-cancel" onClick={handleOk}>
+            Хорошо
+          </button>
         </div>
       </div>
     </div>

@@ -43,7 +43,7 @@ export const createWorkSheet = createAsyncThunk(
             const data = await response.json()
 
             if(!response.ok) {
-               return rejectWithValue(data.message)
+               return rejectWithValue({message:data.message})
             }
 
             return {
@@ -90,7 +90,8 @@ export const tattooMastersSlice = createSlice({
         status: null,
         error:null,
         created:false,
-        currentMaster:null
+        currentMaster:null,
+        message:''
     },
     reducers: {
         resetMasterState: (state) => {
@@ -122,12 +123,14 @@ export const tattooMastersSlice = createSlice({
             state.status = 'Успешно'
             state.currentMaster = action.payload.master
             state.created = true
+            state.message = action.payload.message
         })
         .addCase(createWorkSheet.rejected,(state,action) => {
             state.status = 'Отклонен'
             state.currentMaster = null
             state.error = action.payload.message
             state.created = false
+            state.message = action.payload.message
         })
         .addCase(checkWorkSheet.pending,(state,action) => {
             state.status = 'Загрузка'

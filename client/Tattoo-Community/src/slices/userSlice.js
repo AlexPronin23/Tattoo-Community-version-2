@@ -23,7 +23,7 @@ export const userRegistration = createAsyncThunk(
             const data = await response.json()
 
             if(!response.ok) {
-                return rejectWithValue(data.message)
+                return rejectWithValue({message:data.message})
             }
 
             return {
@@ -57,7 +57,7 @@ export const userLogin = createAsyncThunk(
             const data = await response.json()
 
             if(!response.ok) {
-              return  rejectWithValue(data.message)
+              return  rejectWithValue({message:data.message})
             }
 
             return {
@@ -84,7 +84,7 @@ export const userAuth = createAsyncThunk(
             const data = await response.json()
 
             if(!response.ok) {
-                return rejectWithValue(data.message)
+                return rejectWithValue({message:data.message})
             }
 
             return {
@@ -132,6 +132,7 @@ const userSlice = createSlice({
         error:null,
         isAuth:false,
         currentUser:null,
+        message:''
     },
     extraReducers:(builder) => {
         builder
@@ -142,10 +143,12 @@ const userSlice = createSlice({
         .addCase(userRegistration.fulfilled,(state,action) => {
             state.status = 'Успешно'
             state.users = action.payload
+            state.message = action.payload.message
         })
         .addCase(userRegistration.rejected, (state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
+            state.message = action.payload.message
         })
         .addCase(userLogin.pending, (state,action) => {
             state.status = 'Загрузка'
@@ -155,12 +158,14 @@ const userSlice = createSlice({
             state.status = 'Успешно'
             state.isAuth = true
             state.currentUser = action.payload.user
+            state.message = action.payload.message
         })
         .addCase(userLogin.rejected, (state,action) => {
             state.status = 'Отклонен'
             state.isAuth = false
             state.currentUser = null
             state.error = action.payload
+            state.message = action.payload.message
         })
          .addCase(userAuth.pending, (state,action) => {
             state.status = 'Загрузка'
@@ -170,21 +175,25 @@ const userSlice = createSlice({
             state.status = 'Успешно'
             state.isAuth = true
             state.currentUser = action.payload.user
+            state.message = action.payload.message
         })
         .addCase(userAuth.rejected, (state,action) => {
             state.status = 'Отклонен'
             state.isAuth = false
             state.currentUser = null
             state.error = action.payload
+            state.message = action.payload.message
         })
         .addCase(userLogout.fulfilled, (state,action) => {
             state.status = 'Успешно'
             state.isAuth = false
             state.currentUser = null
+            state.message = action.payload.message
         })
         .addCase(userLogout.rejected, (state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
+            state.message = action.payload.message
         })
 
     }
