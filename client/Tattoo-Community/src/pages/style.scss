@@ -711,3 +711,58 @@
         }
     }
 }
+
+// Master Page
+
+.info{
+    background-color: $bg-color;
+    padding: 50px;
+   height: 100vh;
+    
+
+    &__img{
+        width: 300px;
+        margin-bottom: 20px;
+        border-radius: 50px;
+    }
+
+    &__items{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    &__item{
+        color: $main-color;
+        font-size: 20px;
+    }
+
+    &__style{
+        display: flex;
+        font-size: 20px;
+        color: $main-color;
+    }
+
+
+
+    &__styles{
+        display: flex;
+        gap: 5px;
+        position: relative;
+    }
+
+
+
+    &__styles__item{
+        color: #1a1aff;
+    }
+
+    &__styles__item:not(:last-child)::after{
+        content: ',';
+    }
+
+
+    
+}

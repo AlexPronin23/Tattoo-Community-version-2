@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link, Navigate } from "react-router";
 const ProtectedRoutes = ({ children }) => {
   const { isAuth, status } = useSelector((state) => state.users);
 
@@ -14,6 +15,7 @@ const ProtectedRoutes = ({ children }) => {
     return (
       <>
         <h1>Вы не авторизованы!</h1>
+        <Link to={"/login"}>Войти</Link>
       </>
     );
   }

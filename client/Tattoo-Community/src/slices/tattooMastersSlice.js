@@ -83,6 +83,34 @@ export const checkWorkSheet = createAsyncThunk(
     }
 )
 
+//Получение информации об одном мастере
+export const getOneMaster = createAsyncThunk (
+    'tattooMasters/getOneMaster',
+    async function ({id}, {rejectWithValue}) {
+        try {
+
+            const response = await fetch(`/api/tattoomasters/${id}`,{
+                credentials:'include'
+            })
+
+            const data = await response.json()
+
+            if(!response.ok) {
+                return rejectWithValue({message:data.message})
+            }
+
+            return ({
+                message:data.message,
+                master:data.master
+            })
+            
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+        
+    }
+)
+
 export const tattooMastersSlice = createSlice({
     name:'tattooMasters',
     initialState: {
@@ -146,6 +174,15 @@ export const tattooMastersSlice = createSlice({
            state.currentMaster = null
            state.error = action.payload.message
            state.created = false
+        })
+        .addCase(getOneMaster.fulfilled, (state,action) => {
+            state.status = 'Успешно'
+            state.currentMaster = action.payload.master
+            state.message = action.payload.message
+        })
+        .addCase(getOneMaster.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload
         })
 
     }

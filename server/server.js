@@ -142,6 +142,36 @@ app.get('/api/tattoomasters/check', auth, async (req,res) => {
     }
 })
 
+//1.4 Получение информации об одном мастере
+app.get('/api/tattoomasters/:id', auth, async (req,res) => {
+    const {id} = req.params
+
+    try {
+        const master = await TattooMasters.findOne({
+            where:{user_id:id},
+            include:[{
+                model:SpStyles,
+                as:'styles',
+                through:{
+                    attributes:[]
+                }
+            }]
+        }
+        )
+
+        if(!master) {
+            return res.status(404).json({message:'Мастер не найден!'})
+        }
+
+        res.json({
+            master:master
+        })
+
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+})
+
 
 // 2. Users
 

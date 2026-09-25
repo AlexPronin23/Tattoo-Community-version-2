@@ -37,11 +37,12 @@ function App() {
 
 const AppContent = () => {
   const location = useLocation(); // Получаем местоположение url
-  const isAuthPage = ["/login", "/register", "/profile", "/create"].includes(
-    location.pathname,
-  ); // проверяем наличие url адреса
+  const isPage =
+    ["/login", "/register", "/profile", "/create", "/master/:id"].includes(
+      location.pathname,
+    ) || location.pathname.startsWith("/master/"); // проверяем наличие url адреса
 
-  return <>{isAuthPage ? <AuthLayout /> : <DefaultLayout />}</>;
+  return <>{isPage ? <AuthLayout /> : <DefaultLayout />}</>;
 };
 
 export default App;

@@ -11,7 +11,11 @@ const MastersCard = ({
   cardImg,
 }) => {
   return (
-    <Link key={user_id} className="tattoomasters_card">
+    <Link
+      key={user_id}
+      to={`/master/${user_id}`}
+      className="tattoomasters_card"
+    >
       <img
         src={cardImg || UserImg}
         alt="Tattoo Masters picture"
