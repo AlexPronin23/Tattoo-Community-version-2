@@ -331,6 +331,7 @@ app.post('/api/portfolio', auth, async(req,res) => {
 
 })
 
+//3.2  Получение всех портфолио
 app.get('/api/portfolio', auth, async(req,res) => {
     try {
         const photos = await Portfolio.findAll({where:{user_id:req.user.id}},{raw:true})
@@ -339,6 +340,23 @@ app.get('/api/portfolio', auth, async(req,res) => {
        res.status(500).json({message:error.message}) 
     }
 })
+
+// 3.3 Получение портфолио конкретного пользователя
+
+app.get('/api/portfolio/:id', auth, async (req,res) => {
+    const {id} = req.params
+
+    try {
+        const photos = await Portfolio.findAll({where:{user_id:id}},{raw:true})
+    
+        res.json({photos:photos})
+
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+
+})
+
 
 //
 

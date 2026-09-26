@@ -119,6 +119,7 @@ export const tattooMastersSlice = createSlice({
         error:null,
         created:false,
         currentMaster:null,
+        masterPage:null,
         message:''
     },
     reducers: {
@@ -177,7 +178,7 @@ export const tattooMastersSlice = createSlice({
         })
         .addCase(getOneMaster.fulfilled, (state,action) => {
             state.status = 'Успешно'
-            state.currentMaster = action.payload.master
+            state.masterPage = action.payload.master
             state.message = action.payload.message
         })
         .addCase(getOneMaster.rejected,(state,action) => {

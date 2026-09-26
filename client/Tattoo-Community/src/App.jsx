@@ -13,6 +13,7 @@ import { useEffect } from "react";
 function App() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.users.currentUser);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(userAuth());
@@ -20,13 +21,13 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && !location.pathname.startsWith("/master/")) {
       dispatch(checkWorkSheet());
     } else {
       dispatch(resetMasterState());
       // dispatch(resetPortfolio());
     }
-  }, [dispatch, currentUser]);
+  }, [dispatch, currentUser, location.pathname]);
 
   return (
     <>
