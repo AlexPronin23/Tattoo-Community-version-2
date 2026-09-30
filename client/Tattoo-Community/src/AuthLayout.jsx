@@ -7,6 +7,7 @@ import ProtectedRoutes from "./pages/ProtectedRoutes";
 import Profile from "./pages/Profile";
 import FormCreate from "./pages/FormCreate";
 import MasterPage from "./pages/MasterPage";
+import FormEdit from "./pages/FormEdit";
 
 const AuthLayout = () => {
   return (
@@ -36,6 +37,15 @@ const AuthLayout = () => {
           element={
             <ProtectedRoutes>
               <MasterPage />
+            </ProtectedRoutes>
+          }
+        />
+
+        <Route
+          path={"/edit/:id"}
+          element={
+            <ProtectedRoutes>
+              <FormEdit />
             </ProtectedRoutes>
           }
         />

@@ -263,6 +263,8 @@
         
     }
 
+   
+
     &__option{
         // color: $black;
         padding: 10px;
@@ -278,6 +280,10 @@
            background-color: $blue;
            border-radius: 20px;
         }
+    }
+
+     &__option.active {
+        color: red;
     }
 
 
@@ -612,6 +618,8 @@
         margin-bottom: 20px;
     }
 
+
+    
   
     &__portfolio {
         display: flex;
@@ -709,6 +717,17 @@
             color: $main-color;
             transform: scale(1.5);
         }
+    }
+
+    &__link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-edit{
+        padding: 10px;
     }
 }
 

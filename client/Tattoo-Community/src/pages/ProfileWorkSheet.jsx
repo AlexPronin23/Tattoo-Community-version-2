@@ -11,6 +11,7 @@ const ProfileWorkSheet = () => {
   const [images, setImages] = useState([]);
   const { photos, uploaded } = useSelector((state) => state.portfolio);
   const {
+    user_id,
     first_name,
     last_name,
     experience,
@@ -152,9 +153,14 @@ const ProfileWorkSheet = () => {
               </div>
             )}
           </div>
-          <Link to={"/"} className="worksheet__back">
-            Назад
-          </Link>
+          <div className="worksheet__link">
+            <Link to={"/"} className="worksheet__back">
+              Назад
+            </Link>
+            <Link to={`/edit/${user_id}`} className="button btn-edit">
+              Изменить
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -172,6 +172,73 @@ app.get('/api/tattoomasters/:id', auth, async (req,res) => {
     }
 })
 
+// 1.5 Изменение данных мастера
+app.put('/api/tattoomasters/edit/:id', auth, async (req,res) => {
+    const {id} = req.params
+
+    const {newFirstName,newLastName,newExperience, newTattooSalon, newIsColored,newIsAtHome,newDescription,newStyles} = req.body
+
+      // Проверка: только сам мастер может редактировать свою анкету
+    if (Number(id) !== req.user.id) {
+        return res.status(403).json({ message: 'Нет доступа' });
+    }
+
+    const normalizedStyleIds = Array.from(
+    Array.isArray(newStyles) ? newStyles : [newStyles],
+        (id) => Number(id)
+    ).filter((id) => !Number.isNaN(id) && id > 0);
+
+    if (normalizedStyleIds.length === 0) {
+        return res.status(400).json({ message: 'Выберите хотя бы один стиль' });
+    }
+
+    try {
+        
+        const [updated] = await TattooMasters.update(
+            {
+                first_name: newFirstName,
+                last_name: newLastName,
+                experience: Number(newExperience),
+                tattooSalon: newTattooSalon || 'Фриланс',
+                isColored: Boolean(newIsColored),
+                isAtHome: Boolean(newIsAtHome),
+                description: newDescription
+            },
+            { where: { user_id: id } }
+        );
+
+        if (updated === 0) {
+            return res.status(404).json({ message: 'Анкета не найдена' });
+        }
+
+        // 2. Находим экземпляр, чтобы работать со связями
+        const master = await TattooMasters.findOne({ where: { user_id: id } });
+
+        // 3. Пересоздаём связи стилей
+        const styles = await SpStyles.findAll({
+            where: { style_id: normalizedStyleIds }
+        });
+
+        await master.setStyles(styles);
+
+        // 4. Возвращаем обновлённую анкету
+        const result = await TattooMasters.findOne({
+            where: { user_id: id },
+            include: [{
+                model: SpStyles,
+                as: 'styles',
+                through: { attributes: [] }
+            }]
+        });
+
+        res.json({ message: 'Анкета обновлена', master: result });
+
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+
+})
+
 
 // 2. Users
 

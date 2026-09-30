@@ -13,6 +13,7 @@ import { useEffect } from "react";
 function App() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.users.currentUser);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -39,9 +40,16 @@ function App() {
 const AppContent = () => {
   const location = useLocation(); // Получаем местоположение url
   const isPage =
-    ["/login", "/register", "/profile", "/create", "/master/:id"].includes(
-      location.pathname,
-    ) || location.pathname.startsWith("/master/"); // проверяем наличие url адреса
+    [
+      "/login",
+      "/register",
+      "/profile",
+      "/create",
+      "/master/:id",
+      "/edit/:id",
+    ].includes(location.pathname) ||
+    location.pathname.startsWith("/master/") ||
+    location.pathname.startsWith("/edit/"); // проверяем наличие url адреса
 
   return <>{isPage ? <AuthLayout /> : <DefaultLayout />}</>;
 };
