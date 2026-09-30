@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router";
 import { updateWorkSheet } from "../slices/tattooMastersSlice";
+
+import { showPopup, hidePopup } from "../slices/popupSlice";
 const FormEdit = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { styles } = useSelector((state) => state.styles);
   const { id } = useParams();
-  const { currentMaster, message } = useSelector(
-    (state) => state.tattooMasters,
-  );
+  const { currentMaster } = useSelector((state) => state.tattooMasters);
   const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [isSucces, setIsSucces] = useState(false);
+  // const [open, setOpen] = useState(false);
+  // const [isSucces, setIsSucces] = useState(false);
 
   const [newMasterInfo, setNewMasterInfo] = useState({
     newFirstName: "",
@@ -62,12 +62,6 @@ const FormEdit = () => {
     newStyles,
   } = newMasterInfo;
 
-  const currentIds = currentMaster?.styles?.map((s) => s.style_id) || [];
-
-  const isSame =
-    currentIds.length === newStyles.length &&
-    newStyles.every((id) => currentIds.includes(id));
-
   const handleType = (e) => {
     const { name, value, type, checked } = e.target;
     setNewMasterInfo((prev) => ({
@@ -94,35 +88,44 @@ const FormEdit = () => {
       return;
     }
 
-    if (isSame) {
-      alert("Эти стили были уже выбраны вами ранее");
-      return;
-    }
-
     try {
       const resultAction = await dispatch(
         updateWorkSheet({ id, newMasterInfo }),
       );
 
       if (updateWorkSheet.fulfilled.match(resultAction)) {
-        setIsSucces(true);
-        setOpen(true);
+        dispatch(
+          showPopup({
+            message: resultAction.payload.message,
+            type: "success",
+          }),
+        );
+        setTimeout(() => {
+          dispatch(hidePopup());
+          setIsLoading(true);
+        }, 1500);
+
+        setTimeout(() => {
+          navigate("/profile", { replace: true });
+        }, 3000);
       } else if (updateWorkSheet.rejected.match(resultAction)) {
-        setIsSucces(false);
-        setOpen(true);
+        dispatch(
+          showPopup({
+            message: resultAction.payload.message,
+            type: "error",
+          }),
+        );
+        setTimeout(() => {
+          dispatch(hidePopup());
+        }, 1500);
       }
     } catch (error) {
-      alert(error.message);
-    }
-  };
-
-  const handleOk = () => {
-    setOpen(false);
-    if (isSucces) {
-      setIsLoading(true);
-      setTimeout(() => {
-        navigate("/profile", { replace: true });
-      }, 1500);
+      dispatch(
+        showPopup({
+          message: error.message,
+          type: "error",
+        }),
+      );
     }
   };
 
@@ -281,13 +284,6 @@ const FormEdit = () => {
       {/* Loading screen */}
       <div className={`form__loading ${isLoading ? "open" : ""}`}>
         <div className="spinner"></div>
-      </div>
-      {/* Popup */}
-      <div className={`form__popup ${open ? "open" : ""}`}>
-        <p className="form__popup__text">{message}</p>
-        <button className="button btn-cancel" onClick={handleOk}>
-          Хорошо
-        </button>
       </div>
     </div>
   );

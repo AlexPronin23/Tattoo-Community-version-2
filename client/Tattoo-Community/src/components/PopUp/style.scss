@@ -1,0 +1,56 @@
+@use '../../styles/vars.scss' as *;
+.popup{
+    position: fixed;
+
+    left: 45%;
+    top: 0;
+   transform: translateY(-110%);
+   
+   
+    padding: 20px;
+    border-radius: 30px;
+
+    
+    opacity: 0;
+    visibility: hidden;
+
+
+    transition: opacity .5s ease-in-out, visibility .5s ease-in-out, transform .5s ease-in-out;
+   
+    z-index: 9998;
+
+    text-align: center;
+
+
+  &--success{
+    background-color: #28a745;
+    color: $main-color;
+    
+  }
+
+  &--error{
+    background-color: #F44336 ;
+    color: $main-color;
+  }
+    
+  &--warning{
+    background-color: #FFC107;
+    color: $main-color;
+  }
+
+
+&.open{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    top: 0;
+}
+
+&__text{
+    margin-bottom: 10px;
+}
+
+.btn-cancel{
+    padding: 10px;
+}
+}

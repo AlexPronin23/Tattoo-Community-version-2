@@ -556,6 +556,17 @@
         margin-bottom: 20px;
     }
 
+    &__button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-edit{
+        padding: 10px;
+    }
+
     &__back{
         color: $second-color;
 

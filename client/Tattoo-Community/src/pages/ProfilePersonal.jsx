@@ -4,7 +4,7 @@ import "./style.scss";
 import { useEffect } from "react";
 const ProfilePersonal = () => {
   const currentUser = useSelector((state) => state.users.currentUser);
-  const { email, phone, status } = currentUser;
+  const { user_id, email, phone, status } = currentUser;
 
   return (
     <div className="personal">
@@ -18,9 +18,14 @@ const ProfilePersonal = () => {
               Статус : {status ? "Тату мастер" : "Пользователь"}
             </li>
           </ul>
-          <Link className="personal__back" to="/">
-            Назад
-          </Link>
+          <div className="personal__button">
+            <Link className="personal__back" to="/">
+              Назад
+            </Link>
+            <Link to={`/personal/edit/${user_id}`} className="button btn-edit">
+              Изменить
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import Footer from "@components/Footer/Footer";
 const DefaultLayout = () => {
   return (
     <>
-      {<Header />}
+      <Header />
       <Main />
       <Footer />
     </>

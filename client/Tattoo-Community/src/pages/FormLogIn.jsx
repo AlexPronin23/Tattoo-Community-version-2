@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { userLogin } from "../slices/userSlice";
 
+import { showPopup, hidePopup } from "../slices/popupSlice";
+
 import "./style.scss";
 
 const FormLogIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { message } = useSelector((state) => state.users);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [isSucces, setIsSucces] = useState(false);
 
   const [data, setData] = useState({
     email: "",
@@ -37,14 +37,39 @@ const FormLogIn = () => {
           email: "",
           password: "",
         });
-        setIsSucces(true);
-        setOpen(true);
+        dispatch(
+          showPopup({
+            message: resultAction.payload.message,
+            type: "success",
+          }),
+        );
+
+        setTimeout(() => {
+          dispatch(hidePopup());
+          setIsLoading(true);
+        }, 1500);
+
+        setTimeout(() => {
+          navigate("/profile", { replace: true });
+        }, 3000);
       } else if (userLogin.rejected.match(resultAction)) {
-        setOpen(true);
-        setIsSucces(false);
+        dispatch(
+          showPopup({
+            message: resultAction.payload.message,
+            type: "error",
+          }),
+        );
+        setTimeout(() => {
+          dispatch(hidePopup());
+        }, 1500);
       }
     } catch (error) {
-      alert(error.message);
+      dispatch(
+        showPopup({
+          message: error.message,
+          type: "error",
+        }),
+      );
     }
   };
 
@@ -54,16 +79,6 @@ const FormLogIn = () => {
       ...prev,
       [name]: value,
     }));
-  };
-
-  const handleOk = () => {
-    setOpen(false);
-    if (isSucces) {
-      setIsLoading(true);
-      setTimeout(() => {
-        navigate("/profile", { replace: true });
-      }, 1500);
-    }
   };
 
   return (
@@ -153,12 +168,12 @@ const FormLogIn = () => {
           <div className="spinner"></div>
         </div>
         {/* Popup */}
-        <div className={`form__popup ${open ? "open" : ""}`}>
+        {/* <div className={`form__popup ${open ? "open" : ""}`}>
           <p className="form__popup__text">{message}</p>
           <button className="button btn-cancel" onClick={handleOk}>
             Хорошо
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

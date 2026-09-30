@@ -3,12 +3,14 @@ import tattooMasterReducer from '../slices/tattooMastersSlice'
 import userReducer from '../slices/userSlice'
 import styleReducer from '../slices/styleSlice'
 import portfolioReducer from '../slices/portfolioSlice'
+import popupReducer from '../slices/popupSlice'
 
 export default configureStore({
     reducer:{
         tattooMasters:tattooMasterReducer,
         users: userReducer,
         styles:styleReducer,
-        portfolio:portfolioReducer
+        portfolio:portfolioReducer,
+        popup:popupReducer
     }
 })
