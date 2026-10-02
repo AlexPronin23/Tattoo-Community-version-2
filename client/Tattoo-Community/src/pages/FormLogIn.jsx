@@ -73,7 +73,7 @@ const FormLogIn = () => {
     }
   };
 
-  const handleData = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => ({
       ...prev,
@@ -99,7 +99,7 @@ const FormLogIn = () => {
                 maxLength={254}
                 name="email"
                 className="form__input"
-                onChange={handleData}
+                onChange={handleChange}
               />
 
               <div className="form__help">
@@ -132,7 +132,7 @@ const FormLogIn = () => {
                 maxLength={16}
                 name="password"
                 className="form__input"
-                onChange={handleData}
+                onChange={handleChange}
               />
 
               <div className="form__help">
@@ -168,12 +168,6 @@ const FormLogIn = () => {
           <div className="spinner"></div>
         </div>
         {/* Popup */}
-        {/* <div className={`form__popup ${open ? "open" : ""}`}>
-          <p className="form__popup__text">{message}</p>
-          <button className="button btn-cancel" onClick={handleOk}>
-            Хорошо
-          </button>
-        </div> */}
       </div>
     </div>
   );

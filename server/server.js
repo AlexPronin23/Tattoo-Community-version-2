@@ -361,6 +361,52 @@ app.post('/api/user/logout', (req,res) => {
  res.json({message:'Выход выполнен успешно'})
 })
 
+//2.4 Изменение персональных данных пользователя
+app.put('/api/personal/edit/:id', auth, async (req, res) => {
+    const { id } = req.params;
+    const { newEmail, newPhone, newPassword, newStatus } = req.body;
+
+    // 1. Только сам пользователь
+    if (Number(id) !== req.user.id) {
+        return res.status(403).json({ message: 'Нет доступа' });
+    }
+
+    // 2. Обязательные поля
+    if (!newEmail || !newPhone) {
+        return res.status(400).json({ message: 'Не полные данные' });
+    }
+
+    try {
+        
+        const updateData = {
+            email : newEmail,
+            phone:newPhone,
+            status: Boolean(newStatus)
+        }
+
+        if(newPassword && newPassword.length > 0) {
+            const salt = bcrypt.genSaltSync(7)
+           updateData.password = bcrypt.hashSync(newPassword,salt)
+        }
+
+        const [updated] = await Users.update(updateData, {where:{user_id:id}})
+
+         if (updated === 0) {
+            return res.status(404).json({ message: 'Пользователь не найден' });
+        }
+
+        const updatedUser = await Users.findOne({where:{user_id:id},attributes: ['user_id', 'email', 'phone', 'status']})
+
+        res.json({
+            message: 'Данные успешно изменены',
+            newUser: updatedUser
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // 3. Portfolio
 
 // 3.1 Создание портфолио(добавление фото)

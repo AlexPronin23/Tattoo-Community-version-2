@@ -224,7 +224,7 @@ export const tattooMastersSlice = createSlice({
             })
             .addCase(updateWorkSheet.fulfilled, (state, action) => {
                 state.status = 'Успешно';
-                state.currentMaster = action.payload.master;   // ← master, а не newMasterInfo
+                state.currentMaster = action.payload.master;   
                 state.masterPage = action.payload.master;
                 state.message = action.payload.message;
             })

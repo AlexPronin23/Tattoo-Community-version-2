@@ -1,5 +1,6 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 
+// Регистрация пользователя
 export const userRegistration = createAsyncThunk(
     'users/userRegistration',
     async function ({email,phone,password,status}, {rejectWithValue}) {
@@ -38,6 +39,7 @@ export const userRegistration = createAsyncThunk(
     }
 )
 
+// Авторизация пользователя
 export const userLogin = createAsyncThunk(
     'users/userLogin',
     async function ({email,password}, {rejectWithValue}) {
@@ -72,6 +74,7 @@ export const userLogin = createAsyncThunk(
     }
 )
 
+// Аутентификация пользователя
 export const userAuth = createAsyncThunk(
     'users/userAuth',
     async function (_,{rejectWithValue}) {
@@ -99,6 +102,7 @@ export const userAuth = createAsyncThunk(
     }
 )
 
+// Выход пользователя
 export const userLogout = createAsyncThunk(
     'users/userLogout', 
     async function (_,{rejectWithValue}) {
@@ -119,6 +123,44 @@ export const userLogout = createAsyncThunk(
             
         } catch (error) {
             return rejectWithValue(error.message)
+        }
+        
+    }
+)
+
+// Изменение данных пользователя
+export const userEditData = createAsyncThunk(
+    'users/userEditData',
+    async function ({id,newEmail,newPhone,newPassword,newStatus}, {rejectWithValue}) {
+        try {   
+
+         const response = await fetch(`/api/personal/edit/${id}`,{
+            method:'PUT',
+            credentials:'include',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                newEmail:newEmail,
+                newPhone:newPhone,
+                newPassword:newPassword,
+                newStatus:newStatus
+            })
+         })
+
+         const data = await response.json()
+
+         if(!response.ok) {
+            return rejectWithValue({message:data.message})
+         }
+
+         return ({
+            message:data.message,
+            newUser:data.newUser
+         })
+            
+        } catch (error) {
+            return rejectWithValue({message:error.message})
         }
         
     }
@@ -194,6 +236,15 @@ const userSlice = createSlice({
             state.status = 'Отклонен'
             state.error = action.payload
             state.message = action.payload.message
+        })
+        .addCase(userEditData.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.currentUser = action.payload.newUser
+            
+        })
+        .addCase(userEditData.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload.message
         })
 
     }
