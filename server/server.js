@@ -366,10 +366,10 @@ app.put('/api/personal/edit/:id', auth, async (req, res) => {
     const { id } = req.params;
     const { newEmail, newPhone, newPassword, newStatus } = req.body;
 
-    // 1. Только сам пользователь
-    if (Number(id) !== req.user.id) {
-        return res.status(403).json({ message: 'Нет доступа' });
-    }
+    // // 1. Только сам пользователь
+    // if (Number(id) !== req.user.id) {
+    //     return res.status(403).json({ message: 'Нет доступа' });
+    // }
 
     // 2. Обязательные поля
     if (!newEmail || !newPhone) {

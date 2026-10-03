@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 
 // Redux
 import { userLogout } from "../../slices/userSlice";
+import { showPopup, hidePopup } from "../../slices/popupSlice";
 
 // Images
 import HeaderLogo from "@assets/icon/Header/HeaderLogo.svg";
@@ -35,8 +36,21 @@ const Header = () => {
     try {
       const resultAction = await dispatch(userLogout());
       if (userLogout.fulfilled.match(resultAction)) {
-        alert(resultAction.payload.message);
-        window.location.reload();
+        dispatch(
+          showPopup({
+            message: resultAction.payload.message,
+            type: "success",
+          }),
+        );
+
+        setTimeout(() => {
+          dispatch(hidePopup());
+        }, 3000);
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500);
+
         setOpenModalWindow(false);
       }
     } catch (error) {
