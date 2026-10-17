@@ -1,19 +1,22 @@
 import "./style.scss";
 
 import MastersCard from "../Cards/MastersCard/MastersCard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllTattooMasters } from "../../slices/tattooMastersSlice";
+// import { getAllTattooMasters } from "../../slices/tattooMastersSlice";
+import { getMastersLimit, setPage } from "../../slices/paginationSlice";
 import Skeleton from "../Skeleton/CardSkeleton";
 
 const Masters = () => {
   const dispatch = useDispatch();
-  const masters = useSelector((state) => state.tattooMasters.tattooMasters);
-  const { status, error } = useSelector((state) => state.tattooMasters);
+  const mastersLimit = useSelector((state) => state.pagination.mastersLimit);
+  const { page, totalPages, limit, status, error } = useSelector(
+    (state) => state.pagination,
+  );
 
   useEffect(() => {
-    dispatch(getAllTattooMasters());
-  }, [dispatch]);
+    dispatch(getMastersLimit({ page, limit }));
+  }, [dispatch, page, limit]);
 
   return (
     <section className="masters">
@@ -24,7 +27,7 @@ const Masters = () => {
           <div className="masters_card">
             {error ? (
               <>
-                <h1>{error}</h1>
+                <h1>{error.message || "Ошибка"}</h1>
               </>
             ) : status === "Загрузка" ? (
               <>
@@ -33,10 +36,32 @@ const Masters = () => {
                 ))}
               </>
             ) : (
-              masters.map((master) => (
+              mastersLimit.map((master) => (
                 <MastersCard key={master.user_id} {...master} />
               ))
             )}
+          </div>
+
+          <div className="masters__pagination">
+            <div className="masters__pagination__content">
+              <button
+                disabled={page === 1}
+                className="button btn-previous"
+                onClick={() => dispatch(setPage(page - 1))}
+              >
+                ←
+              </button>
+              <p className="masters__pagination__pages">
+                {page} из {totalPages}
+              </p>
+              <button
+                disabled={page === totalPages}
+                className="button btn-next"
+                onClick={() => dispatch(setPage(page + 1))}
+              >
+                →
+              </button>
+            </div>
           </div>
         </div>
       </div>

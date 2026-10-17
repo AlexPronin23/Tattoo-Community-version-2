@@ -46,9 +46,67 @@
         gap: 30px;
 
         overflow: hidden;
+        
+        margin-bottom: 30px;
       
 
 }
+//
+
+// Pagination
+
+&__pagination{
+
+    &__content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+    &__pages{
+        color: $main-color;
+        font-size: 20px;
+    }
+
+    .btn-previous{
+        padding: 10px;
+
+        &:hover{
+            transform: translateX(-10px);
+        }
+
+         &:disabled{
+            opacity: .5;
+            
+            &:hover{
+                transform: translateX(0)
+            }
+        }
+    }
+
+    .btn-next{
+        padding: 10px;
+        
+
+        &:hover{
+            transform: translateX(10px);
+        }
+
+       
+         &:disabled{
+            opacity: .5;
+            
+            
+
+            &:hover{
+                transform: translateX(0)
+            }
+        }
+
+    }
+}
+
 //
 
 // Adaptive version

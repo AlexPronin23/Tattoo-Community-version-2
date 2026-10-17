@@ -4,6 +4,7 @@ import userReducer from '../slices/userSlice'
 import styleReducer from '../slices/styleSlice'
 import portfolioReducer from '../slices/portfolioSlice'
 import popupReducer from '../slices/popupSlice'
+import paginationReducer from '../slices/paginationSlice'
 
 export default configureStore({
     reducer:{
@@ -11,6 +12,7 @@ export default configureStore({
         users: userReducer,
         styles:styleReducer,
         portfolio:portfolioReducer,
-        popup:popupReducer
+        popup:popupReducer,
+        pagination:paginationReducer
     }
 })

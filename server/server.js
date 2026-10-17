@@ -28,22 +28,50 @@ app.use(cors({
 // 1. TattooMasters
 
 // 1.1 Получение данных о тату мастерах
-app.get('/api/tattoomasters', async (req,res) => {
+// app.get('/api/tattoomasters', async (req,res) => {
 
-    try {
-        const masters = await TattooMasters.findAll({raw:true})
+//     try {
+//         const masters = await TattooMasters.findAll({raw:true})
 
-        res.json({
-            masters:masters
-        })
+//         res.json({
+//             masters:masters
+//         })
 
         
-    } catch (error) {
-        return res.status(500).json({message:'Ошибка на сервере'})
+//     } catch (error) {
+//         return res.status(500).json({message:'Ошибка на сервере'})
        
         
-    }
+//     }
     
+// })
+
+app.get('/api/tattoomasters', async (req,res) => {
+    try {
+        
+        const page = parseInt(req.query.page || 1)
+        const limit = parseInt(req.query.limit || 6)
+        const offset = (page - 1 ) * limit
+    
+        const {count,rows} = await TattooMasters.findAndCountAll({
+           limit,
+           offset
+        })
+    
+        res.json({
+            mastersLimit:rows,
+            pagination:{
+                page,
+                limit,
+                total:count,
+                totalPages:Math.ceil(count / limit)
+            }
+        })
+    } catch (error) {
+        res.status(500).json({message:error.message})
+        
+    }
+
 })
 
 // 1.2 Получение стилей 
