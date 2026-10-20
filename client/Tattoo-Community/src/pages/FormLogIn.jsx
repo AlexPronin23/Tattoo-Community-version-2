@@ -1,10 +1,10 @@
+// React
 import { Link, useNavigate } from "react-router-dom";
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// Redux
 import { userLogin } from "../slices/userSlice";
-
 import { showPopup, hidePopup } from "../slices/popupSlice";
 
 import "./style.scss";

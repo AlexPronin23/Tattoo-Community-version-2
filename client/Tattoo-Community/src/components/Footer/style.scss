@@ -5,18 +5,18 @@
 
     padding: 30px 20px;
 
-    &_wrapper{
+    &__wrapper{
         display: flex;
         align-items: center;
         justify-content: space-evenly;
     }
 
-    &_items{
+    &__items{
         display: flex;
         gap: 20px;
     }
 
-    &_link{
+    &__link{
 
         color: $main-color;
 
@@ -24,7 +24,7 @@
 
     }
 
-    &_social{
+    &__social{
 
         display: flex;
         align-items: center;
@@ -32,7 +32,7 @@
 
     }
 
-    &_phone{
+    &__phone{
 
        color: $main-color;
 
@@ -51,7 +51,7 @@
 
 @media (max-width:700px) {
 
-    &_wrapper{
+    &__wrapper{
 
         flex-direction: column;
         gap: 20px;
@@ -62,7 +62,7 @@
 
 @media (max-width:400px) {
                
-        &_wrapper{
+        &__wrapper{
 
             flex-direction: column;
             gap: 20px;

@@ -1,8 +1,12 @@
+// React
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useParams } from "react-router";
+
+// Redux
 import { getOneMaster } from "../slices/tattooMastersSlice";
 import { getOnePortfolio } from "../slices/portfolioSlice";
-import { useParams } from "react-router";
+
 const MasterPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();

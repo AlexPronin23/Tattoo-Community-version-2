@@ -10,17 +10,17 @@ const Services = () => {
   return (
     <section className="services">
       <div className="container">
-        <div className="services_wrapper">
-          <h1 className="title services_title">Услуги</h1>
+        <div className="services__wrapper">
+          <h1 className="title services__title">Услуги</h1>
 
-          <div className="services_card">
+          <div className="services__card">
             <div className="card">
               <img
                 src={FirstPicture}
                 alt="First Picture"
-                className="card_img"
+                className="card__img"
               />
-              <p className="card_text">Профиль мастера</p>
+              <p className="card__text">Профиль мастера</p>
             </div>
 
             <div className="card">
@@ -29,7 +29,7 @@ const Services = () => {
                 alt="Second Picture"
                 className="card_img"
               />
-              <p className="card_text">Продвижение бренда</p>
+              <p className="card__text">Продвижение бренда</p>
             </div>
 
             <div className="card">
@@ -38,7 +38,7 @@ const Services = () => {
                 alt="Third Picture"
                 className="card_img"
               />
-              <p className="card_text">Онлайн чат</p>
+              <p className="card__text">Онлайн чат</p>
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
+import "./style.scss";
+
+// React
 import { useSelector, useDispatch } from "react-redux";
 
-import "./style.scss";
 const PopUp = () => {
   const { open, message, type } = useSelector((state) => state.popup);
 

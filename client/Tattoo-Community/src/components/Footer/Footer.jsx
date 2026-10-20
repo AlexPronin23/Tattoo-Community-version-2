@@ -6,29 +6,28 @@ import VK from "../../assets/icon/Footer/VK.svg";
 
 // Components
 import Nav from "../Nav/Nav";
+import Logo from "../Logo/Logo";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer_wrapper">
-          {/* Здесь потом будет отдельный компонент Logo */}
-          <a href="" className="footer_logo">
-            <img src={FooterLogo} alt="Footer Logo" />
-          </a>
+        <div className="footer__wrapper">
+          <div className="footer__logo">
+            <Logo src={FooterLogo} />
+          </div>
 
-          {/* Здесь потом будет отдельный компонент Nav */}
-          <nav className="footer_nav">
+          <nav className="footer__nav">
             <Nav />
           </nav>
 
-          <div className="footer_social">
-            <a href="#" className="footer_phone">
+          <div className="footer__social">
+            <a href="#" className="footer__phone">
               {" "}
               +79521529988{" "}
             </a>
 
-            <a href="#" className="footer_vk">
+            <a href="#" className="footer__vk">
               <img src={VK} alt="VK" />
             </a>
           </div>

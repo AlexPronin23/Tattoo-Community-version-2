@@ -12,15 +12,16 @@ import { showPopup, hidePopup } from "../../slices/popupSlice";
 
 // Images
 import HeaderLogo from "@assets/icon/Header/HeaderLogo.svg";
-import HeaderImg from "@assets/img/Header/tattooImg.png";
-import TattooMachine from "@assets/icon/Header/tattoo-machine.svg";
 import BurgerMenuWhite from "@assets/icon/Header/BurgerMenuWhite.svg";
-import UserIcon from "@assets/icon/Header/UserIcon.svg";
+
+//Video
+import makingTattoo from "../../assets/video/makingTattoo.mp4";
 
 // Components
 import Nav from "../Nav/Nav";
 import Logo from "../Logo/Logo";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import Account from "../Account/Account";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -78,24 +79,7 @@ const Header = () => {
           {isAuth ? (
             <>
               <div className="header__account">
-                <img
-                  className="header__account__logo"
-                  src={UserIcon}
-                  alt="User icon"
-                />
-
-                <div className="header__account__dropdown">
-                  <Link to={"/profile"} className="header__account__profile">
-                    Личный кабинет
-                  </Link>
-
-                  <button
-                    className="button btn-logout"
-                    onClick={() => setOpenModalWindow(true)}
-                  >
-                    Выйти
-                  </button>
-                </div>
+                <Account setOpenModalWindow={() => setOpenModalWindow(true)} />
               </div>
             </>
           ) : (
@@ -169,7 +153,7 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="header__image">
+          {/* <div className="header__image">
             <img className="header__img" src={HeaderImg} alt="Header Img" />
 
             <img
@@ -177,6 +161,19 @@ const Header = () => {
               src={TattooMachine}
               alt="Tattoo machine"
             />
+          </div> */}
+
+          <div className="header__video">
+            <video
+              src={makingTattoo}
+              width={600}
+              height={360}
+              muted
+              autoPlay
+              loop
+            >
+              Ваш браузер не поддерживает тег video.
+            </video>
           </div>
         </div>
       </div>

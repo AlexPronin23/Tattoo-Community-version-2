@@ -1,6 +1,6 @@
 @use '../../styles/vars.scss' as *;
  .nav{
-     &_items{
+     &__items{
 
         display: flex;
         gap: 27px;
@@ -10,7 +10,7 @@
     }
     
 
-    &_link{
+    &__link{
       
         color: $main-color;
 
@@ -22,7 +22,7 @@
     }
 
  
-    &_link:hover{
+    &__link:hover{
 
         color:$blue;
 
@@ -32,13 +32,13 @@
 
     @media (max-width:700px) {
 
-        &_items{
+        &__items{
             flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
         }
 
-        &_link{
+        &__link{
             font-size: 14px;
         }
         
@@ -47,13 +47,13 @@
     @media (max-width:400px) {
 
         // Для навигации которая находится внутри MobileMenu
-        &_items{
+        &__items{
             flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
         }
 
-        &_link{
+        &__link{
             font-size: 12px;
         }
         

@@ -1,52 +1,40 @@
-import './style.scss'
+import "./style.scss";
 
 const Community = () => {
-    return ( 
+  return (
+    <section className="community">
+      <div className="container">
+        <div className="community__content">
+          <h1 className="title community__title">Сообщество</h1>
 
-        <section className="community">
+          {/* Part about Chat */}
 
-            <div className="container">
+          <div className="community__first__question">
+            <p className="community__chat">О чем чат?</p>
 
-                <div className="community_content">
+            <p className="community__chat__descr">
+              Обмен опытом, разбор кейсов, обсуждение техники , <br />
+              материалов, стерилизации, риска и безопасности
+            </p>
+          </div>
 
-                    <h1 className="title community_title">Сообщество</h1>
+          {/* Part about useful */}
 
-                    {/* Part about Chat */}
+          <div className="community__second__question">
+            <p className="community__useful">Кому будет полезен?</p>
 
-                    <div className="community_first_question">
+            <p className="community__useful__descr">
+              Мастерам любого уровня и похожим специалистам — <br />
+              ученикам, арт-директорам, владельцам студий и <br /> поставщикам
+              материалов.
+            </p>
+          </div>
 
-                    <p className="community_chat">О чем чат?</p>
+          <button className="button community__btn">Присоединяйся </button>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-                    <p className="community_chat-descr">Обмен опытом, разбор кейсов, обсуждение техники , <br /> 
-                    материалов, стерилизации, риска и безопасности
-                    </p>
-
-                    </div>
-
-                    {/* Part about useful */}
-
-                    <div className="community_second_question">
-
-                    <p className="community_useful">Кому будет полезен?</p>
-
-                    <p className="community_useful-descr">Мастерам любого уровня и похожим специалистам —  <br /> 
-                    ученикам, арт-директорам, владельцам студий и <br /> поставщикам материалов.
-
-                    </p>
-                    
-                    </div>
-                    
-                   
-
-                    <button className="button community_btn">Присоединяйся </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-     );
-}
- 
 export default Community;

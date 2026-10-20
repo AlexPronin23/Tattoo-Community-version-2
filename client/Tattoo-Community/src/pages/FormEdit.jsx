@@ -1,6 +1,9 @@
+// React
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router";
+
+// Redux
 import { updateWorkSheet } from "../slices/tattooMastersSlice";
 
 import { showPopup, hidePopup } from "../slices/popupSlice";

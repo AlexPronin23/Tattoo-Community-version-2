@@ -1,11 +1,13 @@
+// Styles
+import "./style.scss";
+
+// React
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import "./style.scss";
-import { useEffect } from "react";
+
 const ProfilePersonal = () => {
   const currentUser = useSelector((state) => state.users.currentUser);
   const { user_id, email, phone, status } = currentUser;
-
   return (
     <div className="personal">
       <div className="container">

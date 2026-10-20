@@ -1,6 +1,9 @@
+// React
 import { Link, useParams, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+
+// Redux
 import { userEditData } from "../slices/userSlice";
 import { showPopup, hidePopup } from "../slices/popupSlice";
 

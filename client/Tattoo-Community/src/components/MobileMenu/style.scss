@@ -1,8 +1,10 @@
+@use '../../styles/vars.scss' as *;
+
 .mobile{
    
     position: relative;
 
-   &_group{
+   &__group{
 
     display: flex;
     align-items: center;
@@ -11,7 +13,22 @@
 
    }
 
-   &_close{
+   
+
+   &__account{
+      
+     color: $main-color;
+
+     font-size: 20px;
+
+     transition: opacity .3s ease-in-out;
+
+     &:hover{
+      opacity: .5;
+     }
+   }
+
+   &__close{
 
       position: absolute;
       top: 0;

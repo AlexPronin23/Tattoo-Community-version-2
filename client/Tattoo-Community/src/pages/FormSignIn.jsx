@@ -1,10 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
-
+// Styles
 import "./style.scss";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userRegistration } from "../slices/userSlice";
 
+// React
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+// Redux
+import { userRegistration } from "../slices/userSlice";
 import { showPopup, hidePopup } from "../slices/popupSlice";
 
 const FormSignIn = () => {

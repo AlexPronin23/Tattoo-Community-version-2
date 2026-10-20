@@ -1,3 +1,6 @@
+// Styles
+import "./style.scss";
+
 // React
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,8 +12,6 @@ import { userLogout } from "../slices/userSlice";
 // Pages
 import ProfilePersonal from "./ProfilePersonal";
 import ProfileWorkSheet from "./ProfileWorkSheet";
-
-import "./style.scss";
 
 const Profile = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,16 @@
 import "./style.scss";
 
+// Images
 import MastersCard from "../Cards/MastersCard/MastersCard";
+
+// React
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { getAllTattooMasters } from "../../slices/tattooMastersSlice";
+
+// Redux
 import { getMastersLimit, setPage } from "../../slices/paginationSlice";
+
+// Components
 import Skeleton from "../Skeleton/CardSkeleton";
 
 const Masters = () => {
@@ -21,10 +27,10 @@ const Masters = () => {
   return (
     <section className="masters">
       <div className="container">
-        <div className="masters_wrapper">
-          <h1 className="title masters_title">Тату мастера</h1>
+        <div className="masters__wrapper">
+          <h1 className="title masters__title">Тату мастера</h1>
 
-          <div className="masters_card">
+          <div className="masters__card">
             {error ? (
               <>
                 <h1>{error.message || "Ошибка"}</h1>

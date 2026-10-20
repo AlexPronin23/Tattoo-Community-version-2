@@ -420,49 +420,49 @@
 // Adaptive version
 
 
-@media (max-width:700px) {
+// @media (max-width:700px) {
 
-    &__tooltip{
-        width: 150px;
-        padding: 10px;
-    }
+//     &__tooltip{
+//         width: 150px;
+//         padding: 10px;
+//     }
     
-}
+// }
 
-@media (max-width:400px) {
+// @media (max-width:400px) {
 
-    padding: 30px;
+//     padding: 30px;
 
-    &__column{
-        margin-bottom: 20px;
-    }
+//     &__column{
+//         margin-bottom: 20px;
+//     }
 
-    &__label{
-        font-size: 10px;
-    }
+//     &__label{
+//         font-size: 10px;
+//     }
     
-    &__input{
-        width: 200px;
-        padding: 10px;
+//     &__input{
+//         width: 200px;
+//         padding: 10px;
 
-        &::placeholder{
-            font-size: 10px;
-        }
+//         &::placeholder{
+//             font-size: 10px;
+//         }
 
-        &-checkbox{
-            width: 20px;
-        }
-    }
+//         &-checkbox{
+//             width: 20px;
+//         }
+//     }
 
-    &__link{
-        font-size: 10px;
-    }
+//     &__link{
+//         font-size: 10px;
+//     }
 
-    &__help{
-        opacity: 0;
-        visibility: hidden;
-    }
-}
+//     &__help{
+//         opacity: 0;
+//         visibility: hidden;
+//     }
+// }
 
 }
 
@@ -836,4 +836,193 @@
 
 
     
+}
+
+
+// Adaptive versions
+@media (max-width: 700px) {
+    // Формы
+    .form {
+        &__tooltip {
+            width: 150px;
+            padding: 10px;
+        }
+    }
+
+    // Профиль
+    .profile {
+        padding: 50px 20px;
+        height: auto;
+        min-height: 100vh;
+
+        &__tabs {
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn__tabs {
+            padding: 15px 30px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        &__info {
+            padding: 20px;
+        }
+    }
+
+    // Персональные данные
+    .personal {
+        &__items {
+            font-size: 14px;
+        }
+    }
+
+    // Портфолио (Worksheet)
+    .worksheet {
+        padding: 20px 10px;
+
+        &__gallery {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+    }
+
+    // Страница мастера (Info)
+    .info {
+        padding: 30px 15px;
+
+        &__img {
+            width: 200px;
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+
+        &__item,
+        &__style,
+        &__styles {
+            font-size: 16px;
+        }
+
+        &__styles {
+            flex-wrap: wrap;
+        }
+
+        &__portfolio__title {
+            font-size: 24px;
+        }
+
+        &__portfolio {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    // Формы
+    .form {
+        padding: 30px;
+
+        &__column {
+            margin-bottom: 20px;
+        }
+
+        &__label {
+            font-size: 10px;
+        }
+
+        &__input {
+            width: 200px;
+            padding: 10px;
+
+            &::placeholder {
+                font-size: 10px;
+            }
+
+            &-checkbox {
+                width: 20px;
+            }
+        }
+
+        &__link {
+            font-size: 10px;
+        }
+
+        &__help {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    // Профиль
+    .profile {
+        padding: 30px 10px;
+
+        .btn__tabs {
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+    }
+
+    // Персональные данные
+    .personal {
+        &__title {
+            font-size: 18px;
+        }
+
+        &__button {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-edit {
+            width: 100%;
+            max-width: 200px;
+        }
+    }
+
+    // Портфолио (Worksheet)
+    .worksheet {
+        &__title {
+            font-size: 24px;
+        }
+
+        &__gallery {
+            grid-template-columns: 1fr;
+        }
+
+        &__link {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-edit {
+            width: 100%;
+            max-width: 200px;
+        }
+    }
+
+    // Страница мастера (Info)
+    .info {
+        padding: 20px 10px;
+
+        &__img {
+            width: 150px;
+        }
+
+        &__item,
+        &__style,
+        &__styles {
+            font-size: 14px;
+        }
+
+        &__portfolio__title {
+            font-size: 20px;
+        }
+
+        &__portfolio {
+            grid-template-columns: 1fr;
+        }
+    }
 }

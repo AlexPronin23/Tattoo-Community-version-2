@@ -1,13 +1,9 @@
-const Logo = ({src}) => {
-    return ( 
+const Logo = ({ src }) => {
+  return (
+    <a href="#" className="logo">
+      <img src={src} alt="Logo" />
+    </a>
+  );
+};
 
-            <a href="#" className="logo">
-        
-             <img src={src} alt="Logo" />
-
-            </a>
-
-     );
-}
- 
 export default Logo;
