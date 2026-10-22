@@ -1,7 +1,7 @@
 // React
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 
 // Redux
 import { getOneMaster } from "../slices/tattooMastersSlice";
@@ -15,12 +15,16 @@ const MasterPage = () => {
   const {
     first_name,
     last_name,
+    phone,
     experience,
     isColored,
+    isAtHome,
     tattooSalon,
     description,
     cardImg,
     styles = [],
+    workaddress,
+    homeaddress,
   } = masterPage || {};
   useEffect(() => {
     dispatch(getOneMaster({ id }));
@@ -45,11 +49,19 @@ const MasterPage = () => {
               </li>
               <li className="info__item">Имя: {first_name}</li>
               <li className="info__item">Фамилия: {last_name}</li>
+              <li className="info__item">Телефон: {phone}</li>
               <li className="info__item">Опыт работы: {experience} лет/года</li>
               <li className="info__item">
                 Использую ли цветные краски {isColored ? "Да" : "Нет"}
               </li>
-              <li className="info__item">Тату салон : {tattooSalon}</li>
+              <li className="info__item">
+                Тату салон : {!isAtHome ? tattooSalon : "Работает на дому"}
+              </li>
+              <li className="info__item">
+                {!isAtHome
+                  ? `Рабочий адрес:   ${workaddress}`
+                  : `Домашний адрес:  ${homeaddress || ""}`}
+              </li>
               <li className="info__item">О себе :{description}</li>
             </ul>
 
@@ -76,6 +88,9 @@ const MasterPage = () => {
               </div>
             ))}
           </div>
+          <Link className="info__back" to={"/"}>
+            Назад
+          </Link>
         </div>
       </div>
     </div>

@@ -189,7 +189,7 @@ const FormCreate = () => {
             </div>
 
             <div className="form__column">
-              <label className="form__label">Работаете в тату салоне?</label>
+              <label className="form__label">Работаете на дому? </label>
 
               <input
                 type="checkbox"
@@ -201,13 +201,12 @@ const FormCreate = () => {
             </div>
 
             <div
-              className={`form__column form__column-homeaddress ${isAtHome ? "disabled" : ""}`}
+              className={`form__column form__column-homeaddress ${isAtHome ? "open" : ""}`}
             >
               <label className="form__label">Домашний адрес (Улица): </label>
 
               <input
                 type="text"
-                required
                 placeholder="Введите домашний адрес"
                 name="homeaddress"
                 value={homeaddress}
@@ -217,7 +216,7 @@ const FormCreate = () => {
             </div>
 
             <div
-              className={`form__column form__column-salon ${isAtHome ? "open" : ""}`}
+              className={`form__column form__column-salon ${isAtHome ? "none" : ""}`}
             >
               <label className="form__label">Тату салон: </label>
 
@@ -232,7 +231,7 @@ const FormCreate = () => {
             </div>
 
             <div
-              className={`form__column form__column-workaddress ${isAtHome ? "open" : ""}`}
+              className={`form__column form__column-workaddress ${isAtHome ? "none" : ""}`}
             >
               <label className="form__label">Рабочий адрес (Улица): </label>
 

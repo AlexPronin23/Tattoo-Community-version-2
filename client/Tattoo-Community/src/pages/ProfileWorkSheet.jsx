@@ -99,11 +99,15 @@ const ProfileWorkSheet = () => {
                 <li className="worksheet__item">
                   Используете цветные краски: {isColored ? "Да" : "Нет"}
                 </li>
-                <li className="worksheet__item">
-                  Тату салон: {!isAtHome ? "Фриланс" : tattooSalon}
+                <li
+                  className={`worksheet__item worksheet__item ${isAtHome ? "none" : ""}`}
+                >
+                  Тату салон: {tattooSalon}
                 </li>
                 <li className="worksheet__item">
-                  Адрес: {isAtHome ? workaddress : homeaddress}
+                  {isAtHome
+                    ? `Домашний адрес: ${homeaddress}`
+                    : `Рабочий адрес: ${workaddress}`}
                 </li>
                 <li className="worksheet__item">О себе: {description}</li>
                 <li className="worksheet__item"> Цена: {price} руб</li>

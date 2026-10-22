@@ -7,6 +7,7 @@ const MastersCard = ({
   first_name,
   last_name,
   tattooSalon,
+  isAtHome,
   experience,
   cardImg,
   price,
@@ -31,7 +32,9 @@ const MastersCard = ({
           Фамилия тату мастера: {last_name}
         </h2>
 
-        <p className="tattoomasters__card-salon">Тату салон: {tattooSalon}</p>
+        <p className="tattoomasters__card-salon">
+          Тату салон: {!isAtHome ? tattooSalon : "Работает на дому"}
+        </p>
 
         <p className="tattoomasters__card-experience">Опыт: {experience} лет</p>
 
