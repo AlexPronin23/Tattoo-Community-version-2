@@ -1,5 +1,6 @@
 @use '../styles/vars.scss' as *;
 
+// Forms
 .form{
     background-color: $bg-color;
     height: 100vh;
@@ -38,11 +39,25 @@
         display: block;
     }
 
+    &__column-homeaddress.disabled{
+        display: none;
+    }
+
+    &__column-workaddress{
+        display: none;
+    }
+
+    &__column-workaddress.open{
+        display: block;
+    }
+
     &__label{
 
         color: $main-color;
         
         font-family: $second-font;
+
+        cursor: auto;
         
     }
 
@@ -58,6 +73,7 @@
 
 // Input
     &__input{
+        position: relative;
 
         width: 270px;
 
@@ -68,7 +84,8 @@
 
         transition: transform .5s ease-in-out, box-shadow .5s ease-in-out;
 
-        position: relative;
+        cursor:pointer;
+
 
         &:focus{
 
@@ -471,7 +488,7 @@
 .profile{
     background-color: $bg-color;
     padding: 100px;
-    height: 100vh;
+    min-height: 100vh;
     overflow-x: hidden;
 
 
@@ -536,6 +553,7 @@
 // ProfilePersonal
 
 .personal{
+
     text-align: center;
     margin-bottom: 30px;
 
@@ -590,6 +608,8 @@
 
 .worksheet {
     padding: 30px;
+    min-height: 100vh;
+    
 
     &__content {
         text-align: center;
@@ -747,7 +767,7 @@
 .info{
     background-color: $bg-color;
     padding: 50px;
-    height: auto;
+    min-height: 100vh;
      
    
 

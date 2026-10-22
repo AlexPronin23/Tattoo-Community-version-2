@@ -26,6 +26,9 @@ const FormCreate = () => {
     styleIds: [],
     description: "",
     cardImg: "",
+    price: "",
+    workaddress: "",
+    homeaddress: "",
   });
 
   const {
@@ -38,6 +41,9 @@ const FormCreate = () => {
     styleIds,
     description,
     cardImg,
+    price,
+    workaddress,
+    homeaddress,
   } = masterInfo;
 
   const handleChange = (e) => {
@@ -93,6 +99,9 @@ const FormCreate = () => {
           styleIds: [],
           description: "",
           cardImg: "",
+          price: "",
+          workaddress: "",
+          homeaddress: "",
         });
         setIsSucces(true);
         setOpen(true);
@@ -192,16 +201,47 @@ const FormCreate = () => {
             </div>
 
             <div
+              className={`form__column form__column-homeaddress ${isAtHome ? "disabled" : ""}`}
+            >
+              <label className="form__label">Домашний адрес (Улица): </label>
+
+              <input
+                type="text"
+                required
+                placeholder="Введите домашний адрес"
+                name="homeaddress"
+                value={homeaddress}
+                className="form__input "
+                onChange={handleChange}
+              />
+            </div>
+
+            <div
               className={`form__column form__column-salon ${isAtHome ? "open" : ""}`}
             >
               <label className="form__label">Тату салон: </label>
 
               <input
                 type="text"
-                // required
                 placeholder="Введите название тату салона"
                 name="tattooSalon"
                 value={tattooSalon}
+                className="form__input "
+                onChange={handleChange}
+              />
+            </div>
+
+            <div
+              className={`form__column form__column-workaddress ${isAtHome ? "open" : ""}`}
+            >
+              <label className="form__label">Рабочий адрес (Улица): </label>
+
+              <input
+                type="text"
+                // required
+                placeholder="Введите рабочий адрес"
+                name="workaddress"
+                value={workaddress}
                 className="form__input "
                 onChange={handleChange}
               />
@@ -256,6 +296,21 @@ const FormCreate = () => {
                 onChange={handleChange}
               ></textarea>
               {/* <p className="form__count">Кол-во символов : {text.length}</p> */}
+            </div>
+
+            <div className="form__column">
+              <label className="form__label">Цена услуг (в рублях): </label>
+
+              <input
+                type="text"
+                required
+                placeholder="Введите цену"
+                maxLength={16}
+                name="price"
+                value={price}
+                className="form__input"
+                onChange={handleChange}
+              />
             </div>
 
             <div className="form__column">

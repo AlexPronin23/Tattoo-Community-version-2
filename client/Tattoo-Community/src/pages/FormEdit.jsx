@@ -14,8 +14,6 @@ const FormEdit = () => {
   const { id } = useParams();
   const { currentMaster } = useSelector((state) => state.tattooMasters);
   const [isLoading, setIsLoading] = useState(false);
-  // const [open, setOpen] = useState(false);
-  // const [isSucces, setIsSucces] = useState(false);
 
   const [newMasterInfo, setNewMasterInfo] = useState({
     newFirstName: "",
@@ -26,6 +24,9 @@ const FormEdit = () => {
     newIsAtHome: false,
     newDescription: "",
     newStyles: [],
+    newPrice: "",
+    newWorkAddress: "",
+    newHomeAddress: "",
   });
 
   // Заполняем форму при загрузке currentMaster
@@ -40,6 +41,9 @@ const FormEdit = () => {
         newIsAtHome: isAtHome || false,
         newDescription: description || "",
         newStyles: currentMaster.styles?.map((s) => s.style_id) || [],
+        newPrice: price || "",
+        newWorkAddress: wokraddress || "",
+        newHomeAddress: homeaddress || "",
       });
     }
   }, [currentMaster]);
@@ -52,6 +56,9 @@ const FormEdit = () => {
     isColored,
     isAtHome,
     description,
+    price,
+    wokraddress,
+    homeaddress,
   } = currentMaster || {};
 
   const {
@@ -63,6 +70,9 @@ const FormEdit = () => {
     newIsAtHome,
     newDescription,
     newStyles,
+    newPrice,
+    newWorkAddress,
+    newHomeAddress,
   } = newMasterInfo;
 
   const handleType = (e) => {
@@ -209,6 +219,22 @@ const FormEdit = () => {
             </div>
 
             <div
+              className={`form__column form__column-homeaddress ${newIsAtHome ? "disabled" : ""}`}
+            >
+              <label className="form__label">Домашний адрес (Улица): </label>
+
+              <input
+                type="text"
+                required
+                value={newHomeAddress}
+                placeholder="Введите название тату салона"
+                name="newHomeAddress"
+                className="form__input "
+                onChange={handleType}
+              />
+            </div>
+
+            <div
               className={`form__column form__column-salon ${newIsAtHome ? "open" : ""}`}
             >
               <label className="form__label">Тату салон: </label>
@@ -219,6 +245,22 @@ const FormEdit = () => {
                 value={newTattooSalon}
                 placeholder="Введите название тату салона"
                 name="newTattooSalon"
+                className="form__input "
+                onChange={handleType}
+              />
+            </div>
+
+            <div
+              className={`form__column form__column-workaddress ${newIsAtHome ? "open" : ""}`}
+            >
+              <label className="form__label">Рабочий адрес (Улица): </label>
+
+              <input
+                type="text"
+                // required
+                value={newWorkAddress}
+                placeholder="Введите название тату салона"
+                name="newWorkAddress"
                 className="form__input "
                 onChange={handleType}
               />
@@ -273,6 +315,21 @@ const FormEdit = () => {
                 onChange={handleType}
               ></textarea>
               {/* <p className="form__count">Кол-во символов : {text.length}</p> */}
+            </div>
+
+            <div className="form__column">
+              <label className="form__label">Цена на услуги (в рублях): </label>
+
+              <input
+                type="text"
+                required
+                value={newPrice}
+                placeholder="Введите цену "
+                maxLength={20}
+                name="newPrice"
+                className="form__input"
+                onChange={handleType}
+              />
             </div>
 
             <button type="submit" className="button btn-login">

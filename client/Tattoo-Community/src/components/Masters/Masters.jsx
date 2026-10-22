@@ -31,7 +31,18 @@ const Masters = () => {
           <h1 className="title masters__title">Тату мастера</h1>
 
           <div className="masters__card">
-            {error ? (
+            {status === "Загрузка" ? (
+              <>
+                {[...Array(2)].map(() => (
+                  <Skeleton />
+                ))}
+              </>
+            ) : (
+              mastersLimit.map((master) => (
+                <MastersCard key={master.user_id} {...master} />
+              ))
+            )}
+            {/* {error ? (
               <>
                 <h1>{error.message || "Ошибка"}</h1>
               </>
@@ -45,7 +56,7 @@ const Masters = () => {
               mastersLimit.map((master) => (
                 <MastersCard key={master.user_id} {...master} />
               ))
-            )}
+            )} */}
           </div>
 
           <div className="masters__pagination">

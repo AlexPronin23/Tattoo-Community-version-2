@@ -92,7 +92,20 @@ app.get('/api/styles', async (req,res) => {
 
 //1.3 Создание анкеты
 app.post('/api/tattoomasters/profile', auth, async (req,res) => {
-    const {firstName,lastName,experience,isColored,isAtHome,tattooSalon,description,cardImg,styleIds} = req.body
+    const {
+        firstName,
+        lastName,
+        experience,
+        isColored,
+        isAtHome,
+        tattooSalon,
+        description,
+        cardImg,
+        styleIds,
+        price,
+        workaddress,
+        homeaddress
+    } = req.body
     const userId = req.user.id
 
     const normalizedStyleIds = Array.from(
@@ -112,9 +125,12 @@ app.post('/api/tattoomasters/profile', auth, async (req,res) => {
             experience:experience,
             isColored:isColored,
             isAtHome:isAtHome,
-            tattooSalon:tattooSalon || 'Фриланс',
+            tattooSalon:tattooSalon || '',
             description:description,
-            cardImg:cardImg || null
+            cardImg:cardImg || null,
+            price:price,
+            workaddress:workaddress,
+            homeaddress:homeaddress
         }) // Экземпляр модели 
 
         const styles = await SpStyles.findAll({
@@ -204,7 +220,19 @@ app.get('/api/tattoomasters/:id', auth, async (req,res) => {
 app.put('/api/tattoomasters/edit/:id', auth, async (req,res) => {
     const {id} = req.params
 
-    const {newFirstName,newLastName,newExperience, newTattooSalon, newIsColored,newIsAtHome,newDescription,newStyles} = req.body
+    const {
+        newFirstName,
+        newLastName,
+        newExperience,
+         newTattooSalon, 
+         newIsColored,
+         newIsAtHome,
+         newDescription,
+         newStyles,
+         newPrice,
+         newWorkAddress,
+         newHomeAddress
+        } = req.body
 
       // Проверка: только сам мастер может редактировать свою анкету
     if (Number(id) !== req.user.id) {
@@ -227,10 +255,13 @@ app.put('/api/tattoomasters/edit/:id', auth, async (req,res) => {
                 first_name: newFirstName,
                 last_name: newLastName,
                 experience: Number(newExperience),
-                tattooSalon: newTattooSalon || 'Фриланс',
+                tattooSalon: newTattooSalon || '',
                 isColored: Boolean(newIsColored),
                 isAtHome: Boolean(newIsAtHome),
-                description: newDescription
+                description: newDescription,
+                price:Number(newPrice),
+                workaddress:newWorkAddress,
+                homeaddress:newHomeAddress
             },
             { where: { user_id: id } }
         );

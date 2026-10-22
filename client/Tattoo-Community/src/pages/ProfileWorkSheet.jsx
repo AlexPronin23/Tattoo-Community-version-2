@@ -26,6 +26,9 @@ const ProfileWorkSheet = () => {
     tattooSalon,
     description,
     styles,
+    price,
+    workaddress,
+    homeaddress,
   } = currentMaster || {};
 
   const imgToBase64 = (file) =>
@@ -99,8 +102,13 @@ const ProfileWorkSheet = () => {
                 <li className="worksheet__item">
                   Тату салон: {!isAtHome ? "Фриланс" : tattooSalon}
                 </li>
+                <li className="worksheet__item">
+                  Адрес: {isAtHome ? workaddress : homeaddress}
+                </li>
                 <li className="worksheet__item">О себе: {description}</li>
+                <li className="worksheet__item"> Цена: {price} руб</li>
               </ul>
+
               <p className="worksheet__style">Используемые стили: </p>
               <ul className="worksheet__styles">
                 {styles.map((style) => (

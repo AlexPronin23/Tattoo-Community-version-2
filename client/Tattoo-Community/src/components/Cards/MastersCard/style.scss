@@ -1,6 +1,6 @@
 @use '../../../styles/vars.scss' as *;
 
-.tattoomasters_card{
+.tattoomasters__card{
 
     position: relative;
 
@@ -8,7 +8,7 @@
     background-color: $main-color;
     width: 400px;
     border-radius: 50px;
-    perspective: 1000px;
+  
 
 
    
@@ -72,6 +72,12 @@
         
     }
 
+    &-price{
+        font-size: 30px;
+        color: #1A1A1A;
+       
+    }
+
 
    &-btn{
 
@@ -83,13 +89,13 @@
     
    }
 
-   &-green{
-        color: rgb(88, 255, 11);
-   }
+//    &-green{
+//         color: rgb(88, 255, 11);
+//    }
 
-   &-red{
-    color: red;
-   }
+//    &-red{
+//     color: red;
+//    }
 
 //  Adaptive version
 
@@ -130,8 +136,12 @@
        
     }
 
-    &-info > p {
-        display: none; //Временно
+    // &-info > p {
+    //     display: none; //Временно
+    // }
+
+    &-price{
+        font-size: 12px;
     }
     
     &-btn{
