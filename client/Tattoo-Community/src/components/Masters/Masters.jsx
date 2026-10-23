@@ -4,7 +4,7 @@ import "./style.scss";
 import MastersCard from "../Cards/MastersCard/MastersCard";
 
 // React
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Redux
@@ -16,19 +16,40 @@ import Skeleton from "../Skeleton/CardSkeleton";
 const Masters = () => {
   const dispatch = useDispatch();
   const mastersLimit = useSelector((state) => state.pagination.mastersLimit);
-  const { page, totalPages, limit, status, error } = useSelector(
+  const { page, totalPages, limit, status } = useSelector(
     (state) => state.pagination,
   );
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     dispatch(getMastersLimit({ page, limit }));
   }, [dispatch, page, limit]);
+
+  const handleActive = (active) => {
+    setActive(active);
+  };
 
   return (
     <section className="masters">
       <div className="container">
         <div className="masters__wrapper">
           <h1 className="title masters__title">Тату мастера</h1>
+
+          <div className="masters__tabs">
+            <h2 className="masters__tabs__title">Фильтровать по цене: </h2>
+            <button
+              onClick={() => handleActive("more")}
+              className={`button btn-tab ${active === "more" ? "active" : ""}`}
+            >
+              Больше 5000 рублей
+            </button>
+            <button
+              onClick={() => handleActive("less")}
+              className={`button btn-tab ${active === "less" ? "active" : ""}`}
+            >
+              Меньше 5000 рублей
+            </button>
+          </div>
 
           <div className="masters__card">
             {status === "Загрузка" ? (
@@ -42,21 +63,6 @@ const Masters = () => {
                 <MastersCard key={master.user_id} {...master} />
               ))
             )}
-            {/* {error ? (
-              <>
-                <h1>{error.message || "Ошибка"}</h1>
-              </>
-            ) : status === "Загрузка" ? (
-              <>
-                {[...Array(2)].map(() => (
-                  <Skeleton />
-                ))}
-              </>
-            ) : (
-              mastersLimit.map((master) => (
-                <MastersCard key={master.user_id} {...master} />
-              ))
-            )} */}
           </div>
 
           <div className="masters__pagination">

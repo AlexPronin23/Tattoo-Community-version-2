@@ -8,20 +8,7 @@
 
     position: relative;
 
-// Divide line
-//     &::after{
-//         content: '';
-//         position: absolute;
 
-//         width: 100%;
-//         height: 1px;
-
-//         left: 0px;
-//         top: 95%;
-
-//         background-color: $main-color;
-//     }
-// //
 
 // Masters items
     &__wrapper{
@@ -32,8 +19,43 @@
     &__title{
         color: $main-color ;
         
-        margin-bottom: 70px ;
+        margin-bottom: 30px ;
     }
+//
+
+// Master tabs
+
+  &__tabs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    gap: 20px;
+  }
+
+  &__tabs__title{
+    color: $main-color;
+    font-size: 25px;
+  }
+
+  .btn-tab{
+    color: $main-color;
+    padding: 15px;
+    transition: background-color .5s ease-in-out;
+  }
+
+  .btn-tab:hover{
+    opacity: 1;
+    background-color: $black;
+    transform: translateY(0);
+    
+  }
+
+  .btn-tab.active {
+    background-color: $black;
+  }
+
+
 //
 
 // Masters cards
