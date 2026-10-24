@@ -4,11 +4,16 @@ import "./style.scss";
 import MastersCard from "../Cards/MastersCard/MastersCard";
 
 // React
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Redux
-import { getMastersLimit, setPage } from "../../slices/paginationSlice";
+import {
+  getMastersLimit,
+  setPage,
+  setFilter,
+  getFilteredMasters,
+} from "../../slices/paginationSlice";
 
 // Components
 import Skeleton from "../Skeleton/CardSkeleton";
@@ -16,17 +21,22 @@ import Skeleton from "../Skeleton/CardSkeleton";
 const Masters = () => {
   const dispatch = useDispatch();
   const mastersLimit = useSelector((state) => state.pagination.mastersLimit);
-  const { page, totalPages, limit, status } = useSelector(
+  const { page, totalPages, limit, status, activeFilter } = useSelector(
     (state) => state.pagination,
   );
-  const [active, setActive] = useState("");
+  // const [active, setActive] = useState("");
 
   useEffect(() => {
-    dispatch(getMastersLimit({ page, limit }));
-  }, [dispatch, page, limit]);
+    if (activeFilter) {
+      dispatch(getFilteredMasters({ limit, page, priceType: activeFilter }));
+    } else {
+      dispatch(getMastersLimit({ page, limit }));
+    }
+  }, [dispatch, page, limit, activeFilter]);
 
-  const handleActive = (active) => {
-    setActive(active);
+  const handleActive = (type) => {
+    const newFilter = activeFilter === type ? "" : type;
+    dispatch(setFilter(newFilter));
   };
 
   return (
@@ -39,13 +49,13 @@ const Masters = () => {
             <h2 className="masters__tabs__title">Фильтровать по цене: </h2>
             <button
               onClick={() => handleActive("more")}
-              className={`button btn-tab ${active === "more" ? "active" : ""}`}
+              className={`button btn-tab ${activeFilter === "more" ? "active" : ""}`}
             >
               Больше 5000 рублей
             </button>
             <button
               onClick={() => handleActive("less")}
-              className={`button btn-tab ${active === "less" ? "active" : ""}`}
+              className={`button btn-tab ${activeFilter === "less" ? "active" : ""}`}
             >
               Меньше 5000 рублей
             </button>

@@ -40,7 +40,7 @@ const TattooMasters = sequelize.define('tb_info', {
          allowNull: false
     },
     price: {
-        type:DataTypes.STRING,
+        type:DataTypes.INTEGER,
         allowNull:false
     },
     workaddress:{

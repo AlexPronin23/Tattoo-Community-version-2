@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const sequelize = require('./db/db')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const {Op} = require('sequelize')
 require('dotenv').config()
 
 // Models
@@ -52,8 +53,19 @@ app.get('/api/tattoomasters', async (req,res) => {
         const page = parseInt(req.query.page || 1)
         const limit = parseInt(req.query.limit || 6)
         const offset = (page - 1 ) * limit
+        const price = req.query.price
     
+
+        let whereConditions = {}
+
+        if(price === 'more') {
+            whereConditions.price = {[Op.gt]: 5000}
+        } else if (price === 'less') {
+            whereConditions.price = {[Op.lt] : 5000}
+        }
+
         const {count,rows} = await TattooMasters.findAndCountAll({
+           where:whereConditions,
            limit,
            offset
         })
