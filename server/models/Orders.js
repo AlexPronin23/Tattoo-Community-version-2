@@ -18,8 +18,13 @@ const Orders = sequilize.define('tb_orders', {
         type: DataTypes.STRING,
         allowNull:false
     },
-    dataOrder: {
-        type:DataTypes.DATE,
+    customerPhone: {
+        type:DataTypes.STRING,
+        allowNull:false
+    }
+    ,
+    dateOrder: {
+        type:DataTypes.DATEONLY,
     },
     timeOrder: {
         type: DataTypes.TIME

@@ -8,7 +8,7 @@ const {Op} = require('sequelize')
 require('dotenv').config()
 
 // Models
-const { TattooMasters,Users, SpStyles, Portfolio } = require('./models/index');
+const { TattooMasters,Users, SpStyles, Portfolio, Orders } = require('./models/index');
 
 
 const app = express()
@@ -339,6 +339,8 @@ app.post('/api/user/registration', async (req,res) => {
             message:'Успешная регистрация!'
         })
 
+        
+
     } catch (error) {
         res.status(500).json({error:error.message})
     }
@@ -544,6 +546,41 @@ app.get('/api/portfolio/:id', auth, async (req,res) => {
 
 //
 
+// Orders
+
+// 1.1 Создание записи (заказа)
+app.post('/api/orders/create', auth, async (req,res) => {
+    const client_id = req.user.id // Тот кто делает
+
+    const {master_id,customerName,customerPhone,dateOrder,timeOrder,price,message} = req.body
+
+    if(!customerName || !customerPhone || !dateOrder || !timeOrder ||  !message ) {
+        return res.status(400).json({message:'Не полные данные!'})
+    }
+
+    try {
+
+        const newOrder = await Orders.create({
+            client_id,
+            master_id,
+            customerName,
+            customerPhone,
+            dateOrder,
+            timeOrder,
+            price,
+            message,
+            status:'В ожидании'
+        })
+
+        res.json({
+            message:'Вы успешно записались',
+            order:newOrder
+        })
+        
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+})
 
 // Connection
 sequelize.sync({force:false})
