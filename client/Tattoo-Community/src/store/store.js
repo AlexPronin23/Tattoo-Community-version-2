@@ -5,6 +5,7 @@ import styleReducer from '../slices/styleSlice'
 import portfolioReducer from '../slices/portfolioSlice'
 import popupReducer from '../slices/popupSlice'
 import paginationReducer from '../slices/paginationSlice'
+import modalReducer from '../slices/modalSlice'
 
 export default configureStore({
     reducer:{
@@ -13,6 +14,7 @@ export default configureStore({
         styles:styleReducer,
         portfolio:portfolioReducer,
         popup:popupReducer,
-        pagination:paginationReducer
+        pagination:paginationReducer,
+        modal: modalReducer
     }
 })

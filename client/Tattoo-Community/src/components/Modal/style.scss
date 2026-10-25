@@ -1,0 +1,96 @@
+@use '../../styles/vars.scss' as *;
+
+.modal {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    backdrop-filter: blur(10px);
+
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity .4s ease-in-out , visibility .6s ease-in-out;
+
+
+    &__content{
+
+        width: 500px;
+        padding: 50px 30px;
+
+        background-color: $main-color;
+        border-radius: 30px;
+    }
+
+    &__title{
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    &__form__column{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    &__form__label{
+        font-size: 20px;
+        cursor: auto;
+    }
+
+    &__form__input{
+        outline: 1px $black solid;
+        padding: 10px;
+        border-radius: 20px;
+        transition: transform .5s ease-in-out;
+    }
+
+    &__form__input:hover {
+        transform: translateX(5px);
+    }
+
+    &__form__textarea{
+        width: 200px;
+        height: 100px;
+        padding: 10px;
+        outline: 1px $black solid;
+        border-radius: 10px;
+        resize: none;
+
+    }
+
+    &__button{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .btn-modal{
+        padding: 10px;
+    }
+
+     .btn-close{
+        padding: 10px;
+        background-color: red;
+    }
+
+
+   
+    &.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+}

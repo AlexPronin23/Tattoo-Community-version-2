@@ -1,6 +1,11 @@
-import { Link } from "react-router";
-import UserImg from "../../../assets/img/Main/Masters/UserImg.jpg";
+// Styles
 import "./style.scss";
+
+// React
+import { Link } from "react-router";
+
+// Images
+import UserImg from "../../../assets/img/Main/Masters/UserImg.jpg";
 
 const MastersCard = ({
   user_id,
@@ -23,7 +28,6 @@ const MastersCard = ({
         alt="Tattoo Masters picture"
         className="tattoomasters__card-img"
       />
-
       <div className="tattoomasters__card-info">
         <h2 className="tattoomasters__card-name">
           Имя тату мастера: {first_name}
@@ -42,8 +46,6 @@ const MastersCard = ({
           Цена на услуги от {price} руб
         </p>
       </div>
-
-      <button className="button tattoomasters__card-btn">Записаться</button>
     </Link>
   );
 };

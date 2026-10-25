@@ -6,16 +6,17 @@ import { useParams, Link } from "react-router";
 // Redux
 import { getOneMaster } from "../slices/tattooMastersSlice";
 import { getOnePortfolio } from "../slices/portfolioSlice";
+import { setOpen } from "../slices/modalSlice";
 
 const MasterPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  // const users = useSelector((state) => state.users.users);
   const { masterPage } = useSelector((state) => state.tattooMasters);
   const { currentPortfolio = [] } = useSelector((state) => state.portfolio);
   const {
     first_name,
     last_name,
-    phone,
     experience,
     isColored,
     isAtHome,
@@ -49,7 +50,7 @@ const MasterPage = () => {
               </li>
               <li className="info__item">Имя: {first_name}</li>
               <li className="info__item">Фамилия: {last_name}</li>
-              <li className="info__item">Телефон: {phone}</li>
+              {/* <li className="info__item">Телефон: {users.phone}</li> */}
               <li className="info__item">Опыт работы: {experience} лет/года</li>
               <li className="info__item">
                 Использую ли цветные краски {isColored ? "Да" : "Нет"}
@@ -88,6 +89,12 @@ const MasterPage = () => {
               </div>
             ))}
           </div>
+          <button
+            className="button btn-info"
+            onClick={() => dispatch(setOpen())}
+          >
+            Записаться
+          </button>
           <Link className="info__back" to={"/"}>
             Назад
           </Link>

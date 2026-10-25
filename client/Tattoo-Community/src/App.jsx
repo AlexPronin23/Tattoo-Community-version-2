@@ -17,6 +17,7 @@ import MasterPage from "./pages/MasterPage";
 import FormEdit from "./pages/FormEdit";
 import FormEditPersonal from "./pages/FormEditPersonal";
 import PopUp from "./components/PopUp/PopUp";
+import Modal from "./components/Modal/Modal";
 
 function App() {
   const dispatch = useDispatch();
@@ -100,26 +101,9 @@ function App() {
       </Routes>
 
       <PopUp />
+      <Modal />
     </>
   );
 }
-
-// const AppContent = () => {
-//   // const location = useLocation(); // Получаем местоположение url
-//   // const isPage =
-//   //   [
-//   //     "/login",
-//   //     "/register",
-//   //     "/profile",
-//   //     "/create",
-//   //     "/master/:id",
-//   //     "/edit/:id",
-//   //     "/personal/edit/:id",
-//   //   ].includes(location.pathname) ||
-//   //   location.pathname.startsWith("/master/") ||
-//   //   location.pathname.startsWith("/edit/") || // проверяем наличие url адреса
-//   //   location.pathname.startsWith("/personal/"); // проверяем наличие url адреса
-//   // return <>{isPage ? <AuthLayout /> : <DefaultLayout />}</>;
-// };
 
 export default App;
