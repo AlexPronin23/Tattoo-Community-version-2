@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const sequelize = require('./db/db')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {Op} = require('sequelize')
+const {Op, where} = require('sequelize')
 require('dotenv').config()
 
 // Models
@@ -581,6 +581,28 @@ app.post('/api/orders/create', auth, async (req,res) => {
         res.status(500).json({message:error.message})
     }
 })
+
+// 1.2 Получение количество заказов
+app.get('/api/order-count', auth, async(req,res) => {
+    const id = req.user.id
+
+    try {
+
+        const orderCount = await Orders.count({
+            where:{master_id:id, status:'В ожидании'}
+        })
+
+        res.json({
+            orderCount:orderCount
+        })
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+        
+    }
+})
+
+//
 
 // Connection
 sequelize.sync({force:false})

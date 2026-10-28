@@ -40,6 +40,28 @@ export const createOrder = createAsyncThunk(
     }
 )
 
+export const getOrderCount = createAsyncThunk(
+    'orders/getOrderCount',
+    async function (_,{rejectWithValue}) {
+        try {
+            
+            const response = await fetch('/api/order-count', {
+                credentials:'include'
+            })
+
+            const data = await response.json()
+
+            return ({
+                orderCount:data.orderCount
+            })
+
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
+
 const orderSlice = createSlice({
     name:'order',
     initialState:{
@@ -64,6 +86,15 @@ const orderSlice = createSlice({
             state.message = action.payload.message
             state.created = false
         })
+        .addCase(getOrderCount.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.orderCount = action.payload.orderCount
+        })
+        .addCase(getOrderCount.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload
+        })
+        
     }
 })
 
