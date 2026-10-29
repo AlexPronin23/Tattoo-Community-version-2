@@ -583,7 +583,7 @@ app.post('/api/orders/create', auth, async (req,res) => {
 })
 
 // 1.2 Получение количество заказов
-app.get('/api/order-count', auth, async(req,res) => {
+app.get('/api/orders-count', auth, async(req,res) => {
     const id = req.user.id
 
     try {
@@ -599,6 +599,28 @@ app.get('/api/order-count', auth, async(req,res) => {
     } catch (error) {
         return res.status(500).json({message:error.message})
         
+    }
+})
+
+// 1.3 Получение заказов мастера
+
+app.get('/api/master-orders', auth, async(req,res) => {
+    const id = req.user.id
+
+    try {
+        
+        const masterOrders = await Orders.findAll({
+            where:{master_id:id}
+        }, 
+        {raw:true}
+    )
+
+        res.json({
+            masterOrders:masterOrders
+        })
+
+    } catch (error) {
+        return res.status(500).json({message:error.message})
     }
 })
 

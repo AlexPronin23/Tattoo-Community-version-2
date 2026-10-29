@@ -45,7 +45,7 @@ export const getOrderCount = createAsyncThunk(
     async function (_,{rejectWithValue}) {
         try {
             
-            const response = await fetch('/api/order-count', {
+            const response = await fetch('/api/orders-count', {
                 credentials:'include'
             })
 
@@ -62,10 +62,31 @@ export const getOrderCount = createAsyncThunk(
     }
 )
 
+export const getMasterOrders = createAsyncThunk(
+    'order/getMasterOrders',
+    async function (_,{rejectWithValue}) {
+        try {
+
+            const response = await fetch('/api/master-orders', {
+                credentials:'include'
+            })
+
+            const data = await response.json()
+
+            return ({
+                masterOrders:data.masterOrders
+            })           
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
+
 const orderSlice = createSlice({
     name:'order',
     initialState:{
-        orderList:[],
+        masterOrders:[],
         status:null,
         error:null,
         orderCount:0,
@@ -76,7 +97,6 @@ const orderSlice = createSlice({
         builder
         .addCase(createOrder.fulfilled, (state,action) => {
             state.status = 'Успешно'
-            state.orderList = action.payload.order
             state.message = action.payload.message
             state.created = true
         })
@@ -93,6 +113,18 @@ const orderSlice = createSlice({
         .addCase(getOrderCount.rejected,(state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
+        })
+        .addCase(getMasterOrders.pending, (state,action) => {
+            state.status = 'Загрузка'
+            state.error = null
+        })
+        .addCase(getMasterOrders.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.masterOrders = action.payload.masterOrders
+        })
+        .addCase(getMasterOrders.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload.error
         })
         
     }
