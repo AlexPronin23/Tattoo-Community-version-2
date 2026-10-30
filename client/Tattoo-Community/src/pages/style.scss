@@ -885,17 +885,16 @@
 
   &__card{
     width: 500px;
-    border: 1px orange solid;
+    background-color: rgba(255, 166, 0, 0.856);
     border-radius: 30px;
     padding: 15px;
-    cursor: pointer;
-
-    transition: opacity .3s ease-in-out;
-
-    &:hover{
-        opacity: .5;
-    }
+    cursor: pointer
   }
+
+  &__card-completed{
+     background-color: green;
+  }
+
 
   &__item{
     display: flex;
@@ -922,9 +921,10 @@
     opacity: 1;
     visibility: visible;
     margin-top: 20px; 
+    margin-bottom: 20px;
   }
 
-    &__info__item {
+  &__info__item {
       margin-bottom: 10px;
       line-height: 1.4;
       font-size: 20px;
@@ -933,6 +933,15 @@
         margin-bottom: 0;
       }
     }
+
+  .btn-order{
+    padding: 10px
+  }
+
+  .btn-order:disabled{
+    opacity: .5;
+    transform: translateY(0);
+  }
 
 }
 

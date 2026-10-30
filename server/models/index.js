@@ -7,7 +7,7 @@ const Portfolio = require('./Portfolio');
 const Orders = require('./Orders')
 
 // Users <-> TattooMasters (1 to 1)
-Users.hasOne(TattooMasters, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+Users.hasOne(TattooMasters, { foreignKey: 'user_id', onDelete: 'CASCADE',as:'masterInfo' });
 TattooMasters.belongsTo(Users, { foreignKey: 'user_id' });
 
 // Users <-> Portfolio (1 to Many)

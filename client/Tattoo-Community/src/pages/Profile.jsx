@@ -12,7 +12,8 @@ import { userLogout } from "../slices/userSlice";
 // Pages
 import ProfilePersonal from "./ProfilePersonal";
 import ProfileWorkSheet from "./ProfileWorkSheet";
-import ProfileOrders from "./ProfileOrders";
+import ProfileOrdersMaster from "./ProfileOrdersMaster";
+import ProfileOrdersClient from "./ProfileOrdersClient";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -74,6 +75,13 @@ const Profile = () => {
               >
                 Персональные данные
               </button>
+
+              <button
+                onClick={() => handleActive("orders")}
+                className={`button btn__tabs ${active === "orders" ? "active" : ""}`}
+              >
+                Ваши заказы
+              </button>
             </>
           )}
         </div>
@@ -88,7 +96,15 @@ const Profile = () => {
             </>
           ) : active === "orders" ? (
             <>
-              <ProfileOrders />
+              {status ? (
+                <>
+                  <ProfileOrdersMaster />
+                </>
+              ) : (
+                <>
+                  <ProfileOrdersClient />
+                </>
+              )}
             </>
           ) : (
             ""

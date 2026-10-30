@@ -347,7 +347,7 @@ app.post('/api/user/registration', async (req,res) => {
 
 })
 
-// 2.1 Авторизация пользователей
+// 2.1 Аутентификация пользователей
 
 app.post('/api/user/login', async (req,res) => {
 
@@ -386,13 +386,13 @@ app.post('/api/user/login', async (req,res) => {
 
         res.json({
             user:{
-                id:user.user_id,
+                user_id:user.user_id,
                 email:user.email,
                 phone:user.phone,
                 status:user.status
 
             },
-            message:'Успешная авторизация'
+            message:'Успешная аутентификация'
         })
 
     } catch (error) {
@@ -401,7 +401,7 @@ app.post('/api/user/login', async (req,res) => {
 
 })
 
-// 2.2 Аутентификация пользователей
+// 2.2 Авторизация пользователей
 app.get('/api/user/auth', auth,  async (req,res) => {
     const {id} = req.user
     
@@ -439,10 +439,10 @@ app.put('/api/personal/edit/:id', auth, async (req, res) => {
     const { id } = req.params;
     const { newEmail, newPhone, newPassword, newStatus } = req.body;
 
-    // // 1. Только сам пользователь
-    // if (Number(id) !== req.user.id) {
-    //     return res.status(403).json({ message: 'Нет доступа' });
-    // }
+    // 1. Только сам пользователь
+    if (Number(id) !== req.user.id) {
+        return res.status(403).json({ message: 'Нет доступа' });
+    }
 
     // 2. Обязательные поля
     if (!newEmail || !newPhone) {
@@ -582,7 +582,7 @@ app.post('/api/orders/create', auth, async (req,res) => {
     }
 })
 
-// 1.2 Получение количество заказов
+// 1.2 Получение количество  заказов мастера
 app.get('/api/orders-count', auth, async(req,res) => {
     const id = req.user.id
 
@@ -622,6 +622,80 @@ app.get('/api/master-orders', auth, async(req,res) => {
     } catch (error) {
         return res.status(500).json({message:error.message})
     }
+})
+
+// 1.4 Получение количества заказов клиента
+app.get('/api/bookings-count', auth , async (req,res) => {
+    const id = req.user.id
+    try {
+
+        const bookingsCount = await Orders.count({
+            where:{client_id:id}
+        })
+
+        res.json({
+            bookingsCount:bookingsCount
+        })
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
+// 1.5 Получение заказов клиента
+app.get('/api/client-orders', auth, async (req,res) => {
+    const id = req.user.id
+    try {
+
+      const clientOrders = await Orders.findAll({
+        where:{client_id:id},
+        include:[{
+            model:Users,
+            as:'master',
+            attributes:['phone'],
+            include:[{
+                model:TattooMasters,
+                as:'masterInfo',
+                attributes:['first_name', 'isAtHome','workaddress', 'homeaddress']
+            }]
+        }]
+      })
+
+      res.json({
+        clientOrders:clientOrders
+      })
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
+// 1.6 Изменение статуса
+app.put('/api/update-order-status', auth,async (req,res) => {
+    const id = req.user.id
+    const {order_id,status} = req.body
+    try {
+
+    const [updated] = await Orders.update(
+        {status:status}, {where:{order_id:order_id, master_id:id}})
+
+    if(updated === 0) {
+        return res.status(404).json({message:'Заказ не найден'})
+    }
+
+    const updatedStatus = await Orders.findOne({
+        where:{order_id:order_id,master_id:id},
+        attributes:['status']
+    })
+    
+    res.json({
+        updatedStatus:updatedStatus
+    })
+    
+    } catch (error) {
+       return res.status(500).json({message:error.message})
+    }
+
 })
 
 //

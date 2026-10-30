@@ -6,11 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 // Redux
-import { getMasterOrders } from "../slices/orderSlice";
+import { getMasterOrders, updateStatusOrder } from "../slices/orderSlice";
 
-const ProfileOrders = () => {
+const ProfileOrdersMaster = () => {
   const dispatch = useDispatch();
-  const { masterOrders, orderCount } = useSelector((state) => state.order);
+  const { masterOrders, orderCount, statusOrder } = useSelector(
+    (state) => state.order,
+  );
   const [openInfo, setOpenInfo] = useState(null);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const ProfileOrders = () => {
     <div className="orders">
       <div className="container">
         <div className="orders__content">
-          {orderCount > 0 ? (
+          {masterOrders.length > 0 ? (
             <>
               {masterOrders.map(
                 ({
@@ -39,7 +41,7 @@ const ProfileOrders = () => {
                   customerPhone,
                 }) => (
                   <div
-                    className="orders__card"
+                    className={`orders__card  ${status === "Выполнен" ? "orders__card-completed" : ""}`}
                     key={order_id}
                     onClick={() => handleOpen(order_id)}
                   >
@@ -66,6 +68,24 @@ const ProfileOrders = () => {
                         Пожелание от заказчика: {message}
                       </p>
                     </div>
+
+                    <div className="orders__button">
+                      <button
+                        type="button"
+                        className="button btn-order"
+                        disabled={status === "Выполнен"}
+                        onClick={() =>
+                          dispatch(
+                            updateStatusOrder({
+                              order_id,
+                              status: "Выполнен",
+                            }),
+                          )
+                        }
+                      >
+                        Выполнен
+                      </button>
+                    </div>
                   </div>
                 ),
               )}
@@ -79,4 +99,4 @@ const ProfileOrders = () => {
   );
 };
 
-export default ProfileOrders;
+export default ProfileOrdersMaster;
