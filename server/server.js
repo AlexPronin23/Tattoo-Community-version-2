@@ -698,6 +698,39 @@ app.put('/api/update-order-status', auth,async (req,res) => {
 
 })
 
+// 1.7 Получить все выполненные заказы
+
+app.get('/api/completed-orders',async(req,res) => {
+    
+    try {
+
+        const masterCompletedOrders = await Orders.findAll({
+            where:{status:'Выполнен'}
+        })
+
+        res.json({masterCompletedOrders:masterCompletedOrders})
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
+// Получить все заказы со статусом "В ожидании"
+
+app.get('/api/waiting-orders',auth, async(req,res) => {
+    const id = req.user.id
+    try {
+        const masterWaitingOrders = await Orders.findAll({
+            where:{master_id:id,status:'В ожидании'}
+        })
+
+        res.json({masterWaitingOrders:masterWaitingOrders})
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
 //
 
 // Connection

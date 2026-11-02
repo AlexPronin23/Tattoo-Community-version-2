@@ -6,7 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 // Redux
-import { getMasterOrders, updateStatusOrder } from "../slices/orderSlice";
+import {
+  getMasterOrders,
+  updateStatusOrder,
+  getCompletedOrders,
+  getWaitingOrders,
+} from "../slices/orderSlice";
 
 const ProfileOrdersMaster = () => {
   const dispatch = useDispatch();
@@ -22,8 +27,20 @@ const ProfileOrdersMaster = () => {
     setOpenInfo((prevId) => (prevId === id ? null : id));
   };
 
-  const handleClick = (click) => {
+  const fetchStatusOrders = async (click) => {
     setClick(click);
+
+    if (click === "all") {
+      await dispatch(getMasterOrders());
+    }
+
+    if (click === "completed") {
+      await dispatch(getCompletedOrders());
+    }
+
+    if (click === "waiting") {
+      await dispatch(getWaitingOrders());
+    }
   };
 
   return (
@@ -32,19 +49,22 @@ const ProfileOrdersMaster = () => {
         <div className="orders__wrapper">
           <div className="orders__tabs">
             <button
-              onClick={() => handleClick("all")}
+              type="button"
+              onClick={() => fetchStatusOrders("all")}
               className={`orders__tab ${click === "all" ? "click" : ""}`}
             >
               Все
             </button>
             <button
-              onClick={() => handleClick("completed")}
+              type="button"
+              onClick={() => fetchStatusOrders("completed")}
               className={`orders__tab ${click === "completed" ? "click" : ""}`}
             >
               Выполнены
             </button>
             <button
-              onClick={() => handleClick("waiting")}
+              type="button"
+              onClick={() => fetchStatusOrders("waiting")}
               className={`orders__tab ${click === "waiting" ? "click" : ""}`}
             >
               В ожидании

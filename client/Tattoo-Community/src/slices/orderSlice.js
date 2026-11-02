@@ -133,6 +133,7 @@ export const getClientOrders = createAsyncThunk(
     }
 )
 
+// Изменение статуса
 export const updateStatusOrder = createAsyncThunk(
     'order/updateStatusOrder',
     async function ({order_id,status}, {rejectWithValue}) {
@@ -161,6 +162,48 @@ export const updateStatusOrder = createAsyncThunk(
                 updatedStatus:data.updatedStatus
             })
 
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
+
+// Получение выполненных заказов
+export const getCompletedOrders = createAsyncThunk(
+    'order/getCompletedOrders',
+    async function (_,{rejectWithValue}) {
+        try {
+
+         const response = await fetch('/api/completed-orders')
+
+         const data = await response.json()
+
+         return ({
+            masterCompletedOrders:data.masterCompletedOrders
+         })
+            
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
+
+// Получение ожидающих заказов
+export const getWaitingOrders = createAsyncThunk(
+    'order/getWaitingOrders',
+    async function (_,{rejectWithValue}) {
+        try {
+
+         const response = await fetch('/api/waiting-orders')
+
+         const data = await response.json()
+
+         return ({
+           masterWaitingOrders:data.masterWaitingOrders
+         })
+            
         } catch (error) {
             return rejectWithValue({message:error.message})
         }
@@ -246,11 +289,24 @@ const orderSlice = createSlice({
             state.status = 'Отклонен'
             state.statusOrder = action.payload.message
         })
-        
-        
+        .addCase(getCompletedOrders.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.masterOrders = action.payload.masterCompletedOrders
+        })
+        .addCase(getCompletedOrders.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload
+        })
+        .addCase(getWaitingOrders.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.masterOrders = action.payload.masterWaitingOrders
+        })
+        .addCase(getWaitingOrders.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload
+        })
         
     }
 })
 
 export default  orderSlice.reducer
-export const {minusCountOrder} = orderSlice.actions
