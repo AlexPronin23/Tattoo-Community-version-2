@@ -211,6 +211,34 @@ export const getWaitingOrders = createAsyncThunk(
     }
 )
 
+// Получение количество выполненых заказов
+export const getCompletedOrdersCount = createAsyncThunk(
+    'order/getCompletedOrdersCount',
+    async function (_,{rejectWithValue}) {
+        try {
+
+            const response = await fetch('/api/completed-orders-count', {
+                credentials:'include'
+            }) 
+
+            const data = await response.json()
+
+            if(!response.ok){
+                return rejectWithValue({message:data.message})
+            }
+
+            return ({
+                message:data.message,
+                completedOrdersCount:data.completedOrdersCount
+            })
+            
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
+
 const orderSlice = createSlice({
     name:'order',
     initialState:{
@@ -220,6 +248,7 @@ const orderSlice = createSlice({
         error:null,
         orderCount:0,
         bookingsCount:0,
+        completedOrdersCount:0,
         created:false,
         message:'',
     },
@@ -304,6 +333,14 @@ const orderSlice = createSlice({
         .addCase(getWaitingOrders.rejected,(state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
+        })
+        .addCase(getCompletedOrdersCount.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.completedOrdersCount = action.payload.completedOrdersCount
+        })
+        .addCase(getCompletedOrdersCount.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload.message
         })
         
     }

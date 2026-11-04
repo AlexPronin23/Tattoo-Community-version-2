@@ -11,16 +11,20 @@ import {
   updateStatusOrder,
   getCompletedOrders,
   getWaitingOrders,
+  getCompletedOrdersCount,
 } from "../slices/orderSlice";
 
 const ProfileOrdersMaster = () => {
   const dispatch = useDispatch();
-  const { masterOrders, orderCount } = useSelector((state) => state.order);
+  const { masterOrders, orderCount, completedOrdersCount } = useSelector(
+    (state) => state.order,
+  );
   const [openInfo, setOpenInfo] = useState(null);
   const [click, setClick] = useState("all");
 
   useEffect(() => {
     dispatch(getMasterOrders());
+    dispatch(getCompletedOrdersCount());
   }, [dispatch]);
 
   const handleOpen = (id) => {
@@ -47,6 +51,14 @@ const ProfileOrdersMaster = () => {
     <div className="orders">
       <div className="container">
         <div className="orders__wrapper">
+          <div className="orders__statistics">
+            <p className="orders__count">
+              Количество заказов в ожидании: {orderCount}
+            </p>
+            <p className="orders__count orders__count-completed">
+              Количество выполненых заказов: {completedOrdersCount}
+            </p>
+          </div>
           <div className="orders__tabs">
             <button
               type="button"

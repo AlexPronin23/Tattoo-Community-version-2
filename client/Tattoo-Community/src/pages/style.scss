@@ -883,6 +883,22 @@
     color: $main-color;
   }
 
+  &__statistics{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    margin-bottom: 20px;
+  }
+
+  &__count{
+    color:rgba(255, 166, 0, 0.856) ;
+  }
+
+  &__count-completed{
+    color: green;
+  }
+
   &__tabs{
     position: relative;
     display: flex;
