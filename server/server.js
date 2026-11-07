@@ -8,7 +8,7 @@ const {Op, where} = require('sequelize')
 require('dotenv').config()
 
 // Models
-const { TattooMasters,Users, SpStyles, Portfolio, Orders } = require('./models/index');
+const { TattooMasters,Users, SpStyles, Portfolio, Orders,SpServices,Services} = require('./models/index');
 
 
 const app = express()
@@ -29,23 +29,6 @@ app.use(cors({
 // 1. TattooMasters
 
 // 1.1 Получение данных о тату мастерах
-// app.get('/api/tattoomasters', async (req,res) => {
-
-//     try {
-//         const masters = await TattooMasters.findAll({raw:true})
-
-//         res.json({
-//             masters:masters
-//         })
-
-        
-//     } catch (error) {
-//         return res.status(500).json({message:'Ошибка на сервере'})
-       
-        
-//     }
-    
-// })
 
 app.get('/api/tattoomasters', async (req,res) => {
     try {
@@ -546,9 +529,9 @@ app.get('/api/portfolio/:id', auth, async (req,res) => {
 
 //
 
-// Orders
+// 4. Orders
 
-// 1.1 Создание записи (заказа)
+// 4.1 Создание записи (заказа)
 app.post('/api/orders/create', auth, async (req,res) => {
     const client_id = req.user.id // Тот кто делает
 
@@ -582,7 +565,7 @@ app.post('/api/orders/create', auth, async (req,res) => {
     }
 })
 
-// 1.2 Получение количество  заказов мастера
+// 4.2 Получение количество  заказов мастера
 app.get('/api/orders-count', auth, async(req,res) => {
     const id = req.user.id
 
@@ -602,7 +585,7 @@ app.get('/api/orders-count', auth, async(req,res) => {
     }
 })
 
-// 1.3 Получение заказов мастера
+// 4.3 Получение заказов мастера
 
 app.get('/api/master-orders', auth, async(req,res) => {
     const id = req.user.id
@@ -624,7 +607,7 @@ app.get('/api/master-orders', auth, async(req,res) => {
     }
 })
 
-// 1.4 Получение количества заказов клиента
+// 4.4 Получение количества заказов клиента
 app.get('/api/bookings-count', auth , async (req,res) => {
     const id = req.user.id
     try {
@@ -642,7 +625,7 @@ app.get('/api/bookings-count', auth , async (req,res) => {
     }
 })
 
-// 1.5 Получение заказов клиента
+// 4.5 Получение заказов клиента
 app.get('/api/client-orders', auth, async (req,res) => {
     const id = req.user.id
     try {
@@ -670,7 +653,7 @@ app.get('/api/client-orders', auth, async (req,res) => {
     }
 })
 
-// 1.6 Изменение статуса
+// 4.6 Изменение статуса
 app.put('/api/update-order-status', auth,async (req,res) => {
     const id = req.user.id
     const {order_id,status} = req.body
@@ -698,14 +681,14 @@ app.put('/api/update-order-status', auth,async (req,res) => {
 
 })
 
-// 1.7 Получить все выполненные заказы
+// 4.7 Получить все выполненные заказы
 
-app.get('/api/completed-orders',async(req,res) => {
-    
+app.get('/api/completed-orders', auth,async(req,res) => {
+    const id = req.user.id
     try {
 
         const masterCompletedOrders = await Orders.findAll({
-            where:{status:'Выполнен'}
+            where:{master_id:id,status:'Выполнен'}
         })
 
         res.json({masterCompletedOrders:masterCompletedOrders})
@@ -715,7 +698,7 @@ app.get('/api/completed-orders',async(req,res) => {
     }
 })
 
-// 1.8 Получить все заказы со статусом "В ожидании"
+// 4.8 Получить все заказы со статусом "В ожидании"
 
 app.get('/api/waiting-orders',auth, async(req,res) => {
     const id = req.user.id
@@ -731,7 +714,7 @@ app.get('/api/waiting-orders',auth, async(req,res) => {
     }
 })
 
-// 1.9 Получить количество выполненных заказов
+// 4.9 Получить количество выполненных заказов
 
 app.get('/api/completed-orders-count', auth, async(req,res) => {
     const id = req.user.id
@@ -754,6 +737,82 @@ app.get('/api/completed-orders-count', auth, async(req,res) => {
         return res.status(500).json({message:error.message})
     }
 })
+
+//
+
+// 5. Services
+
+// 5.1 Получение все услуг
+
+app.get('/api/services', async (req,res) => {
+    try {
+
+        const services = await SpServices.findAll({raw:true})
+
+        if(!services) {
+            return res.status(404).json({message:'Услуги не найдены'})
+        }
+
+        res.json({services:services})
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
+// 5.2 Создание услуги
+app.post('/api/create-services', auth, async (req, res) => {
+    const id = req.user.id;
+    const { service_id, servicePrice } = req.body;
+
+    if (!service_id || !servicePrice) {
+        return res.status(400).json({ message: 'Выберите услугу и укажите цену' });
+    }
+
+    try {
+        // Используем findOrCreate, чтобы не было дублей. 
+        // Если мастер уже добавил эту услугу, мы просто обновим ей цену.
+        const [record, created] = await Services.findOrCreate({
+            where: { user_id: id, service_id: service_id },
+            defaults: { servicePrice: servicePrice }
+        });
+
+        // Если запись уже была (created === false) - обновляем цену
+        if (!created) {
+            record.servicePrice = servicePrice;
+            await record.save();
+            res.json({message:'Услуга была изменена'})
+        }
+
+        res.json({ message: 'Услуга успешно добавлена' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// 5.3 Получение услуг мастера
+app.get('/api/master-services', auth, async (req,res) => {
+    const id = req.user.id
+
+    try {
+
+        const masterServices = await Services.findAll({
+            where:{user_id:id},
+            include:[{
+                model:SpServices,
+                as:'masterServicesInfo' ,
+                attributes:['name']
+            }]
+        })
+
+        res.json({masterServices:masterServices})
+        
+    } catch (error) {
+      return res.status(500).json({message:error.message})   
+    }
+})
+
+//
 
 //
 

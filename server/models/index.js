@@ -5,6 +5,8 @@ const SpStyles = require('./SpStyles');
 const Styles = require('./Styles');
 const Portfolio = require('./Portfolio');
 const Orders = require('./Orders')
+const SpServices = require('./SpServices')
+const Services = require('./Services')
 
 // Users <-> TattooMasters (1 to 1)
 Users.hasOne(TattooMasters, { foreignKey: 'user_id', onDelete: 'CASCADE',as:'masterInfo' });
@@ -46,5 +48,23 @@ Orders.belongsTo(Users, {
     as: 'master' // По этому псевдониму будем доставать инфу о мастере
 });
 
+// TattooMaster <-> Services <-> SpServices (Many to Many)
+TattooMasters.belongsToMany(SpServices, {
+    through:Services, foreignKey:'user_id', otherKey:'service_id', as:'services'
+})
+SpServices.belongsToMany(TattooMasters,{
+    through:Services, foreignKey:'service_id', otherKey:'user_id', as:'masters'
+})
 
-module.exports = {Users, TattooMasters, SpStyles, Styles, Portfolio ,Orders};
+// Services <-> SpServices (1 to Many)
+Services.belongsTo(SpServices, { 
+    foreignKey: 'service_id', 
+    as: 'masterServicesInfo' 
+});
+
+SpServices.hasMany(Services, { 
+    foreignKey: 'service_id' 
+});
+
+
+module.exports = {Users, TattooMasters, SpStyles, Styles, Portfolio ,Orders,SpServices,Services};

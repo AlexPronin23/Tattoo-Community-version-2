@@ -184,7 +184,6 @@ export const tattooMastersSlice = createSlice({
                 state.created = false;
                 state.message = action.payload.message;
             })
-
             // === checkWorkSheet ===
             .addCase(checkWorkSheet.pending, (state) => {
                 state.status = 'Загрузка';

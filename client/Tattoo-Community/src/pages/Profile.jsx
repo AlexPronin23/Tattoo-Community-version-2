@@ -14,6 +14,7 @@ import ProfilePersonal from "./ProfilePersonal";
 import ProfileWorkSheet from "./ProfileWorkSheet";
 import ProfileOrdersMaster from "./ProfileOrdersMaster";
 import ProfileOrdersClient from "./ProfileOrdersClient";
+import ProfileServices from "./ProfileServices";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,12 @@ const Profile = () => {
               >
                 Мои заказы
               </button>
+              <button
+                onClick={() => handleActive("services")}
+                className={`button btn__tabs ${active === "services" ? "active" : ""}`}
+              >
+                Услуги
+              </button>
             </>
           ) : (
             <>
@@ -105,6 +112,10 @@ const Profile = () => {
                   <ProfileOrdersClient />
                 </>
               )}
+            </>
+          ) : active === "services" ? (
+            <>
+              <ProfileServices />
             </>
           ) : (
             ""

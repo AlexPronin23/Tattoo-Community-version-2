@@ -11,6 +11,7 @@ const FormCreate = () => {
   const navigate = useNavigate();
 
   const { styles } = useSelector((state) => state.styles);
+
   const { message } = useSelector((state) => state.tattooMasters);
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -283,6 +284,24 @@ const FormCreate = () => {
             </div>
 
             <div className="form__column">
+              <label className="form__label">
+                {" "}
+                Средняя цена услуг (в рублях):{" "}
+              </label>
+
+              <input
+                type="text"
+                required
+                placeholder="Введите цену"
+                maxLength={16}
+                name="price"
+                value={price}
+                className="form__input"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form__column">
               <label className="form__label">О себе: </label>
 
               <textarea
@@ -295,21 +314,6 @@ const FormCreate = () => {
                 onChange={handleChange}
               ></textarea>
               {/* <p className="form__count">Кол-во символов : {text.length}</p> */}
-            </div>
-
-            <div className="form__column">
-              <label className="form__label">Цена услуг (в рублях): </label>
-
-              <input
-                type="text"
-                required
-                placeholder="Введите цену"
-                maxLength={16}
-                name="price"
-                value={price}
-                className="form__input"
-                onChange={handleChange}
-              />
             </div>
 
             <div className="form__column">
