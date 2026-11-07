@@ -7,6 +7,7 @@ import popupReducer from '../slices/popupSlice'
 import paginationReducer from '../slices/paginationSlice'
 import modalReducer from '../slices/modalSlice'
 import orderReducer from '../slices/orderSlice'
+import serviceReducer from '../slices/serviceSlice'
 
 export default configureStore({
     reducer:{
@@ -17,6 +18,7 @@ export default configureStore({
         popup:popupReducer,
         pagination:paginationReducer,
         modal: modalReducer,
-        order:orderReducer
+        order:orderReducer,
+        service:serviceReducer
     }
 })

@@ -252,7 +252,6 @@ const orderSlice = createSlice({
         created:false,
         message:'',
     },
-
     extraReducers:(builder) => {
         builder
         .addCase(createOrder.fulfilled, (state,action) => {
@@ -347,3 +346,4 @@ const orderSlice = createSlice({
 })
 
 export default  orderSlice.reducer
+

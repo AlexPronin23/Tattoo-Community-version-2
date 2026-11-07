@@ -1041,6 +1041,148 @@
 
 }
 
+// Profile Services
+
+.profile__services{
+    padding: 50px;
+
+    &__content{
+        text-align: center;
+    }
+
+    &__header{
+        margin-bottom: 80px;
+    }
+
+    &__title{
+        margin-bottom: 20px;
+    }
+
+    &__subtitle{
+        color: $main-color;
+    }
+
+    &__create{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+        gap: 30px;
+    }
+
+    &__column{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__label{
+        color: $main-color;
+    }
+
+    &__select {
+        width: 200px;
+
+        outline: 3px $main-color solid;
+        padding: 15px;
+
+        color: $main-color;
+        border-radius: 30px;
+        font-size: 16px;
+    }
+
+      &__option{
+        color: $black;
+        padding: 10px;
+     
+    }
+
+    &__input{
+
+        outline: 3px $main-color solid;
+        padding: 15px;
+        border-radius: 30px;
+
+        color: $main-color;
+
+        transition: transform .4s ease-in-out;
+    }
+
+    &__input:hover{
+        transform: translateX(-5px);
+    }
+
+    &__input::placeholder{
+        color: $main-color;
+    }
+
+    .btn-create{
+        cursor: pointer;
+        padding: 15px;
+    }
+
+&__table {
+   
+    width: 100%;
+    overflow-x: auto; 
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0; 
+      background-color: $main-color; 
+      border-radius: 15px; 
+      overflow: hidden; 
+      border: 3px solid $black; 
+    }
+
+    th, td {
+      padding: 18px;
+      text-align: left;
+      border-right: 1px solid $black;
+    }
+
+    
+    th {
+      background-color: $main-color; 
+      color: $black; 
+      font-family: $second-font;
+      font-size: 14px;
+      text-transform: uppercase; 
+      letter-spacing: 1px;
+      font-weight: 600;
+      border-bottom: 2px solid $black; 
+    }
+
+    td {
+      width: 50%;
+      color:$black; 
+      font-size: 16px;
+      border-bottom: 1px solid $black; 
+      border-right: 1px solid $black;
+
+
+    }
+
+
+
+    tbody tr {
+      transition: background-color .2s ease-in-out;
+      cursor: default;
+
+      &:hover {
+        background-color: $blue;
+      }
+    }
+  }
+
+    &__none{
+        color: $main-color;
+    }
+
+}
+
 // Adaptive versions
 @media (max-width: 700px) {
     // Формы
@@ -1144,6 +1286,15 @@
             gap: 10px;
         }
     }
+
+   .profile__services{
+      padding: 30px;
+
+      &__create{
+        flex-direction: column
+      }
+   }
+
 }
 
 

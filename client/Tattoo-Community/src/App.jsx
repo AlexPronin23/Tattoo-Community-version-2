@@ -9,6 +9,7 @@ import { getStyles } from "./slices/styleSlice";
 import { checkWorkSheet, resetMasterState } from "./slices/tattooMastersSlice";
 import { getOrderCount } from "./slices/orderSlice";
 import { showPopup, hidePopup } from "./slices/popupSlice";
+import { getServices } from "./slices/serviceSlice";
 
 // Pages
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -34,6 +35,7 @@ function App() {
   useEffect(() => {
     dispatch(userAuth());
     dispatch(getStyles());
+    dispatch(getServices());
   }, [dispatch]);
 
   useEffect(() => {
