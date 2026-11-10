@@ -47,8 +47,11 @@ const ProfileServices = () => {
       setTimeout(() => {
         dispatch(hidePopup());
       }, 1500);
+<<<<<<< HEAD
 
       return;
+=======
+>>>>>>> 2af41417cd6e7821a1dfe1b07b5f891962cdfb77
     }
 
     try {

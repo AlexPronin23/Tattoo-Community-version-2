@@ -812,6 +812,7 @@ app.get('/api/master-services', auth, async (req,res) => {
     }
 })
 
+<<<<<<< HEAD
 // 5.4 Получение услуг конкретного мастера
 app.get('/api/master-services/:id', auth, async(req,res) => {
     const {id} = req.params
@@ -838,6 +839,8 @@ app.get('/api/master-services/:id', auth, async(req,res) => {
     }
 })
 
+=======
+>>>>>>> 2af41417cd6e7821a1dfe1b07b5f891962cdfb77
 //
 
 //
