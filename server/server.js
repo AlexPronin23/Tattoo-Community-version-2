@@ -812,6 +812,32 @@ app.get('/api/master-services', auth, async (req,res) => {
     }
 })
 
+// 5.4 Получение услуг конкретного мастера
+app.get('/api/master-services/:id', auth, async(req,res) => {
+    const {id} = req.params
+
+    try {
+
+        const currentMasterServices = await Services.findAll({
+            where:{user_id:id},
+            include:[{
+                model:SpServices,
+                as:'masterServicesInfo' ,
+                attributes:['name']
+            }]
+        })
+
+        if(!currentMasterServices){
+            return res.status(404).json({message:'Услуги мастера не найдены'})
+        }
+
+        res.json({currentMasterServices:currentMasterServices})
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
 //
 
 //

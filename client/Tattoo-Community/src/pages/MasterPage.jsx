@@ -7,12 +7,14 @@ import { useParams, Link } from "react-router";
 import { getOneMaster } from "../slices/tattooMastersSlice";
 import { getOnePortfolio } from "../slices/portfolioSlice";
 import { setOpen } from "../slices/modalSlice";
+import { getCurrentMasterServices } from "../slices/serviceSlice";
 
 const MasterPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   // const users = useSelector((state) => state.users.users);
   const { masterPage } = useSelector((state) => state.tattooMasters);
+  const { currentMasterServices } = useSelector((state) => state.service);
   const { currentPortfolio = [] } = useSelector((state) => state.portfolio);
   const {
     first_name,
@@ -27,12 +29,11 @@ const MasterPage = () => {
     workaddress,
     homeaddress,
   } = masterPage || {};
-  useEffect(() => {
-    dispatch(getOneMaster({ id }));
-  }, [dispatch, id]);
 
   useEffect(() => {
+    dispatch(getOneMaster({ id }));
     dispatch(getOnePortfolio({ id }));
+    dispatch(getCurrentMasterServices({ id }));
   }, [dispatch, id]);
 
   if (!masterPage) {
@@ -77,6 +78,27 @@ const MasterPage = () => {
               </ul>
             </div>
           </div>
+
+          <div className="info__services">
+            <h2 className="info__services__title">Мои услуги: </h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Название услуги</th>
+                  <th>Цена</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentMasterServices.map((item) => (
+                  <tr key={item.service_id}>
+                    <td>{item.masterServicesInfo?.name || "Не указано"}</td>
+                    <td>{item.servicePrice} руб</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
           <h2 className="info__portfolio__title">Мои работы: </h2>
           <div className="info__portfolio">
             {currentPortfolio.map((photo) => (

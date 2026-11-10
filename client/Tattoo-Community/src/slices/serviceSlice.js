@@ -82,11 +82,37 @@ export const getMasterServices = createAsyncThunk(
     }
 )
 
+// Получение услуг конкретного мастера
+export const getCurrentMasterServices = createAsyncThunk(
+    'service/getCurrentMasterServices',
+    async function ({id}, {rejectWithValue}) {
+        try {
+            
+            const response = await fetch(`/api/master-services/${id}`)
+
+            const data = await response.json()
+
+            if(!response){
+                return rejectWithValue({message:data.message})
+            }
+
+            return ({
+                currentMasterServices:data.currentMasterServices
+            })
+
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
+
 const serviceSlice = createSlice({
     name:'service',
     initialState:{
         services:[],
         masterServices:[],
+        currentMasterServices:[],
         status:null,
         error:null,
     },
@@ -118,6 +144,14 @@ const serviceSlice = createSlice({
         .addCase(getMasterServices.rejected,(state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
+        })
+        .addCase(getCurrentMasterServices.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.currentMasterServices = action.payload.currentMasterServices
+        })
+        .addCase(getCurrentMasterServices.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload.currentMasterServices
         })
     }
 })

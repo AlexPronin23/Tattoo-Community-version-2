@@ -855,6 +855,66 @@
         padding: 11px 28px;
     }
 
+    &__services{
+        margin-bottom: 30px;
+    }
+
+    &__services__title{
+        color: $main-color;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0; 
+      background-color: $main-color; 
+      border-radius: 15px; 
+      overflow: hidden; 
+      border: 3px solid $black; 
+    }
+
+    th, td {
+      padding: 18px;
+      text-align: left;
+      border-right: 1px solid $black;
+    }
+
+    
+    th {
+      background-color: $main-color; 
+      color: $black; 
+      font-family: $second-font;
+      font-size: 14px;
+      text-transform: uppercase; 
+      letter-spacing: 1px;
+      font-weight: 600;
+      border-bottom: 2px solid $black; 
+    }
+
+    td {
+      width: 50%;
+      color:$black; 
+      font-size: 16px;
+      border-bottom: 1px solid $black; 
+      border-right: 1px solid $black;
+
+
+    }
+
+
+
+    tbody tr {
+      transition: background-color .2s ease-in-out;
+      cursor: default;
+
+      &:hover {
+        background-color: $blue;
+      }
+    }
+  
+
     &__back{
 
         display: block;
@@ -915,9 +975,11 @@
     top: 140%;
 
     width: 70%;
-    height:1px ;
+    height:3px ;
 
     background-color: $main-color;
+
+    border-radius: 30px;
   }
 
   &__tab{
@@ -934,7 +996,7 @@
     position: absolute;
     
     left: 1%;
-    top: 135%;
+    top: 140%;
 
     width: 0%;
     height: 0px;
@@ -947,6 +1009,8 @@
     transition: opacity .5s ease-in-out, visibility .5s ease-in-out,width .5s ease-in-out, height .5s ease-in-out ;
 
     z-index: 9;
+
+    border-radius: 30px;
 
   }
 
