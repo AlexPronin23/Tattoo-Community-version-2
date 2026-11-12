@@ -78,6 +78,13 @@
         align-items: center;
     }
 
+    &__form__select{
+        outline: 1px $black solid;
+        padding: 10px;
+        border-radius: 30px;
+        margin-bottom: 20px;
+    }
+
     .btn-modal{
         padding: 10px;
     }

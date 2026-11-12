@@ -14,6 +14,10 @@ const Orders = sequilize.define('tb_orders', {
         type: DataTypes.INTEGER,
         allowNull:false
     },
+    service_id: {
+        type:DataTypes.INTEGER,
+        allowNull:false
+    },
     customerName: {
         type: DataTypes.STRING,
         allowNull:false
@@ -28,6 +32,9 @@ const Orders = sequilize.define('tb_orders', {
     },
     timeOrder: {
         type: DataTypes.TIME
+    },
+    serviceName:{
+        type:DataTypes.STRING
     },
     price:{
         type: DataTypes.INTEGER

@@ -3,7 +3,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 // Создание заказа
 export const createOrder = createAsyncThunk(
     'order/createOrder',
-    async function ({master_id,customerName,customerPhone,dateOrder,timeOrder,price,message}, {rejectWithValue}) {
+    async function ({master_id,service_id,customerName,customerPhone,dateOrder,timeOrder,serviceName,price,message}, {rejectWithValue}) {
         try {
 
             const response = await fetch('/api/orders/create', {
@@ -14,10 +14,12 @@ export const createOrder = createAsyncThunk(
                 },
                 body:JSON.stringify({
                     master_id:master_id,
+                    service_id:service_id,
                     customerName:customerName,
                     customerPhone:customerPhone,
                     dateOrder:dateOrder,
-                    timeOrder,
+                    timeOrder:timeOrder,
+                    serviceName:serviceName,
                     price:price,
                     message:message
                 })

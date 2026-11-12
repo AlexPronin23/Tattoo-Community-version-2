@@ -66,5 +66,15 @@ SpServices.hasMany(Services, {
     foreignKey: 'service_id' 
 });
 
+// Orders <-> SpServies (1 to Many)
+Orders.belongsTo(SpServices, {
+    foreignKey:'service_id',
+    as:'orderServices'
+})
+
+SpServices.hasMany(Orders,{
+    foreignKey:'service_id',
+})
+
 
 module.exports = {Users, TattooMasters, SpStyles, Styles, Portfolio ,Orders,SpServices,Services};

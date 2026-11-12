@@ -82,7 +82,6 @@ export const getMasterServices = createAsyncThunk(
     }
 )
 
-<<<<<<< HEAD
 // Получение услуг конкретного мастера
 export const getCurrentMasterServices = createAsyncThunk(
     'service/getCurrentMasterServices',
@@ -108,17 +107,12 @@ export const getCurrentMasterServices = createAsyncThunk(
     }
 )
 
-=======
->>>>>>> 2af41417cd6e7821a1dfe1b07b5f891962cdfb77
 const serviceSlice = createSlice({
     name:'service',
     initialState:{
         services:[],
         masterServices:[],
-<<<<<<< HEAD
         currentMasterServices:[],
-=======
->>>>>>> 2af41417cd6e7821a1dfe1b07b5f891962cdfb77
         status:null,
         error:null,
     },
@@ -151,17 +145,14 @@ const serviceSlice = createSlice({
             state.status = 'Отклонен'
             state.error = action.payload
         })
-<<<<<<< HEAD
         .addCase(getCurrentMasterServices.fulfilled,(state,action) => {
             state.status = 'Успешно'
             state.currentMasterServices = action.payload.currentMasterServices
         })
         .addCase(getCurrentMasterServices.rejected,(state,action) => {
             state.status = 'Отклонен'
-            state.error = action.payload.currentMasterServices
+            state.error = action.payload
         })
-=======
->>>>>>> 2af41417cd6e7821a1dfe1b07b5f891962cdfb77
     }
 })
 

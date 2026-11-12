@@ -3,17 +3,21 @@ import "./style.scss";
 
 // React
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Redux
 import { setClose } from "../../slices/modalSlice";
 import { createOrder } from "../../slices/orderSlice";
 import { showPopup, hidePopup } from "../../slices/popupSlice";
+import { useParams } from "react-router";
 
 const Modal = () => {
   const dispatch = useDispatch();
+
   const { open } = useSelector((state) => state.modal);
   const { masterPage } = useSelector((state) => state.tattooMasters);
+  const { currentMasterServices } = useSelector((state) => state.service);
+  const [selectedService, setSelectedService] = useState(null);
   const price = masterPage?.price || "";
   const master_id = masterPage?.user_id || "";
 
@@ -22,6 +26,8 @@ const Modal = () => {
     customerPhone: "",
     dateOrder: "",
     timeOrder: "",
+    serviceName: "",
+    price: "",
     message: "",
   });
 
@@ -44,6 +50,7 @@ const Modal = () => {
       !customerPhone ||
       !dateOrder ||
       !timeOrder ||
+      !price ||
       !message
     ) {
       alert("Вы ввели не полные данные");
@@ -54,11 +61,13 @@ const Modal = () => {
       const resultAction = await dispatch(
         createOrder({
           master_id: master_id,
+          service_id: selectedService?.service_id,
           customerName,
           customerPhone,
           dateOrder,
           timeOrder,
-          price: price,
+          serviceName: selectedService?.masterServicesInfo.name,
+          price: selectedService?.servicePrice,
           message,
         }),
       );
@@ -68,6 +77,8 @@ const Modal = () => {
           customerPhone: "",
           dateOrder: "",
           timeOrder: "",
+          serviceName: "",
+          price: "",
           message: "",
         });
 
@@ -99,6 +110,14 @@ const Modal = () => {
     }
   };
 
+  const handleSelect = (e) => {
+    const serviceId = Number(e.target.value);
+
+    const found = currentMasterServices.find(
+      (item) => item.service_id === serviceId,
+    );
+    setSelectedService(found);
+  };
   return (
     <div className={`modal ${open ? "open" : ""}`}>
       <div className="container">
@@ -152,9 +171,24 @@ const Modal = () => {
               />
             </div>
             <div className="modal__form__column">
-              <label className="modal__form__label">Цена за услугу: </label>
-              <p className="modal__form__price">{price} руб</p>
+              <label className="modal__form__label">Услуга:</label>
+              <select className="modal__form__select" onChange={handleSelect}>
+                <option value="">--Выбирете услугу--</option>
+                {currentMasterServices.map((item) => (
+                  <option value={item.service_id} key={item.service_id}>
+                    {item.masterServicesInfo.name}
+                  </option>
+                ))}
+              </select>
             </div>
+
+            {selectedService && (
+              <div className="modal__form__column">
+                <label className="modal__form__label">Цена:</label>
+                <p>{selectedService.servicePrice} руб.</p>
+              </div>
+            )}
+
             <div className="modal__form__column">
               <label className="modal__form__label">Сообщение мастеру: </label>
               <textarea

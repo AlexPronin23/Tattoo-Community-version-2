@@ -91,6 +91,7 @@ const ProfileOrdersMaster = () => {
                     customerName,
                     dateOrder,
                     timeOrder,
+                    serviceName,
                     price,
                     message,
                     status,
@@ -119,6 +120,9 @@ const ProfileOrdersMaster = () => {
                         </p>
                         <p className="orders__info__item">Дата: {dateOrder}</p>
                         <p className="orders__info__item">Время: {timeOrder}</p>
+                        <p className="orders__info__item">
+                          Услуга: {serviceName}
+                        </p>
                         <p className="orders__info__item">Цена: {price} руб </p>
                         <p className="orders__info__item">
                           Пожелание от заказчика: {message}

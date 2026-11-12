@@ -30,8 +30,14 @@ const ProfileOrdersClient = () => {
             {bookingsCount > 0 ? (
               <>
                 {clientOrders.map((order) => {
-                  const { order_id, dateOrder, timeOrder, price, status } =
-                    order;
+                  const {
+                    order_id,
+                    dateOrder,
+                    timeOrder,
+                    serviceName,
+                    price,
+                    status,
+                  } = order;
 
                   const { phone: phone } = order.master || {};
 
@@ -68,6 +74,9 @@ const ProfileOrdersClient = () => {
                         <p className="orders__info__item">Время: {timeOrder}</p>
                         <p className="orders__info__item">
                           Адрес {!isAtHome ? workaddress : homeaddress}
+                        </p>
+                        <p className="orders__info__item">
+                          Услуга: {serviceName}
                         </p>
                         <p className="orders__info__item">Цена: {price} руб </p>
                       </div>

@@ -12,7 +12,6 @@ import { getCurrentMasterServices } from "../slices/serviceSlice";
 const MasterPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const users = useSelector((state) => state.users.users);
   const { masterPage } = useSelector((state) => state.tattooMasters);
   const { currentMasterServices } = useSelector((state) => state.service);
   const { currentPortfolio = [] } = useSelector((state) => state.portfolio);

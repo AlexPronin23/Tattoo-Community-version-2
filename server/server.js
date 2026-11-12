@@ -535,9 +535,9 @@ app.get('/api/portfolio/:id', auth, async (req,res) => {
 app.post('/api/orders/create', auth, async (req,res) => {
     const client_id = req.user.id // Тот кто делает
 
-    const {master_id,customerName,customerPhone,dateOrder,timeOrder,price,message} = req.body
+    const {master_id,service_id,customerName,customerPhone,dateOrder,timeOrder,serviceName,price,message} = req.body
 
-    if(!customerName || !customerPhone || !dateOrder || !timeOrder ||  !message ) {
+    if(!customerName || !customerPhone || !dateOrder || !timeOrder || !price ||  !message ) {
         return res.status(400).json({message:'Не полные данные!'})
     }
 
@@ -546,10 +546,12 @@ app.post('/api/orders/create', auth, async (req,res) => {
         const newOrder = await Orders.create({
             client_id,
             master_id,
+            service_id,
             customerName,
             customerPhone,
             dateOrder,
             timeOrder,
+            serviceName,
             price,
             message,
             status:'В ожидании'
@@ -812,7 +814,6 @@ app.get('/api/master-services', auth, async (req,res) => {
     }
 })
 
-<<<<<<< HEAD
 // 5.4 Получение услуг конкретного мастера
 app.get('/api/master-services/:id', auth, async(req,res) => {
     const {id} = req.params
@@ -839,8 +840,6 @@ app.get('/api/master-services/:id', auth, async(req,res) => {
     }
 })
 
-=======
->>>>>>> 2af41417cd6e7821a1dfe1b07b5f891962cdfb77
 //
 
 //
