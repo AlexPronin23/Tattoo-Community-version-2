@@ -15,6 +15,7 @@ const MasterPage = () => {
   const { masterPage } = useSelector((state) => state.tattooMasters);
   const { currentMasterServices } = useSelector((state) => state.service);
   const { currentPortfolio = [] } = useSelector((state) => state.portfolio);
+  const { reviews } = useSelector((state) => state.review);
   const {
     first_name,
     last_name,
@@ -109,6 +110,40 @@ const MasterPage = () => {
                 />
               </div>
             ))}
+          </div>
+
+          <div className="info__reviews">
+            <h2 className="title info__reviews__title">Оставьте отзыв</h2>
+            <div className="info__reviews__form">
+              <div className="info__reviews__column">
+                <label className="info__reviews__label">Ваш отзыв:</label>
+                <textarea
+                  className="info__reviews__textarea"
+                  maxLength={255}
+                ></textarea>
+              </div>
+
+              <div className="info__reviews__column">
+                <label className="info__reviews__label">
+                  Поставьте рейтинг:
+                </label>
+                <input
+                  className="info__reviews__input"
+                  defaultValue={1}
+                  maxLength={1}
+                  type="text"
+                />
+              </div>
+
+              <button className="button btn-review">Оставить отзыв</button>
+            </div>
+            <div className="info__reviews__content">
+              {reviews.length < 0 ? (
+                <>Отзывы</>
+              ) : (
+                <>У мастера нет пока отзывов</>
+              )}
+            </div>
           </div>
           <button
             className="button btn-info"

@@ -24,7 +24,6 @@ const Masters = () => {
   const { page, totalPages, limit, status, activeFilter } = useSelector(
     (state) => state.pagination,
   );
-  // const [active, setActive] = useState("");
 
   useEffect(() => {
     if (activeFilter) {

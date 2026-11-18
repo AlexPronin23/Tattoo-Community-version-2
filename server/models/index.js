@@ -7,6 +7,7 @@ const Portfolio = require('./Portfolio');
 const Orders = require('./Orders')
 const SpServices = require('./SpServices')
 const Services = require('./Services')
+const Reviews = require('./Reviews')
 
 // Users <-> TattooMasters (1 to 1)
 Users.hasOne(TattooMasters, { foreignKey: 'user_id', onDelete: 'CASCADE',as:'masterInfo' });
@@ -56,6 +57,8 @@ SpServices.belongsToMany(TattooMasters,{
     through:Services, foreignKey:'service_id', otherKey:'user_id', as:'masters'
 })
 
+
+// ИСПРАВИТЬ СВЯЗАНОСТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Services <-> SpServices (1 to Many)
 Services.belongsTo(SpServices, { 
     foreignKey: 'service_id', 
@@ -76,5 +79,26 @@ SpServices.hasMany(Orders,{
     foreignKey:'service_id',
 })
 
+///////
 
-module.exports = {Users, TattooMasters, SpStyles, Styles, Portfolio ,Orders,SpServices,Services};
+// Users <-> Reviews (1 to Many)
+
+// Кто оставил отзыв (пользователь)
+Users.hasMany(Reviews, {
+    foreignKey:'client_id',as:'clientReviews'
+})
+
+Reviews.belongsTo(Users, {
+    foreignKey:'client_id', as:'client'
+})
+
+// Кому оставили отзыв (мастер)
+Users.hasMany(Reviews,{
+    foreignKey:'master_id', as:'masterReviews'
+}) 
+Reviews.belongsTo(Users, {
+    foreignKey:'master_id', as:'master'
+})
+
+
+module.exports = {Users, TattooMasters, SpStyles, Styles, Portfolio ,Orders,SpServices,Services,Reviews};

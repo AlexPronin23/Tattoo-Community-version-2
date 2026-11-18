@@ -62,17 +62,17 @@ const Profile = () => {
                 Анкета мастера
               </button>
               <button
-                onClick={() => handleActive("orders")}
-                className={`button btn__tabs ${active === "orders" ? "active" : ""}`}
-              >
-                Мои заказы
-              </button>
-              <button
                 onClick={() => handleActive("services")}
                 className={`button btn__tabs ${active === "services" ? "active" : ""}`}
               >
                 Услуги
               </button>
+              {/* <button
+                onClick={() => handleActive("orders")}
+                className={`button btn__tabs ${active === "orders" ? "active" : ""}`}
+              >
+                Мои заказы
+              </button> */}
             </>
           ) : (
             <>
@@ -82,13 +82,13 @@ const Profile = () => {
               >
                 Персональные данные
               </button>
-
+              {/* 
               <button
                 onClick={() => handleActive("orders")}
                 className={`button btn__tabs ${active === "orders" ? "active" : ""}`}
               >
                 Ваши заказы
-              </button>
+              </button> */}
             </>
           )}
         </div>

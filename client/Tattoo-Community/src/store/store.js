@@ -8,6 +8,7 @@ import paginationReducer from '../slices/paginationSlice'
 import modalReducer from '../slices/modalSlice'
 import orderReducer from '../slices/orderSlice'
 import serviceReducer from '../slices/serviceSlice'
+import reviewReducer from '../slices/reviewSlice'
 
 export default configureStore({
     reducer:{
@@ -19,6 +20,7 @@ export default configureStore({
         pagination:paginationReducer,
         modal: modalReducer,
         order:orderReducer,
-        service:serviceReducer
+        service:serviceReducer,
+        review:reviewReducer
     }
 })

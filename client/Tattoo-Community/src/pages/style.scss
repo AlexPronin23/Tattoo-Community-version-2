@@ -851,6 +851,55 @@
 
     }
 
+    &__reviews {
+        margin-bottom: 20px;
+    }
+
+    &__reviews__form {
+        margin-bottom: 30px;
+    }
+
+    &__reviews__title{
+        margin-bottom: 20px;
+    }
+
+    &__reviews__column{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    &__reviews__label{
+        color: $main-color;
+    }
+
+    &__reviews__textarea {
+        width: 500px;
+        outline: 3px $main-color solid;
+        padding: 15px;
+        border-radius: 20px;
+        color: $main-color;
+        resize: none;
+    }
+
+    &__reviews__input{
+        width: 50px;
+        outline: 1px $main-color solid;
+        padding: 10px;
+        border-radius: 30px;
+        text-align: center;
+        color: $main-color;
+
+    }
+
+    .btn-review{
+        padding: 12px 47px;
+    }
+    
+
     .btn-info {
         padding: 11px 28px;
     }
