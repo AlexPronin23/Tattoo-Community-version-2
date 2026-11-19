@@ -8,7 +8,7 @@ const {Op, where} = require('sequelize')
 require('dotenv').config()
 
 // Models
-const { TattooMasters,Users, SpStyles, Portfolio, Orders,SpServices,Services} = require('./models/index');
+const { TattooMasters,Users, SpStyles, Portfolio, Orders,SpServices,Services,Reviews} = require('./models/index');
 
 
 const app = express()
@@ -839,6 +839,36 @@ app.get('/api/master-services/:id', auth, async(req,res) => {
         return res.status(500).json({message:error.message})
     }
 })
+
+//
+
+// 6. Reviews
+
+// 6.1 Создание отзыва
+
+app.post('/api/create-review',auth, async(req,res) => {
+    const id = req.user.id
+    const {master_id,message,rate,dateReview,timeReview} = req.body
+    try {
+        
+        const reviews = await Reviews.create({
+            client_id:id,
+            master_id:master_id,
+            message:message,
+            rate:rate,
+            dateReview:dateReview,
+            timeReview:timeReview
+        })
+
+        res.json({
+            message:'Отзыв был успешно создан',
+        })
+
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
 
 //
 

@@ -1,6 +1,6 @@
 // React
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
 
 // Redux
@@ -8,14 +8,22 @@ import { getOneMaster } from "../slices/tattooMastersSlice";
 import { getOnePortfolio } from "../slices/portfolioSlice";
 import { setOpen } from "../slices/modalSlice";
 import { getCurrentMasterServices } from "../slices/serviceSlice";
+import { createReviews } from "../slices/reviewSlice";
+import { showPopup, hidePopup } from "../slices/popupSlice";
 
 const MasterPage = () => {
   const { id } = useParams();
+  const now = new Date();
   const dispatch = useDispatch();
   const { masterPage } = useSelector((state) => state.tattooMasters);
   const { currentMasterServices } = useSelector((state) => state.service);
   const { currentPortfolio = [] } = useSelector((state) => state.portfolio);
   const { reviews } = useSelector((state) => state.review);
+  const [review, setReview] = useState({
+    message: "",
+    rate: "",
+  });
+  const { message, rate } = review;
   const {
     first_name,
     last_name,
@@ -39,6 +47,64 @@ const MasterPage = () => {
   if (!masterPage) {
     return <p>Загрузка...</p>;
   }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setReview((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const fetchCreateReviews = async () => {
+    if (!message || !rate) {
+      alert("Введите полные данные!");
+      return;
+    }
+
+    try {
+      const resultAction = await dispatch(
+        createReviews({
+          master_id: id,
+          message: message,
+          rate: rate,
+          dateReview: now.toLocaleDateString("sv-SE"),
+          timeReview: now.toLocaleTimeString("sv-SE"),
+        }),
+      );
+
+      if (createReviews.fulfilled.match(resultAction)) {
+        setReview({
+          message: "",
+          rate: "",
+        });
+
+        dispatch(
+          showPopup({
+            type: "success",
+            message: resultAction.payload.message,
+          }),
+        );
+
+        setTimeout(() => {
+          dispatch(hidePopup());
+        }, 1500);
+      } else if (createReviews.rejected.match(resultAction)) {
+        dispatch(
+          showPopup({
+            type: "error",
+            message: resultAction.payload.message,
+          }),
+        );
+
+        setTimeout(() => {
+          dispatch(hidePopup());
+        }, 1500);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
     <div className="info">
@@ -102,7 +168,7 @@ const MasterPage = () => {
           <h2 className="info__portfolio__title">Мои работы: </h2>
           <div className="info__portfolio">
             {currentPortfolio.map((photo) => (
-              <div className="info__portfolio__photos" key={photo.user_id}>
+              <div className="info__portfolio__photos" key={photo.portfolio_id}>
                 <img
                   src={photo.img}
                   alt="Master work"
@@ -120,6 +186,10 @@ const MasterPage = () => {
                 <textarea
                   className="info__reviews__textarea"
                   maxLength={255}
+                  value={message}
+                  name="message"
+                  onChange={handleChange}
+                  required
                 ></textarea>
               </div>
 
@@ -129,13 +199,22 @@ const MasterPage = () => {
                 </label>
                 <input
                   className="info__reviews__input"
-                  defaultValue={1}
                   maxLength={1}
+                  value={rate}
+                  name="rate"
                   type="text"
+                  required
+                  onChange={handleChange}
                 />
               </div>
 
-              <button className="button btn-review">Оставить отзыв</button>
+              <button
+                type="button"
+                className="button btn-review"
+                onClick={fetchCreateReviews}
+              >
+                Оставить отзыв
+              </button>
             </div>
             <div className="info__reviews__content">
               {reviews.length < 0 ? (

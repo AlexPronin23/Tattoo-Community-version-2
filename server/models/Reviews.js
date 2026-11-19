@@ -5,6 +5,7 @@ const Reviews = sequelize.define('tb_reviews', {
     review_id:{
         type:DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement:true,
         allowNull:false
     },
     client_id:{
