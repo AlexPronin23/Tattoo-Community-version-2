@@ -235,5 +235,5 @@ export const tattooMastersSlice = createSlice({
     }
 });
 
-export default tattooMastersSlice.reducer;
 export const { resetMasterState } = tattooMastersSlice.actions;
+export default tattooMastersSlice.reducer;

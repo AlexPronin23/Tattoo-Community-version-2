@@ -870,6 +870,37 @@ app.post('/api/create-review',auth, async(req,res) => {
 })
 
 
+// 6.2 Получение отзывов мастера
+
+app.get('/api/master-reviews/:id', async(req,res) => {
+  
+    const {id} = req.params
+
+   try {
+
+    const reviews = await Reviews.findAll({
+        where: {
+            master_id:id
+        },
+        include:[{
+            model:Users,
+            as:'client'
+        }]
+    })
+
+    res.json({
+        reviews:reviews
+    })
+    
+   } catch (error) {
+    return res.status(500).json({message:error.message})
+   }
+
+})
+
+
+
+
 //
 
 //

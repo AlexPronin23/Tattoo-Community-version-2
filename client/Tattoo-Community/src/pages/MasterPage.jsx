@@ -8,7 +8,7 @@ import { getOneMaster } from "../slices/tattooMastersSlice";
 import { getOnePortfolio } from "../slices/portfolioSlice";
 import { setOpen } from "../slices/modalSlice";
 import { getCurrentMasterServices } from "../slices/serviceSlice";
-import { createReviews } from "../slices/reviewSlice";
+import { createReviews, getMasterReviews } from "../slices/reviewSlice";
 import { showPopup, hidePopup } from "../slices/popupSlice";
 
 const MasterPage = () => {
@@ -18,7 +18,9 @@ const MasterPage = () => {
   const { masterPage } = useSelector((state) => state.tattooMasters);
   const { currentMasterServices } = useSelector((state) => state.service);
   const { currentPortfolio = [] } = useSelector((state) => state.portfolio);
-  const { reviews } = useSelector((state) => state.review);
+  const { reviews, status, reviewsType, masterRate } = useSelector(
+    (state) => state.review,
+  );
   const [review, setReview] = useState({
     message: "",
     rate: "",
@@ -42,6 +44,7 @@ const MasterPage = () => {
     dispatch(getOneMaster({ id }));
     dispatch(getOnePortfolio({ id }));
     dispatch(getCurrentMasterServices({ id }));
+    dispatch(getMasterReviews({ id }));
   }, [dispatch, id]);
 
   if (!masterPage) {
@@ -104,6 +107,14 @@ const MasterPage = () => {
     } catch (error) {
       alert(error);
     }
+  };
+
+  const getReviewsType = (rateValue) => {
+    const numRate = Number(rateValue);
+    if (numRate === 0 || numRate === 1) return "terrible";
+    if (numRate === 2 || numRate === 3) return "satisfactory";
+    if (numRate === 4 || numRate === 5) return "excellent";
+    return "";
   };
 
   return (
@@ -217,10 +228,45 @@ const MasterPage = () => {
               </button>
             </div>
             <div className="info__reviews__content">
-              {reviews.length < 0 ? (
-                <>Отзывы</>
+              {status === "Загрузка" ? (
+                <>
+                  <p className="info__reviews__loading">Загрузка...</p>
+                </>
               ) : (
-                <>У мастера нет пока отзывов</>
+                <>
+                  {reviews.length > 0 ? (
+                    <div className="info__reviews__grid">
+                      {reviews.map((review) => (
+                        <div
+                          className={`info__reviews__card info__reviews__card-${getReviewsType(review.rate)}`}
+                          key={review.review_id}
+                        >
+                          <div className="info__reviews__card__top">
+                            <p className="info__reviews__email">
+                              От кого: {review.client.email}
+                            </p>
+                            <p className="info__reviews__date">
+                              Дата: {review.dateReview}
+                            </p>
+                            <p className="info__reviews__time">
+                              Время: {review.timeReview}
+                            </p>
+                            <p className="info__reviews__rate">
+                              Рейтинг: {review.rate}
+                            </p>
+                          </div>
+                          <p className="info__reviews__message">
+                            {review.message}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <>
+                      <p className="info__reviews__none">Пока нет отзывов.</p>
+                    </>
+                  )}
+                </>
               )}
             </div>
           </div>
