@@ -107,12 +107,34 @@ export const getCurrentMasterServices = createAsyncThunk(
     }
 )
 
+// Получение среднего значения услуг мастера
+export const getAverageMasterServicePrice = createAsyncThunk(
+    'service/getAverageMasterServicePrice',
+    async function (user_id,{rejectWithValue}) {
+        try {
+
+            const response = await fetch(`/api/master-average-service-price?user_id=${user_id}`)
+
+            const data = await response.json()
+
+            return({
+                averageMasterServicePrice:data.averageMasterServicePrice
+            })
+            
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
+
 const serviceSlice = createSlice({
     name:'service',
     initialState:{
         services:[],
         masterServices:[],
         currentMasterServices:[],
+        averageServicePrices:{},
         status:null,
         error:null,
     },
@@ -150,6 +172,14 @@ const serviceSlice = createSlice({
             state.currentMasterServices = action.payload.currentMasterServices
         })
         .addCase(getCurrentMasterServices.rejected,(state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload
+        })
+        .addCase(getAverageMasterServicePrice.fulfilled,(state,action) => {
+            state.status = 'Успешно'
+            state.averageServicePrices[action.meta.arg] = action.payload.averageMasterServicePrice
+        })
+        .addCase(getAverageMasterServicePrice.rejected,(state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
         })

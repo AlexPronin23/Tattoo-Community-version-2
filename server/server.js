@@ -840,6 +840,37 @@ app.get('/api/master-services/:id', auth, async(req,res) => {
     }
 })
 
+// 5.5 Получить среднею цену услуг мастера
+app.get('/api/master-average-service-price', async(req,res) => {
+    const {user_id} = req.query
+
+    try {
+
+        const result = await Services.findOne({
+             attributes:[[
+                Sequelize.cast(
+                    Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('servicePrice')), -3),
+                    "FLOAT"
+                ),
+                'avgPrice'
+            ]],
+            where:{
+                user_id:user_id
+            },
+            raw:true
+        })
+
+        const averageMasterServicePrice = result && result.avgPrice ? Number(result.avgPrice) : 0
+
+        res.json({
+            averageMasterServicePrice:averageMasterServicePrice
+        })
+
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
+
 //
 
 // 6. Reviews

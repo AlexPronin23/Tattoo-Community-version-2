@@ -27,7 +27,6 @@ const FormCreate = () => {
     styleIds: [],
     description: "",
     cardImg: "",
-    price: "",
     workaddress: "",
     homeaddress: "",
   });
@@ -42,7 +41,6 @@ const FormCreate = () => {
     styleIds,
     description,
     cardImg,
-    price,
     workaddress,
     homeaddress,
   } = masterInfo;
@@ -100,7 +98,6 @@ const FormCreate = () => {
           styleIds: [],
           description: "",
           cardImg: "",
-          price: "",
           workaddress: "",
           homeaddress: "",
         });
@@ -281,24 +278,6 @@ const FormCreate = () => {
                   </ul>
                 </div>
               </div>
-            </div>
-
-            <div className="form__column">
-              <label className="form__label">
-                {" "}
-                Средняя цена услуг (в рублях):{" "}
-              </label>
-
-              <input
-                type="text"
-                required
-                placeholder="Введите цену"
-                maxLength={16}
-                name="price"
-                value={price}
-                className="form__input"
-                onChange={handleChange}
-              />
             </div>
 
             <div className="form__column">

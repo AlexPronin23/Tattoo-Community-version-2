@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 // Redux
 import { getAverageMasterRate } from "../../../slices/reviewSlice";
+import { getAverageMasterServicePrice } from "../../../slices/serviceSlice";
 
 // Images
 import UserImg from "../../../assets/img/Main/Masters/UserImg.jpg";
@@ -20,16 +21,18 @@ const MastersCard = ({
   isAtHome,
   experience,
   cardImg,
-  price,
 }) => {
   const dispatch = useDispatch();
   const { averageRates } = useSelector((state) => state.review);
+  const { averageServicePrices } = useSelector((state) => state.service);
 
   useEffect(() => {
     dispatch(getAverageMasterRate(user_id));
+    dispatch(getAverageMasterServicePrice(user_id));
   }, [dispatch, user_id]);
 
   const currentRate = averageRates[user_id];
+  const currentPrice = averageServicePrices[user_id];
 
   return (
     <Link
@@ -59,7 +62,7 @@ const MastersCard = ({
         <p className="tattoomasters__card-rate">Рейтинг: {currentRate || 0} </p>
 
         <p className="tattoomasters__card-price">
-          Цена на услуги от {price} руб
+          Цена на услуги от {currentPrice || 0} руб
         </p>
       </div>
     </Link>
