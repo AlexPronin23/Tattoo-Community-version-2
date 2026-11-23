@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const sequelize = require('./db/db')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {Op, where} = require('sequelize')
+const {Op, where,Sequelize} = require('sequelize')
 require('dotenv').config()
 
 // Models
@@ -898,8 +898,32 @@ app.get('/api/master-reviews/:id', async(req,res) => {
 
 })
 
+// 6.3 Получить средний рейтинг мастера
+app.get('/api/master-average-rate/', async(req,res) => {
+    const {user_id} = req.query
+    try {
 
+        const result = await Reviews.findOne({
+            attributes:[[
+                Sequelize.cast(
+                    Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('rate')), 1),
+                    "FLOAT"
+                ),
+                'avgRate'
+            ]],
+            where: { master_id: user_id },
+            raw: true
+        });
 
+        const rate = result && result.avgRate ? Number(result.avgRate) : 0;
+        res.json({
+            averageRate:rate
+        })
+        
+    } catch (error) {
+        return res.status(500).json({message:error.message})
+    }
+})
 
 //
 

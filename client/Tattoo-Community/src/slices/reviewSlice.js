@@ -55,7 +55,27 @@ export const getMasterReviews = createAsyncThunk(
     }
 )
 
-// Получить рейтинг мастера за отзыв
+// Получить средний рейтинг мастера
+export const getAverageMasterRate = createAsyncThunk(
+    'review/getAverageMasterRate',
+    async function (user_id, {rejectWithValue}) {
+        try {
+            
+            const response = await fetch(`/api/master-average-rate/?user_id=${user_id}`)
+
+            const data = await response.json()
+
+            return ({
+                message:data.message,
+                averageRate:data.averageRate
+            })
+
+        } catch (error) {
+            return rejectWithValue({message:error.message})
+        }
+        
+    }
+)
 
 
 const reviewSlice = createSlice({
@@ -65,6 +85,7 @@ const reviewSlice = createSlice({
         status:null,
         error:null,
         reviewsType:'',
+        averageRates:{}
     },
  
     extraReducers:(builder) => {
@@ -85,6 +106,14 @@ const reviewSlice = createSlice({
             state.reviews = action.payload.reviews
         })
         .addCase(getMasterReviews.rejected, (state,action) => {
+            state.status = 'Отклонен'
+            state.error = action.payload
+        })
+        .addCase(getAverageMasterRate.fulfilled, (state,action) => {
+            state.status = 'Успешно'
+            state.averageRates[action.meta.arg] = action.payload.averageRate
+        })
+        .addCase(getAverageMasterRate.rejected, (state,action) => {
             state.status = 'Отклонен'
             state.error = action.payload
         })

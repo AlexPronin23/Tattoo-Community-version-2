@@ -3,6 +3,11 @@ import "./style.scss";
 
 // React
 import { Link } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+// Redux
+import { getAverageMasterRate } from "../../../slices/reviewSlice";
 
 // Images
 import UserImg from "../../../assets/img/Main/Masters/UserImg.jpg";
@@ -17,6 +22,15 @@ const MastersCard = ({
   cardImg,
   price,
 }) => {
+  const dispatch = useDispatch();
+  const { averageRates } = useSelector((state) => state.review);
+
+  useEffect(() => {
+    dispatch(getAverageMasterRate(user_id));
+  }, [dispatch, user_id]);
+
+  const currentRate = averageRates[user_id];
+
   return (
     <Link
       key={user_id}
@@ -41,6 +55,8 @@ const MastersCard = ({
         </p>
 
         <p className="tattoomasters__card-experience">Опыт: {experience} лет</p>
+
+        <p className="tattoomasters__card-rate">Рейтинг: {currentRate || 0} </p>
 
         <p className="tattoomasters__card-price">
           Цена на услуги от {price} руб

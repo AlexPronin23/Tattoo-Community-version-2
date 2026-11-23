@@ -1426,6 +1426,10 @@
         &__portfolio {
             grid-template-columns: repeat(2, 1fr);
         }
+
+        &__reviews__grid{
+            grid-template-columns: 1fr;
+        }
     }
 
     // Заказы (Orders)
@@ -1460,6 +1464,7 @@
         flex-direction: column
       }
    }
+
 
 }
 
@@ -1569,6 +1574,18 @@
         &__portfolio {
             grid-template-columns: 1fr;
         }
+
+        &__reviews__textarea {
+        width: 300px;
+        height: 150px;
+       
+    }
+
+        &__reviews__card{
+        width: 300px;
+        
+        
+    }
     }
 
     // Заказы (Orders)
