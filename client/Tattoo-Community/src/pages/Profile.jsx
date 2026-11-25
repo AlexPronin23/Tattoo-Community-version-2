@@ -67,12 +67,12 @@ const Profile = () => {
               >
                 Услуги
               </button>
-              {/* <button
+              <button
                 onClick={() => handleActive("orders")}
                 className={`button btn__tabs ${active === "orders" ? "active" : ""}`}
               >
                 Мои заказы
-              </button> */}
+              </button>
             </>
           ) : (
             <>
@@ -82,13 +82,13 @@ const Profile = () => {
               >
                 Персональные данные
               </button>
-              {/* 
+
               <button
                 onClick={() => handleActive("orders")}
                 className={`button btn__tabs ${active === "orders" ? "active" : ""}`}
               >
                 Ваши заказы
-              </button> */}
+              </button>
             </>
           )}
         </div>

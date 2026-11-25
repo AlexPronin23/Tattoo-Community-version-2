@@ -1,26 +1,67 @@
 import "./style.scss";
 const Nav = () => {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 50;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <ul className="nav__items">
       <li className="nav__item">
-        <a href="#" className="nav__link">
+        <button
+          href="#"
+          className="nav__link"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("about");
+          }}
+        >
           О нас
-        </a>
+        </button>
       </li>
       <li className="nav__item">
-        <a href="#" className="nav__link">
+        <button
+          href="#"
+          className="nav__link"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("contacts");
+          }}
+        >
           Контакты
-        </a>
+        </button>
       </li>
       <li className="nav__item">
-        <a href="#" className="nav__link">
+        <button
+          href="#"
+          className="nav__link"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("masters");
+          }}
+        >
           Тату мастера
-        </a>
+        </button>
       </li>
       <li className="nav__item">
-        <a href="#" className="nav__link">
+        <button
+          href="#"
+          className="nav__link"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("services");
+          }}
+        >
           Услуги
-        </a>
+        </button>
       </li>
     </ul>
   );

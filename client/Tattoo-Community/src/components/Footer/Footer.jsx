@@ -10,7 +10,7 @@ import Logo from "../Logo/Logo";
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer id="contacts" className="footer">
       <div className="container">
         <div className="footer__wrapper">
           <div className="footer__logo">
@@ -23,8 +23,7 @@ const Footer = () => {
 
           <div className="footer__social">
             <a href="#" className="footer__phone">
-              {" "}
-              +79521529988{" "}
+              +79521529988
             </a>
 
             <a href="#" className="footer__vk">

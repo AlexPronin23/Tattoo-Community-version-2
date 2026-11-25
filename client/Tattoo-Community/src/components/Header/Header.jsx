@@ -60,7 +60,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header id="about" className="header">
       <div className="container">
         <div className="header__top">
           {/* Logo */}
@@ -152,16 +152,6 @@ const Header = () => {
               <li className="header__service">Продвижение своего бренда</li>
             </ul>
           </div>
-
-          {/* <div className="header__image">
-            <img className="header__img" src={HeaderImg} alt="Header Img" />
-
-            <img
-              className="header__machine"
-              src={TattooMachine}
-              alt="Tattoo machine"
-            />
-          </div> */}
 
           <div className="header__video">
             <video

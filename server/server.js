@@ -30,45 +30,48 @@ app.use(cors({
 
 // 1.1 Получение данных о тату мастерах
 
-app.get('/api/tattoomasters', async (req,res) => {
+app.get('/api/tattoomasters', async (req, res) => {
     try {
+        const page = parseInt(req.query.page || 1);
+        const limit = parseInt(req.query.limit || 6);
+        const offset = (page - 1) * limit;
+        const priceFilter = req.query.price;
         
-        const page = parseInt(req.query.page || 1)
-        const limit = parseInt(req.query.limit || 6)
-        const offset = (page - 1 ) * limit
-        const price = req.query.price
-    
 
-        let whereConditions = {}
+        let whereConditions = {};
 
-        if(price === 'more') {
-            whereConditions.price = {[Op.gt]: 5000}
-        } else if (price === 'less') {
-            whereConditions.price = {[Op.lt] : 5000}
+        if (priceFilter === 'more' || priceFilter === 'less') {
+            const operator = priceFilter === 'more' ? '>=' : '<=';
+            const value = 5000;
+            
+          
+            whereConditions = {
+                [Op.and]: Sequelize.literal(`
+                    (SELECT AVG(servicePrice) FROM tb_services WHERE tb_services.user_id = tb_info.user_id) ${operator} ${value}
+                `)
+            };
         }
 
-        const {count,rows} = await TattooMasters.findAndCountAll({
-           where:whereConditions,
-           limit,
-           offset
-        })
-    
+        const { count, rows } = await TattooMasters.findAndCountAll({
+            where: whereConditions,
+            limit,
+            offset,
+            subQuery: false 
+        });
+
         res.json({
-            mastersLimit:rows,
-            pagination:{
+            mastersLimit: rows,
+            pagination: {
                 page,
                 limit,
-                total:count,
-                totalPages:Math.ceil(count / limit)
+                total: count,
+                totalPages: Math.ceil(count / limit)
             }
-        })
+        });
     } catch (error) {
-        res.status(500).json({message:error.message})
-        
+        res.status(500).json({ message: error.message });
     }
-
-})
-
+});
 // 1.2 Получение стилей 
 app.get('/api/styles', async (req,res) => {
     try {
@@ -301,10 +304,22 @@ app.put('/api/tattoomasters/edit/:id', auth, async (req,res) => {
 app.post('/api/user/registration', async (req,res) => {
     const {email,phone,password,status} = req.body
 
+    if(!email || !phone || !password){
+        return res.status(400).json({message:'Все поля (email, телефон, пароль) обязательны'})
+    }
+
+     if (password.length < 8) {
+        return res.status(400).json({ message: 'Пароль должен быть не менее 8 символов' });
+    }
+    
     try {
-        const user = await Users.findOne({where:{email:email,phone:phone, password:password}}, {raw:true})
-        if(user) {
-           return res.status(409).json({message:'Пользователь с таким данными уже существует'})
+       const existingUser = await Users.findOne({ 
+            where: { email: email } 
+        });
+
+       
+        if(existingUser) {
+            return res.status(409).json({message:'Пользователь с таким email уже существует'});
         }
 
         const salt = bcrypt.genSaltSync(7)
@@ -341,6 +356,10 @@ app.post('/api/user/login', async (req,res) => {
         if(!email || !password){
             return res.status(400).json({message:'Логин и пароль должны быть заполнены'})
         }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            return res.status(400).json({ message: 'Некорректный формат email' });
+    }
 
         const user = await Users.findOne({where: {email:email}}, {raw:true})
 
@@ -539,6 +558,13 @@ app.post('/api/orders/create', auth, async (req,res) => {
 
     if(!customerName || !customerPhone || !dateOrder || !timeOrder || !price ||  !message ) {
         return res.status(400).json({message:'Не полные данные!'})
+    }
+
+    if (Number(price) < 0) {
+        return res.status(400).json({ message: 'Цена не может быть отрицательной' });
+    }
+    if (Number(master_id) === Number(client_id)) {
+        return res.status(400).json({ message: 'Вы не можете записаться к самому себе' });
     }
 
     try {
@@ -767,8 +793,12 @@ app.post('/api/create-services', auth, async (req, res) => {
     const id = req.user.id;
     const { service_id, servicePrice } = req.body;
 
-    if (!service_id || !servicePrice) {
+   if (!service_id || !servicePrice) {
         return res.status(400).json({ message: 'Выберите услугу и укажите цену' });
+    }
+
+   if (isNaN(Number(servicePrice)) || Number(servicePrice) <= 0) {
+        return res.status(400).json({ message: 'Цена должна быть положительным числом' });
     }
 
     try {
@@ -880,6 +910,16 @@ app.get('/api/master-average-service-price', async(req,res) => {
 app.post('/api/create-review',auth, async(req,res) => {
     const id = req.user.id
     const {master_id,message,rate,dateReview,timeReview} = req.body
+
+    if (!message || !rate) {
+        return res.status(400).json({ message: 'Напишите текст отзыва и поставьте рейтинг' });
+    }
+
+    const numericRate = Number(rate);
+    if (isNaN(numericRate) || numericRate < 1 || numericRate > 5) {
+        return res.status(400).json({ message: 'Рейтинг должен быть числом от 1 до 5' });
+    }
+
     try {
         
         const reviews = await Reviews.create({

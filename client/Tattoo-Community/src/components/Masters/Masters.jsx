@@ -39,7 +39,7 @@ const Masters = () => {
   };
 
   return (
-    <section className="masters">
+    <section id="masters" className="masters">
       <div className="container">
         <div className="masters__wrapper">
           <h1 className="title masters__title">Тату мастера</h1>

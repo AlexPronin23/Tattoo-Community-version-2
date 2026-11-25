@@ -3,13 +3,12 @@ import "./style.scss";
 
 // React
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Redux
 import { setClose } from "../../slices/modalSlice";
 import { createOrder } from "../../slices/orderSlice";
 import { showPopup, hidePopup } from "../../slices/popupSlice";
-import { useParams } from "react-router";
 
 const Modal = () => {
   const dispatch = useDispatch();

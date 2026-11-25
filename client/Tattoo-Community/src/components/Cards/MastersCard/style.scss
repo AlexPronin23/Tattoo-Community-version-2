@@ -72,11 +72,7 @@
         
     }
 
-    &-price{
-        font-size: 30px;
-        color: #1A1A1A;
-       
-    }
+
 
 
 
@@ -97,7 +93,7 @@
     width: 300px;
 
     &-img{
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     &-info{
@@ -122,7 +118,6 @@
 
         display: flex;
         font-size: 10px;
-        padding: 10px;
         gap: 5px;
         white-space: nowrap;
        
@@ -132,9 +127,6 @@
     //     display: none; //Временно
     // }
 
-    &-price{
-        font-size: 12px;
-    }
     
     &-btn{
 

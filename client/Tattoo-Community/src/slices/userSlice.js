@@ -170,7 +170,7 @@ const userSlice = createSlice({
     name:'users',
     initialState:{
         users:[],
-        status:null,
+        status: 'Загрузка',
         error:null,
         isAuth:false,
         currentUser:null,

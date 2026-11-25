@@ -8,7 +8,7 @@ import ThirdPicture from "@assets/img/Main/Services/ThirdPicture.png";
 
 const Services = () => {
   return (
-    <section className="services">
+    <section id="services" className="services">
       <div className="container">
         <div className="services__wrapper">
           <h1 className="title services__title">Услуги</h1>

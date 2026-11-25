@@ -25,6 +25,7 @@ import FormEdit from "./pages/FormEdit";
 import FormEditPersonal from "./pages/FormEditPersonal";
 import PopUp from "./components/PopUp/PopUp";
 import Modal from "./components/Modal/Modal";
+import NotAuthorized from "./pages/NotAuthorized";
 
 function App() {
   const dispatch = useDispatch();
@@ -133,6 +134,7 @@ function App() {
           />
         </Route>
 
+        <Route path="/not-authorized" element={<NotAuthorized />} />
         <Route path="*" element={<PageNotExists />} />
       </Routes>
 

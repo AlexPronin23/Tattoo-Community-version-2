@@ -26,7 +26,17 @@ const FormLogIn = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      alert("Данные должны быть заполнены");
+      dispatch(
+        showPopup({
+          type: "error",
+          message: "Данные должны быть полностью заполнены",
+        }),
+      );
+
+      setTimeout(() => {
+        dispatch(hidePopup());
+      }, 1500);
+
       return;
     }
 
@@ -94,7 +104,6 @@ const FormLogIn = () => {
               <input
                 type="email"
                 value={email}
-                required
                 placeholder="Введите email"
                 maxLength={254}
                 name="email"
@@ -126,7 +135,6 @@ const FormLogIn = () => {
               <input
                 type="password"
                 value={password}
-                required
                 placeholder="Введите пароль"
                 minLength={8}
                 maxLength={16}

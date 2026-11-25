@@ -29,12 +29,47 @@ const FormSignIn = () => {
     e.preventDefault();
 
     if (!email || !phone || !password || !confirmPassword) {
-      alert("Данные должны быть заполнены");
+      dispatch(
+        showPopup({
+          type: "error",
+          message: "Данные должны быть полностью заполнены",
+        }),
+      );
+
+      setTimeout(() => {
+        dispatch(hidePopup());
+      }, 1500);
+
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Пароли должны совпадать");
+      dispatch(
+        showPopup({
+          type: "error",
+          message: "Пароли должны совпадать",
+        }),
+      );
+
+      setTimeout(() => {
+        dispatch(hidePopup());
+      }, 1500);
+
+      return;
+    }
+
+    if (phone.length < 15) {
+      dispatch(
+        showPopup({
+          type: "error",
+          message: "Введите корректный номер телефона",
+        }),
+      );
+
+      setTimeout(() => {
+        dispatch(hidePopup());
+      }, 1500);
+
       return;
     }
 
@@ -61,11 +96,11 @@ const FormSignIn = () => {
         setTimeout(() => {
           dispatch(hidePopup());
           setIsLoading(true);
-        }, 3000);
+        }, 1500);
 
         setTimeout(() => {
           navigate("/login", { replace: true });
-        }, 1500);
+        }, 3000);
       } else if (userRegistration.rejected.match(resultAction)) {
         dispatch(
           showPopup({
@@ -108,7 +143,6 @@ const FormSignIn = () => {
               <input
                 value={email}
                 type="email"
-                required
                 placeholder="Введите email"
                 maxLength={254}
                 className="form__input"
@@ -139,7 +173,6 @@ const FormSignIn = () => {
               <input
                 value={phone}
                 type="tel"
-                required
                 placeholder="+7 (___) ___-__-__"
                 maxLength={15}
                 className="form__input"
@@ -167,7 +200,6 @@ const FormSignIn = () => {
                 <input
                   value={password}
                   type={isOpen ? "text" : "password"}
-                  required
                   placeholder="Введите пароль"
                   minLength={8}
                   maxLength={16}
@@ -205,7 +237,6 @@ const FormSignIn = () => {
               <input
                 value={confirmPassword}
                 type={isOpen ? "text" : "password"}
-                required
                 placeholder="Введите пароль повторно"
                 minLength={8}
                 maxLength={16}
@@ -232,7 +263,7 @@ const FormSignIn = () => {
                   <ul className="form__items">
                     <li className="form__item">
                       Если поставили галочку,то получаете доступ к личному
-                      профилю
+                      кабинету
                     </li>
                   </ul>
                 </div>

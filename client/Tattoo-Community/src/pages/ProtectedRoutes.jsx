@@ -1,27 +1,17 @@
 // React
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
+import { Navigate } from "react-router";
 
 const ProtectedRoutes = ({ children }) => {
   const { isAuth, status } = useSelector((state) => state.users);
 
   if (status === "Загрузка") {
-    return (
-      <>
-        <h2>Проверка авторизации...</h2>
-      </>
-    );
+    return <h2>Проверка авторизации...</h2>;
   }
 
-  if (!isAuth) {
-    return (
-      <>
-        <h1>Вы не авторизованы!</h1>
-        <Link to={"/login"}>Войти</Link>
-      </>
-    );
+  if (status === "Отклонен" || !isAuth) {
+    return <Navigate to={"/not-authorized"} replace={true} />;
   }
-
   return children;
 };
 
