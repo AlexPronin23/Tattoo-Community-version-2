@@ -2,7 +2,7 @@
 
  Tattoo Community - веб приложение для взаимодействия тату мастеров и клиентов: поиск,заказы,отзывы,рейтинг.
 
- ![Main Screen]("<img width="1893" height="912" alt="Main Screen" src="https://github.com/user-attachments/assets/ab065c27-0b1e-4787-aae9-6c4994c79aa5" />")
+ ![Main Screen](<img width="1893" height="912" alt="Main Screen" src="https://github.com/user-attachments/assets/ab065c27-0b1e-4787-aae9-6c4994c79aa5" />)
 
 
 # 2. Стек технологий
